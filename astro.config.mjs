@@ -16,6 +16,17 @@ export default defineConfig({
     shikiConfig: {
       themes: { light: 'github-light', dark: 'github-dark' },
       wrap: true,
+      // 코드블록 <pre>에 data-language를 심는다(언어 라벨 + 복사 버튼용, 클라이언트 스크립트가 사용).
+      transformers: [
+        {
+          pre(node) {
+            const lang = this.options?.lang;
+            if (lang && lang !== 'text' && lang !== 'plaintext') {
+              node.properties['data-language'] = lang;
+            }
+          },
+        },
+      ],
     },
   },
   vite: {

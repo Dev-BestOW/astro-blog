@@ -11,9 +11,7 @@ const { title, description, pubDate, tags } = post.data;
 
 <article class="group py-6">
   <a href={`/posts/${post.id}/`} class="block">
-    <h2
-      class="text-xl font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400"
-    >
+    <h2 class="text-xl font-semibold tracking-tight group-hover:text-accent">
       {title}
     </h2>
     <p class="mt-2 line-clamp-2 text-neutral-600 dark:text-neutral-400">
@@ -26,7 +24,7 @@ const { title, description, pubDate, tags } = post.data;
       tags.length > 0 && (
         <div class="flex gap-2">
           {tags.map((tag) => (
-            <a href={`/tags/${tag}/`} class="hover:text-blue-600 dark:hover:text-blue-400">
+            <a href={`/tags/${tag}/`} class="hover:text-accent">
               #{tag}
             </a>
           ))}

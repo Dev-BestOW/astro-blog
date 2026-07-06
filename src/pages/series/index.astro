@@ -16,9 +16,7 @@ const series = await getAllSeries();
         {series.map(({ name, count }) => (
           <li class="py-5">
             <a href={`/series/${name}/`} class="group block">
-              <h2 class="text-xl font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                {name}
-              </h2>
+              <h2 class="text-xl font-semibold tracking-tight group-hover:text-accent">{name}</h2>
               <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{count}편</p>
             </a>
           </li>

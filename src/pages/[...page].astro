@@ -16,9 +16,39 @@ const isFirst = page.currentPage === 1;
 ---
 
 <BaseLayout title={isFirst ? undefined : `${page.currentPage}페이지`}>
-  <section class="mb-8">
-    <h1 class="text-2xl font-bold tracking-tight">최근 글</h1>
-  </section>
+  {
+    isFirst ? (
+      <>
+        <section class="mb-10 border-b border-neutral-200 pb-8 dark:border-neutral-800">
+          <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{siteConfig.title}</h1>
+          <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
+            {siteConfig.description}
+          </p>
+          <nav aria-label="바로가기" class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            <a href="/tags" class="text-accent hover:underline">
+              태그
+            </a>
+            <a href="/series" class="text-accent hover:underline">
+              시리즈
+            </a>
+            <a href="/search" class="text-accent hover:underline">
+              검색
+            </a>
+            <a href="/rss.xml" class="text-accent hover:underline">
+              RSS
+            </a>
+          </nav>
+        </section>
+        <h2 class="mb-2 text-xl font-bold tracking-tight">최근 글</h2>
+      </>
+    ) : (
+      <section class="mb-8">
+        <h1 class="text-2xl font-bold tracking-tight">
+          최근 글 <span class="font-normal text-neutral-400">· {page.currentPage}페이지</span>
+        </h1>
+      </section>
+    )
+  }
 
   {
     page.data.length === 0 ? (

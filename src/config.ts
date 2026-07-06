@@ -8,12 +8,14 @@ export const siteConfig = {
   author: 'BestOW',
   locale: 'ko-KR',
   postsPerPage: 10,
+  // hideOnMobile: 로고가 이미 홈 링크라 모바일에선 'Home' 중복 제거.
+  // icon: 관습적으로 아이콘으로 노출하는 항목(Search/RSS) → 좁은 화면 공간 절약.
   nav: [
-    { label: 'Home', href: '/' },
+    { label: 'Home', href: '/', hideOnMobile: true },
     { label: 'Tags', href: '/tags' },
     { label: 'Series', href: '/series' },
-    { label: 'Search', href: '/search' },
-    { label: 'RSS', href: '/rss.xml' },
+    { label: 'Search', href: '/search', icon: 'search' },
+    { label: 'RSS', href: '/rss.xml', icon: 'rss' },
   ],
   // giscus 댓글 (GitHub Discussions 기반).
   // repoId·categoryId는 https://giscus.app 또는 GitHub GraphQL에서 얻는다.

@@ -27,10 +27,5 @@ const { tag, posts } = Astro.props;
     {posts.map((post) => <PostCard post={post} />)}
   </div>
 
-  <a
-    href="/tags"
-    class="mt-8 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
-  >
-    ← 모든 태그
-  </a>
+  <a href="/tags" class="mt-8 inline-block text-sm text-accent hover:underline"> ← 모든 태그 </a>
 </BaseLayout>

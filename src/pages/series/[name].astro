@@ -27,7 +27,7 @@ const { name, posts } = Astro.props;
               {String(i + 1).padStart(2, '0')}
             </span>
             <span class="min-w-0">
-              <h2 class="text-lg font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400">
+              <h2 class="text-lg font-semibold tracking-tight group-hover:text-accent">
                 {post.data.title}
               </h2>
               <p class="mt-1 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400">
@@ -46,10 +46,7 @@ const { name, posts } = Astro.props;
     }
   </ol>
 
-  <a
-    href="/series"
-    class="mt-8 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
-  >
+  <a href="/series" class="mt-8 inline-block text-sm text-accent hover:underline">
     ← 모든 시리즈
   </a>
 </BaseLayout>

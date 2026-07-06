@@ -1,21 +1,57 @@
 ---
 import { siteConfig } from '../config';
 import ThemeToggle from './ThemeToggle.astro';
+
+// 아이콘으로 렌더할 nav 항목의 SVG path (config의 item.icon 값과 매칭).
+const icons: Record<string, string> = {
+  search: 'M21 21l-4.3-4.3M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z',
+  rss: 'M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M6 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z',
+};
+
+const textLinkClass =
+  'rounded-md px-2 py-1 text-neutral-600 hover:bg-neutral-200/60 dark:text-neutral-300 dark:hover:bg-neutral-800';
+const iconLinkClass =
+  'rounded-md p-2 text-neutral-600 hover:bg-neutral-200/60 dark:text-neutral-300 dark:hover:bg-neutral-800';
 ---
 
 <header class="border-b border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto flex max-w-2xl items-center justify-between px-4 py-4">
     <a href="/" class="text-lg font-bold tracking-tight">{siteConfig.title}</a>
-    <nav class="flex items-center gap-1 text-sm">
+    <nav class="flex items-center gap-0.5 text-sm sm:gap-1">
       {
-        siteConfig.nav.map((item) => (
-          <a
-            href={item.href}
-            class="rounded-md px-2 py-1 text-neutral-600 hover:bg-neutral-200/60 dark:text-neutral-300 dark:hover:bg-neutral-800"
-          >
-            {item.label}
-          </a>
-        ))
+        siteConfig.nav.map((item) => {
+          const hidden = 'hideOnMobile' in item && item.hideOnMobile;
+          if ('icon' in item && item.icon) {
+            return (
+              <a
+                href={item.href}
+                aria-label={item.label}
+                title={item.label}
+                class={`${iconLinkClass}${hidden ? ' hidden sm:inline-flex' : ''}`}
+              >
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d={icons[item.icon]} />
+                </svg>
+              </a>
+            );
+          }
+          return (
+            <a
+              href={item.href}
+              class={`${textLinkClass}${hidden ? ' hidden sm:inline-block' : ''}`}
+            >
+              {item.label}
+            </a>
+          );
+        })
       }
       <ThemeToggle />
     </nav>

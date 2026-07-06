@@ -36,7 +36,9 @@ pnpm check    # astro 타입체크 (완료 전 필수, 0 errors 유지)
   `astro add cloudflare` 어댑터를 자동 주입 → workerd 프리렌더에서 `node:fs` 부재로 **빌드 실패**.
   (자세한 배경은 SPEC 변경 이력 참고)
 - OG 생성(`src/lib/og.ts`)은 **빌드타임 전용**(`node:fs`로 폰트 읽음). 런타임/워커로 옮기지 말 것.
-- 폰트 `src/assets/fonts/Pretendard-*.subset.woff`는 OG 렌더에 필요 — 지우지 말 것. (원본 OTF는 커밋하지 않음: `.gitignore`. 서브셋 재생성은 OTF를 임시로 두고 `node scripts/subset-fonts.mjs`.)
+- 폰트 (둘 다 삭제 금지):
+  - `src/assets/fonts/Pretendard-*.subset.woff`(정적 400/700) — **OG 렌더용**(빌드타임). 원본 OTF는 커밋 안 함(`.gitignore`). 재생성: OTF를 임시로 두고 `node scripts/subset-fonts.mjs`.
+  - `src/assets/fonts/PretendardVariable.subset.woff2`(전 weight Variable) — **사이트 본문 웹폰트**(`global.css` `@font-face`). 재생성: `pnpm add -D pretendard` 후 `node scripts/subset-body-font.mjs`(pretendard 패키지의 Variable woff2를 상용 글자로 서브셋).
 - `SITE_URL`은 `src/config.ts`와 `astro.config.mjs`(그리고 도메인 변경 시 `wrangler.jsonc`) **세 곳을 일치**시킬 것.
 
 ## 글 쓰는 법
