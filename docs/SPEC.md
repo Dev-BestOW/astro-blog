@@ -124,7 +124,7 @@ heroImage?: image()
 | **M1 스캐폴딩** | 프로젝트 생성, Tailwind/MDX/컬렉션 스키마, 레이아웃 골격 | ✅ |
 | **M2 콘텐츠** | 목록/상세/태그 페이지, TOC, 읽기시간, 코드 하이라이팅 | ✅ (기본 완료, 페이지네이션 미구현) |
 | **M3 SEO/피드** | RSS, 사이트맵, OG 이미지, 다크모드 | 🟡 (RSS·사이트맵·다크모드·OG메타 완료 / OG 이미지 satori 자동생성 미구현) |
-| **M4 배포** | Cloudflare 연결, Lighthouse 95+ 확인 | 🟡 (배포 연결·자동 재배포 완료 / Lighthouse 측정 미실시) |
+| **M4 배포** | Cloudflare 연결, Lighthouse 95+ 확인 | ✅ (A11y·SEO·BestPractices 100, LCP 130ms/CLS 0) |
 | **v2 백로그** | Pagefind 검색, giscus 댓글, 시리즈 | ⬜ |
 
 ---
@@ -133,3 +133,4 @@ heroImage?: image()
 - 2026-07-06: v1 스펙 확정 (Cloudflare Pages / 미니멀 UI / 순수 Astro).
 - 2026-07-06: M1 스캐폴딩 완료. Astro 7 + Tailwind v4 + MDX + Content Collections(glob loader) 구성. 목록/상세/태그/RSS/사이트맵/다크모드/OG메타/404 페이지 구현, `astro check` 0 errors, `pnpm build` 성공.
 - 2026-07-06: M4 배포 연결 완료. Cloudflare Git 연동, main push 시 자동 재배포 검증(~84초). 배포 URL을 workers.dev 도메인으로 확정하고 canonical/OG/RSS/sitemap 전부 반영. `.nvmrc`(22)·`packageManager` 고정.
+- 2026-07-06: Lighthouse 측정 및 접근성 수정. muted 텍스트 대비(neutral-500 on dark = 4.17)가 WCAG AA 미달 → neutral-600/dark:neutral-400로 상향. 재측정 결과 Accessibility·SEO·Best Practices·Agentic 100/0-failed, 성능 LCP 130ms·CLS 0.00·TTFB 58ms. M4 완료.
