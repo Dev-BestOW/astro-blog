@@ -19,7 +19,7 @@
 | **P1** ✅    | JSON-LD 구조화 데이터 | 글 상세 `BlogPosting` 스키마      | S    |
 | **P2** ✅    | Pagefind 검색         | 정적 클라이언트 전문 검색         | M    |
 | **P2**       | giscus 댓글           | GitHub Discussions 기반 댓글      | S    |
-| **P2**       | 시리즈/연재 그룹핑    | 연재 글 묶음                      | M    |
+| **P2** ✅    | 시리즈/연재 그룹핑    | 연재 글 묶음                      | M    |
 | **P3**       | i18n (다국어)         | 한/영 등 다국어 라우팅            | L    |
 | **P3**       | 조회수/애널리틱스     | 프라이버시 친화 통계              | M    |
 | **P3**       | 커스텀 도메인         | workers.dev → 소유 도메인         | S    |
@@ -99,7 +99,7 @@
 - **완료 기준**: 글에서 댓글 작성/표시, 다크모드 전환 시 테마 동기화.
 - **의존성**: 없음(외부 설정은 사용자 GitHub 권한 필요). **규모**: S
 
-### 7. 시리즈/연재 그룹핑 ⬜
+### 7. 시리즈/연재 그룹핑 ✅
 
 - **목적**: 연재물(예: "Astro 블로그 만들기 1~N")을 묶어 탐색.
 - **범위**
@@ -107,6 +107,7 @@
   - `/series`, `/series/[name]` 페이지, 글 상단/하단에 시리즈 목차
 - **완료 기준**: 같은 series 글이 순서대로 묶여 표시, 이전/다음 편 이동.
 - **의존성**: 없음. 콘텐츠 스키마 변경이라 **SPEC 5장 스키마 갱신** 동반. **규모**: M
+- **결과**: SPEC 5장 선행 갱신 후 `content.config.ts`에 `series`/`seriesOrder` 추가. `utils/posts.ts`에 `getAllSeries`/`getSeriesPosts`/`getSeriesContext`(정렬: seriesOrder↑ → pubDate↑). `/series`(목록·빈 상태), `/series/[name]`(01·02… 순번 목록) 페이지, `SeriesNav` 컴포넌트로 글 상단 목차(현재 편 강조, `data-pagefind-ignore`)+하단 이전/다음 편. nav에 Series. 임시 3편으로 브라우저 실측(그룹핑·순서·현재강조·prev/next·한글 URL) 후 원복 → 빈 상태 확인. check 0/0/0.
 
 ---
 
