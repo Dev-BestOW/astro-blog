@@ -1,0 +1,46 @@
+---
+interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage: number;
+  lastPage: number;
+}
+const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
+const linkClass =
+  'rounded-md px-3 py-1.5 text-sm text-neutral-700 hover:bg-neutral-200/60 dark:text-neutral-300 dark:hover:bg-neutral-800';
+const disabledClass =
+  'rounded-md px-3 py-1.5 text-sm text-neutral-400 dark:text-neutral-600';
+---
+
+{
+  lastPage > 1 && (
+    <nav
+      aria-label="페이지 이동"
+      class="mt-10 flex items-center justify-between border-t border-neutral-200 pt-6 dark:border-neutral-800"
+    >
+      {prevUrl ? (
+        <a href={prevUrl} rel="prev" class={linkClass}>
+          ← 이전
+        </a>
+      ) : (
+        <span class={disabledClass} aria-hidden="true">
+          ← 이전
+        </span>
+      )}
+
+      <span class="text-sm text-neutral-500 dark:text-neutral-400">
+        {currentPage} / {lastPage}
+      </span>
+
+      {nextUrl ? (
+        <a href={nextUrl} rel="next" class={linkClass}>
+          다음 →
+        </a>
+      ) : (
+        <span class={disabledClass} aria-hidden="true">
+          다음 →
+        </span>
+      )}
+    </nav>
+  )
+}

@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import Pagination from '../components/Pagination.astro';
+import { getPublishedPosts, type Post } from '../utils/posts';
+import { siteConfig } from '../config';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPublishedPosts();
+  return paginate(posts, { pageSize: siteConfig.postsPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page<Post> };
+const isFirst = page.currentPage === 1;
+---
+
+<BaseLayout title={isFirst ? undefined : `${page.currentPage}페이지`}>
+  <section class="mb-8">
+    <h1 class="text-2xl font-bold tracking-tight">최근 글</h1>
+  </section>
+
+  {
+    page.data.length === 0 ? (
+      <p class="text-neutral-600 dark:text-neutral-400">
+        아직 작성된 글이 없습니다.
+      </p>
+    ) : (
+      <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+        {page.data.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    )
+  }
+
+  <Pagination
+    prevUrl={page.url.prev}
+    nextUrl={page.url.next}
+    currentPage={page.currentPage}
+    lastPage={page.lastPage}
+  />
+</BaseLayout>

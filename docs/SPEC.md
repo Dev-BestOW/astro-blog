@@ -122,7 +122,7 @@ heroImage?: image()
 | 단계 | 내용 | 상태 |
 |------|------|------|
 | **M1 스캐폴딩** | 프로젝트 생성, Tailwind/MDX/컬렉션 스키마, 레이아웃 골격 | ✅ |
-| **M2 콘텐츠** | 목록/상세/태그 페이지, TOC, 읽기시간, 코드 하이라이팅 | ✅ (기본 완료, 페이지네이션 미구현) |
+| **M2 콘텐츠** | 목록/상세/태그 페이지, TOC, 읽기시간, 코드 하이라이팅, 페이지네이션 | ✅ |
 | **M3 SEO/피드** | RSS, 사이트맵, OG 이미지, 다크모드 | ✅ (RSS·사이트맵·다크모드·OG메타 + satori OG 이미지 자동생성 완료) |
 | **M4 배포** | Cloudflare 연결, Lighthouse 95+ 확인 | ✅ (A11y·SEO·BestPractices 100, LCP 130ms/CLS 0) |
 | **v2 백로그** | Pagefind 검색, giscus 댓글, 시리즈 | ⬜ |
@@ -130,6 +130,7 @@ heroImage?: image()
 ---
 
 ## 변경 이력
+- 2026-07-06: 페이지네이션 구현(M2 완결). `src/pages/[...page].astro`에서 Astro `paginate()`로 page 1=`/`, 이후 `/2`,`/3` 생성(pageSize=`siteConfig.postsPerPage`=10). `Pagination.astro`(이전/다음/카운터, 1페이지면 숨김) 추가. 임시 글 2개+pageSize 1로 다중 페이지 생성·네비 검증 후 원복.
 - 2026-07-06: v1 스펙 확정 (Cloudflare Pages / 미니멀 UI / 순수 Astro).
 - 2026-07-06: M1 스캐폴딩 완료. Astro 7 + Tailwind v4 + MDX + Content Collections(glob loader) 구성. 목록/상세/태그/RSS/사이트맵/다크모드/OG메타/404 페이지 구현, `astro check` 0 errors, `pnpm build` 성공.
 - 2026-07-06: M4 배포 연결 완료. Cloudflare Git 연동, main push 시 자동 재배포 검증(~84초). 배포 URL을 workers.dev 도메인으로 확정하고 canonical/OG/RSS/sitemap 전부 반영. `.nvmrc`(22)·`packageManager` 고정.
