@@ -1,0 +1,11 @@
+# 빌드 산출물·의존성·생성물
+dist/
+.astro/
+node_modules/
+.wrangler/
+.omc/
+pnpm-lock.yaml
+
+# 바이너리·폰트
+src/assets/fonts/
+public/

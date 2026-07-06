@@ -5,10 +5,7 @@ import PostCard from '../../components/PostCard.astro';
 import { getPublishedPosts, getAllTags } from '../../utils/posts';
 
 export const getStaticPaths = (async () => {
-  const [posts, tags] = await Promise.all([
-    getPublishedPosts(),
-    getAllTags(),
-  ]);
+  const [posts, tags] = await Promise.all([getPublishedPosts(), getAllTags()]);
   return tags.map(({ tag }) => ({
     params: { tag },
     props: {

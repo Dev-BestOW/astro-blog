@@ -7,9 +7,7 @@ export async function getPublishedPosts(): Promise<Post[]> {
   const posts = await getCollection('posts', ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
-  return posts.sort(
-    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-  );
+  return posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 }
 
 /** 태그 → 글 개수 맵 (많은 순 정렬된 배열). */
@@ -33,7 +31,7 @@ export function readingTimeMinutes(body: string | undefined): number {
   if (!body) return 1;
   const text = body
     .replace(/```[\s\S]*?```/g, '') // 코드블록 제외
-    .replace(/[#>*_`~\-]/g, ' ');
+    .replace(/[#>*_`~-]/g, ' ');
   const cjk = (text.match(/[一-鿿가-힣]/g) ?? []).length;
   const words = text.split(/\s+/).filter(Boolean).length;
   const minutes = Math.ceil((words + cjk / 2) / WORDS_PER_MINUTE);

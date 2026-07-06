@@ -39,18 +39,12 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          links.forEach((l) =>
-            l.classList.remove('text-blue-600', 'dark:text-blue-400'),
-          );
-          byId
-            .get(entry.target.id)
-            ?.classList.add('text-blue-600', 'dark:text-blue-400');
+          links.forEach((l) => l.classList.remove('text-blue-600', 'dark:text-blue-400'));
+          byId.get(entry.target.id)?.classList.add('text-blue-600', 'dark:text-blue-400');
         }
       },
       { rootMargin: '0px 0px -70% 0px', threshold: 1 },
     );
-    document
-      .querySelectorAll('article h2[id], article h3[id]')
-      .forEach((h) => observer.observe(h));
+    document.querySelectorAll('article h2[id], article h3[id]').forEach((h) => observer.observe(h));
   }
 </script>
