@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
+import sharp from 'sharp';
 import { siteConfig } from '../config';
 
 // 빌드타임에만 실행되는 코드 (정적 엔드포인트). 폰트는 process.cwd() 기준으로 읽는다.
@@ -122,6 +122,7 @@ export async function renderOgPng(opts: OgOptions): Promise<Buffer> {
       { name: 'Pretendard', data: regular, weight: 400, style: 'normal' },
     ],
   });
-  const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
-  return Buffer.from(resvg.render().asPng());
+  // satori가 텍스트를 벡터 path로 변환하므로, 래스터화는 이미 CF 빌드에서
+  // 검증된 sharp(libvips)로 처리한다. (별도 네이티브 모듈 불필요)
+  return sharp(Buffer.from(svg)).png().toBuffer();
 }
