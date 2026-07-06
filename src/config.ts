@@ -15,4 +15,17 @@ export const siteConfig = {
     { label: 'Search', href: '/search' },
     { label: 'RSS', href: '/rss.xml' },
   ],
+  // giscus 댓글 (GitHub Discussions 기반).
+  // repoId·categoryId는 https://giscus.app 에서 레포 입력 시 발급되는 값을 채운다.
+  // 둘 다 비어 있으면 Comments 컴포넌트는 렌더되지 않는다(프로덕션 안전).
+  giscus: {
+    repo: 'Dev-BestOW/astro-blog',
+    repoId: '', // TODO: giscus.app에서 발급받아 채우기
+    category: 'Announcements', // Discussions 카테고리 이름
+    categoryId: '', // TODO: giscus.app에서 발급받아 채우기
+    mapping: 'pathname',
+    reactionsEnabled: '1',
+    inputPosition: 'top',
+    lang: 'ko',
+  },
 } as const;

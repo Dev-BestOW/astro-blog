@@ -7,6 +7,7 @@ import { formatDate, readingTimeMinutes, getSeriesContext } from '../utils/posts
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import SeriesNav from '../components/SeriesNav.astro';
+import Comments from '../components/Comments.astro';
 
 interface Props {
   post: Post;
@@ -126,6 +127,8 @@ const jsonLd: Record<string, unknown> = {
       </nav>
     )
   }
+
+  <Comments />
 
   <div class="mt-12 border-t border-neutral-200 pt-6 dark:border-neutral-800">
     <a href="/" class="text-sm text-blue-600 hover:underline dark:text-blue-400"> ← 목록으로 </a>

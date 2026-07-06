@@ -1,0 +1,68 @@
+---
+import { siteConfig } from '../config';
+
+const g = siteConfig.giscus;
+// repoId·categoryId가 모두 채워졌을 때만 활성화 (미설정 시 프로덕션에 렌더 안 함).
+const configured = Boolean(g.repoId && g.categoryId);
+---
+
+{
+  configured && (
+    <section
+      class="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-800"
+      data-pagefind-ignore
+    >
+      <h2 class="mb-4 text-lg font-semibold tracking-tight">댓글</h2>
+      <div class="giscus" />
+    </section>
+  )
+}
+
+{
+  !configured && import.meta.env.DEV && (
+    <p class="mt-12 border-t border-neutral-200 pt-8 text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
+      giscus 미설정 — <code>src/config.ts</code>의 <code>giscus.repoId</code>·
+      <code>giscus.categoryId</code>를 채우면 댓글이 활성화됩니다. (이 안내는 개발 모드에서만 표시)
+    </p>
+  )
+}
+
+<script is:inline define:vars={{ g, configured }}>
+  if (configured) {
+    const container = document.querySelector('.giscus');
+    const currentTheme = () =>
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.async = true;
+    s.crossOrigin = 'anonymous';
+    s.setAttribute('data-repo', g.repo);
+    s.setAttribute('data-repo-id', g.repoId);
+    s.setAttribute('data-category', g.category);
+    s.setAttribute('data-category-id', g.categoryId);
+    s.setAttribute('data-mapping', g.mapping);
+    s.setAttribute('data-strict', '0');
+    s.setAttribute('data-reactions-enabled', g.reactionsEnabled);
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-input-position', g.inputPosition);
+    s.setAttribute('data-theme', currentTheme());
+    s.setAttribute('data-lang', g.lang);
+    s.setAttribute('data-loading', 'lazy');
+    container.appendChild(s);
+
+    // 다크모드 토글(html.class 변경)에 맞춰 giscus iframe 테마 동기화
+    const observer = new MutationObserver(() => {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: currentTheme() } } },
+        'https://giscus.app',
+      );
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
+</script>
