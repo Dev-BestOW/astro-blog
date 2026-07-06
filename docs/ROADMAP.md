@@ -18,7 +18,7 @@
 | **P1** ✅    | robots.txt            | 크롤러 허용 + 사이트맵 링크       | XS   |
 | **P1** ✅    | JSON-LD 구조화 데이터 | 글 상세 `BlogPosting` 스키마      | S    |
 | **P2** ✅    | Pagefind 검색         | 정적 클라이언트 전문 검색         | M    |
-| **P2**       | giscus 댓글           | GitHub Discussions 기반 댓글      | S    |
+| **P2** 🟡    | giscus 댓글           | GitHub Discussions 기반 댓글      | S    |
 | **P2** ✅    | 시리즈/연재 그룹핑    | 연재 글 묶음                      | M    |
 | **P3**       | i18n (다국어)         | 한/영 등 다국어 라우팅            | L    |
 | **P3**       | 조회수/애널리틱스     | 프라이버시 친화 통계              | M    |
@@ -89,7 +89,7 @@
 - **결과**: `build` = `astro build && pagefind --site dist`(CF·CI 공통). `PostLayout` article에 `data-pagefind-body`(글만 인덱싱), TOC엔 `data-pagefind-ignore`. `/search` 페이지 + Pagefind Default UI(한글 번역·다크모드 변수 매핑), nav에 Search 추가. 인덱스 대상 = 제목+본문+태그+설명(설명은 글 상단 subtitle로 렌더해 자연 인덱싱). 브라우저 실측: "블로그"→1건(접두 부분일치 `블로그를`까지), "스택"→설명 매칭 1건, 콘솔 에러 0. 인덱스는 검색 상호작용 시 lazy 로드. `@pagefind/linux-x64`가 lockfile에 있어 CI/CF(Linux x64) `--frozen-lockfile` 정상.
 - **한계**: 한글 stemming 미지원(어근 매칭 X) — 접두 부분일치는 동작. `astro dev`에선 인덱스 미생성이라 검색 비활성(빌드 후 `pnpm preview`에서 확인).
 
-### 6. giscus 댓글 ⬜
+### 6. giscus 댓글 🟡 (코드 완료 · 사용자 설정 대기)
 
 - **목적**: GitHub Discussions 기반 댓글(가입 장벽 낮고 스팸 관리 쉬움).
 - **범위**
@@ -98,6 +98,8 @@
   - 카테고리/매핑(pathname) 설정
 - **완료 기준**: 글에서 댓글 작성/표시, 다크모드 전환 시 테마 동기화.
 - **의존성**: 없음(외부 설정은 사용자 GitHub 권한 필요). **규모**: S
+- **진행**: `Comments.astro` 스캐폴딩 완료 — `siteConfig.giscus` config 기반, `PostLayout` 하단 삽입, 다크모드 `MutationObserver`로 테마 동기화, `mapping: pathname`, `data-lang: ko`, lazy 로드. **`repoId`/`categoryId` 미설정 시 프로덕션에 렌더 안 함(inert 가드), 개발 모드에서만 안내 표시**.
+- **남은 사용자 작업**: ① 레포 Settings에서 Discussions 활성화 → ② [giscus 앱](https://github.com/apps/giscus) 설치 → ③ [giscus.app](https://giscus.app)에서 `data-repo-id`·`data-category-id` 발급받아 `src/config.ts`의 `giscus.repoId`/`categoryId`(및 필요 시 `category`)에 채우고 push. 이후 배포본에서 댓글 작성/표시·테마 동기화 실측하면 ✅.
 
 ### 7. 시리즈/연재 그룹핑 ✅
 

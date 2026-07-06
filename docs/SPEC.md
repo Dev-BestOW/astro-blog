@@ -58,7 +58,7 @@
 ### 백로그 (v2)
 
 - [x] 검색 (Pagefind — 정적 클라이언트 검색, CF Pages와 궁합 좋음) ✅
-- [ ] 댓글 (giscus)
+- [~] 댓글 (giscus) 🟡 코드 완료·사용자 설정(repoId/categoryId) 대기
 - [x] 시리즈/연재 그룹핑 ✅
 - [ ] 다국어(i18n)
 - [ ] 조회수
@@ -139,6 +139,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-07-06: giscus 댓글 스캐폴딩(ROADMAP P2-6, 코드 완료·사용자 설정 대기). `Comments.astro`(`siteConfig.giscus` config 기반, `PostLayout` 하단, 다크모드 `MutationObserver` 테마 동기화, `pathname` 매핑, ko, lazy). `repoId`/`categoryId` 미설정 시 프로덕션 렌더 안 함(inert 가드)·개발 모드 안내만. 실제 활성화는 사용자가 Discussions 활성화 + giscus.app 발급 ID를 config에 채운 뒤 push.
 - 2026-07-06: 시리즈/연재 그룹핑 추가(ROADMAP P2-7). 스키마에 `series`/`seriesOrder`(5장 선행 갱신). `utils/posts.ts`에 `getAllSeries`/`getSeriesPosts`/`getSeriesContext`(정렬 seriesOrder↑→pubDate↑). `/series`·`/series/[name]` 페이지, `SeriesNav` 컴포넌트(글 상단 목차·현재 편 강조·pagefind 제외)+하단 이전/다음 편, nav에 Series. 시리즈 URL은 태그와 동일하게 원본 이름(공백·한글 인코딩). 임시 3편으로 실측 후 원복(빈 상태 확인).
 - 2026-07-06: Pagefind 정적 검색 추가(ROADMAP P2-5). `build`에 `pagefind --site dist` 체이닝. `PostLayout` article에 `data-pagefind-body`(글만 인덱싱)·TOC엔 `data-pagefind-ignore`, 프론트매터 `description`을 제목 하단 subtitle로 렌더해 인덱싱 포함. `/search` 페이지(Pagefind Default UI, 한글 번역·다크모드 변수), nav에 Search. 인덱스 = 제목+본문+태그+설명. 브라우저 실측(한글 접두 부분일치·설명 매칭·콘솔 에러 0). 한계: 한글 stemming 미지원, `astro dev`에선 검색 비활성(빌드 후 `preview` 필요).
 - 2026-07-06: JSON-LD 구조화 데이터 추가(ROADMAP P1-4). `BaseLayout`에 `jsonLd` prop(`<`→`<` 이스케이프 + `is:inline`으로 안전 주입). 홈(`/`)은 `WebSite`, 글 상세는 `PostLayout`에서 `BlogPosting`(headline·description·datePublished·dateModified·author·publisher·image(생성 OG)·mainEntityOfPage·keywords·inLanguage). 그 외 website 페이지엔 미출력(중복 방지). 빌드 산출물 home=1/post=1/tags=0 및 JSON 유효성 검증.
