@@ -37,9 +37,10 @@ const jsonLd: Record<string, unknown> = {
 ---
 
 <BaseLayout title={title} description={description} type="article" image={ogPath} jsonLd={jsonLd}>
-  <article>
+  <article data-pagefind-body>
     <header class="mb-8">
       <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
+      <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{description}</p>
       <div
         class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400"
       >
@@ -83,7 +84,7 @@ const jsonLd: Record<string, unknown> = {
       )
     }
 
-    <div class="mb-10">
+    <div class="mb-10" data-pagefind-ignore>
       <TableOfContents headings={headings} />
     </div>
 

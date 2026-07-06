@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Pagefind 정적 전문 검색. 인덱스(/pagefind/*)는 빌드 시 `pagefind --site dist`로 생성되므로
+// `astro dev`에서는 동작하지 않는다(빌드 후 `pnpm preview`에서 확인).
+---
+
+<BaseLayout title="검색" description="블로그 글을 검색합니다.">
+  <h1 class="mb-6 text-2xl font-bold tracking-tight">검색</h1>
+
+  <div id="search" data-pagefind-ignore></div>
+
+  <noscript>
+    <p class="text-neutral-600 dark:text-neutral-400">
+      검색을 사용하려면 자바스크립트를 켜 주세요.
+    </p>
+  </noscript>
+
+  <link is:inline rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        translations: {
+          placeholder: '검색어를 입력하세요',
+          zero_results: '"[SEARCH_TERM]"에 대한 결과가 없습니다',
+          many_results: '"[SEARCH_TERM]"에 대한 결과 [COUNT]건',
+          one_result: '"[SEARCH_TERM]"에 대한 결과 [COUNT]건',
+          searching: '"[SEARCH_TERM]" 검색 중…',
+        },
+      });
+    });
+  </script>
+
+  <style is:global>
+    /* 사이트 팔레트에 맞춘 Pagefind UI 테마 변수 */
+    #search {
+      --pagefind-ui-primary: #2563eb; /* blue-600 */
+      --pagefind-ui-text: #171717; /* neutral-900 */
+      --pagefind-ui-background: #ffffff;
+      --pagefind-ui-border: #e5e5e5; /* neutral-200 */
+      --pagefind-ui-tag: #f5f5f5; /* neutral-100 */
+      --pagefind-ui-border-radius: 0.5rem;
+      --pagefind-ui-font: inherit;
+    }
+    html.dark #search {
+      --pagefind-ui-primary: #60a5fa; /* blue-400 */
+      --pagefind-ui-text: #f5f5f5; /* neutral-100 */
+      --pagefind-ui-background: #0a0a0a; /* neutral-950 */
+      --pagefind-ui-border: #262626; /* neutral-800 */
+      --pagefind-ui-tag: #171717; /* neutral-900 */
+    }
+  </style>
+</BaseLayout>
