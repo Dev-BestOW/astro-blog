@@ -19,7 +19,7 @@ const minutes = readingTimeMinutes(post.body);
   title={title}
   description={description}
   type="article"
-  image={heroImage ? heroImage.src : undefined}
+  image={`/og/${post.id}.png`}
 >
   <article>
     <header class="mb-8">

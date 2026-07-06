@@ -7,7 +7,7 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
-  /** OG 이미지 절대/상대 경로 (기본: /og-default.svg, M3에서 satori PNG로 교체) */
+  /** OG 이미지 절대/상대 경로 (기본: satori로 생성한 사이트 기본 PNG) */
   image?: string;
   /** 글 상세면 'article' */
   type?: 'website' | 'article';
@@ -16,7 +16,7 @@ interface Props {
 const {
   title,
   description = siteConfig.description,
-  image = '/og-default.svg',
+  image = '/og/default.png',
   type = 'website',
 } = Astro.props;
 
@@ -49,6 +49,8 @@ const ogImage = new URL(image, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
 
     <!-- Twitter -->
