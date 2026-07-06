@@ -1,5 +1,5 @@
 // 배포 도메인 (astro.config.mjs의 site와 일치시킬 것)
-export const SITE_URL = 'https://astro-blog.dev-bestow.workers.dev';
+export const SITE_URL = 'https://jiwon-seok.com';
 
 export const siteConfig = {
   url: SITE_URL,

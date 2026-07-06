@@ -1,7 +1,7 @@
 # astro-blog — 프로젝트 안내 (세션 시작 시 필독)
 
 Astro로 만든 개발 블로그. 정적 SSG → Cloudflare(Workers 정적 자산)로 배포.
-**라이브**: https://astro-blog.dev-bestow.workers.dev
+**라이브**: https://jiwon-seok.com (Cloudflare Registrar 커스텀 도메인, apex. 예전 `*.workers.dev` 라우트는 비활성)
 
 ## 먼저 읽을 것 (이 순서로)
 

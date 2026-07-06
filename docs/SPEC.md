@@ -15,7 +15,7 @@
 | 항목     | 결정                                          | 비고                                |
 | -------- | --------------------------------------------- | ----------------------------------- |
 | 배포     | **Cloudflare (Git 연동)**                     | 정적 SSG, main push 시 자동 배포    |
-| 배포 URL | **https://astro-blog.dev-bestow.workers.dev** | GitHub `Dev-BestOW/astro-blog` 연동 |
+| 배포 URL | **https://jiwon-seok.com**                    | Cloudflare Registrar 커스텀 도메인(apex), GitHub `Dev-BestOW/astro-blog` 연동 |
 | 렌더링   | **완전 정적 (SSG)** `output: 'static'`        | 어댑터 불필요                       |
 | UI 방향  | **미니멀**                                    | 타이포/여백 중심, 다크모드          |
 | 인터랙션 | **순수 Astro (프레임워크 없음)**              | 필요 시 순수 `<script>`만 사용      |
@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-07-06: 커스텀 도메인 전환 `jiwon-seok.com`(Cloudflare Registrar, apex). Cloudflare Worker에 커스텀 도메인 연결 + 예전 `*.workers.dev` 라우트 비활성(중복 콘텐츠 방지). `SITE_URL`을 `src/config.ts`·`astro.config.mjs` 두 곳에서 교체(`wrangler.jsonc`엔 URL 필드 없음—dashboard 커스텀 도메인 방식이라 무변경, 지뢰 회피). canonical·OG·사이트맵·RSS·robots·JSON-LD가 전부 새 도메인 기준으로 자동 재생성됨을 build로 확인. CLAUDE.md·SPEC 라이브 URL 갱신. 후속: GSC(도메인 속성/DNS 인증)·네이버 서치어드바이저 등록 예정.
 - 2026-07-06: 디자인·UX 개선 D1–D6 일괄 반영(ROADMAP 디자인 섹션). **D1** 본문 웹폰트 self-host — Pretendard Variable을 상용 글자로 서브셋한 단일 woff2(0.63MB, 전 weight)를 `@font-face`+`@theme --font-sans`로 전 페이지 적용(생성 `scripts/subset-body-font.mjs`, 원본 devDep `pretendard`; 희귀 음절은 시스템 폰트 폴백→두부 0). OG용 `Pretendard-*.subset.woff`(정적 400/700)와는 별개. **D2** 브랜드 accent 토큰화 — `--accent`(인디고, 라이트#4f46e5/다크#818cf8)+Tailwind `@theme --color-accent`로 `text-accent` 통일, 순정 blue-600/blue-400 및 `dark:` 변형 전면 제거(Pagefind primary 포함). **D3** sticky 사이드바 TOC — xl+에서 `.toc-floating`을 본문 우측 여백에 `fixed`(TOC 인스턴스 1개 유지, 하이라이트는 `[data-toc-link].is-active`). **D4** 홈 히어로(1페이지 사이트 소개, 목록 heading h2 강등). **D5** 헤더 반응형(config `hideOnMobile`/`icon` 플래그, Home 모바일 숨김·Search/RSS 아이콘화) + 전역 `:focus-visible` accent 링. **D6** 코드블록 언어 라벨+복사 버튼(shiki transformer `data-language` + `PostLayout` 클라이언트 스크립트). `pnpm check` 0/0/0·lint 0·format clean, 라이트/다크·데스크톱/모바일 브라우저 육안 검증. 지뢰: 본문 폰트 `PretendardVariable.subset.woff2`도 삭제 금지(CLAUDE.md 갱신).
 - 2026-07-06: 글 추가 "MPA가 다시 빨라진다 — View Transitions와 '적게 보내기'의 귀환"(`posts/2026-view-transitions-baseline.md`). 2026 프론트엔드 이슈(View Transitions Baseline·RSC·Signals) 정리, 블로그 스택 철학과 연결. 겸사겸사 `search.astro`의 `<link is:inline>` 타입 에러(`ts(2322)`) 수정 — `<link>`엔 `is:inline`이 불필요(정적 `/pagefind/*` 경로는 미변환), 제거해 `pnpm check` 0 errors 복구. build로 글 산출·검색 CSS 경로 유지 확인.
 - 2026-07-06: heroImage/OG 정책 확정(ROADMAP 기술부채 B). OG는 생성 PNG로 통일, heroImage는 본문 상단 표시 전용(코드 변경 없음, 정책 문서화). 5장에 정책 명시.
