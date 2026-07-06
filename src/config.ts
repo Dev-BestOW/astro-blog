@@ -1,5 +1,5 @@
-// TODO(M4): 실제 배포 도메인으로 교체 (astro.config.mjs의 site와 일치시킬 것)
-export const SITE_URL = 'https://astro-blog.pages.dev';
+// 배포 도메인 (astro.config.mjs의 site와 일치시킬 것)
+export const SITE_URL = 'https://astro-blog.dev-bestow.workers.dev';
 
 export const siteConfig = {
   url: SITE_URL,
