@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllSeries } from '../../utils/posts';
+
+const series = await getAllSeries();
+---
+
+<BaseLayout title="Series" description="연재 글 모음">
+  <h1 class="mb-6 text-2xl font-bold tracking-tight">Series</h1>
+
+  {
+    series.length === 0 ? (
+      <p class="text-neutral-600 dark:text-neutral-400">아직 연재가 없습니다.</p>
+    ) : (
+      <ul class="divide-y divide-neutral-200 dark:divide-neutral-800">
+        {series.map(({ name, count }) => (
+          <li class="py-5">
+            <a href={`/series/${name}/`} class="group block">
+              <h2 class="text-xl font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                {name}
+              </h2>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{count}편</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

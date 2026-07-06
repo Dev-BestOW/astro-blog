@@ -3,9 +3,10 @@ import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
 import { siteConfig } from '../config';
 import type { Post } from '../utils/posts';
-import { formatDate, readingTimeMinutes } from '../utils/posts';
+import { formatDate, readingTimeMinutes, getSeriesContext } from '../utils/posts';
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import SeriesNav from '../components/SeriesNav.astro';
 
 interface Props {
   post: Post;
@@ -14,6 +15,7 @@ interface Props {
 const { post, headings } = Astro.props;
 const { title, description, pubDate, updatedDate, tags, heroImage } = post.data;
 const minutes = readingTimeMinutes(post.body);
+const series = await getSeriesContext(post);
 
 const ogPath = `/og/${post.id}.png`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -72,6 +74,8 @@ const jsonLd: Record<string, unknown> = {
       }
     </header>
 
+    {series && <SeriesNav name={series.name} posts={series.posts} currentId={post.id} />}
+
     {
       heroImage && (
         <Image
@@ -92,6 +96,36 @@ const jsonLd: Record<string, unknown> = {
       <slot />
     </div>
   </article>
+
+  {
+    series && (series.prev || series.next) && (
+      <nav
+        aria-label="시리즈 이전/다음 편"
+        class="mt-12 grid grid-cols-2 gap-4 border-t border-neutral-200 pt-6 dark:border-neutral-800"
+      >
+        {series.prev ? (
+          <a href={`/posts/${series.prev.id}/`} class="group text-sm">
+            <span class="text-neutral-500 dark:text-neutral-400">← 이전 편</span>
+            <span class="mt-1 block font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">
+              {series.prev.data.title}
+            </span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {series.next ? (
+          <a href={`/posts/${series.next.id}/`} class="group text-right text-sm">
+            <span class="text-neutral-500 dark:text-neutral-400">다음 편 →</span>
+            <span class="mt-1 block font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">
+              {series.next.data.title}
+            </span>
+          </a>
+        ) : (
+          <span />
+        )}
+      </nav>
+    )
+  }
 
   <div class="mt-12 border-t border-neutral-200 pt-6 dark:border-neutral-800">
     <a href="/" class="text-sm text-blue-600 hover:underline dark:text-blue-400"> ← 목록으로 </a>

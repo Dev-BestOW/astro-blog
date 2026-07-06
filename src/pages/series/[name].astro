@@ -1,0 +1,55 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getAllSeries } from '../../utils/posts';
+
+export const getStaticPaths = (async () => {
+  const series = await getAllSeries();
+  return series.map(({ name, posts }) => ({
+    params: { name },
+    props: { name, posts },
+  }));
+}) satisfies GetStaticPaths;
+
+const { name, posts } = Astro.props;
+---
+
+<BaseLayout title={name} description={`${name} 연재 (${posts.length}편)`}>
+  <h1 class="text-2xl font-bold tracking-tight">{name}</h1>
+  <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{posts.length}편</p>
+
+  <ol class="mt-6 divide-y divide-neutral-200 dark:divide-neutral-800">
+    {
+      posts.map((post, i) => (
+        <li class="py-5">
+          <a href={`/posts/${post.id}/`} class="group flex gap-4">
+            <span class="pt-0.5 text-sm tabular-nums text-neutral-400 dark:text-neutral-500">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="min-w-0">
+              <h2 class="text-lg font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                {post.data.title}
+              </h2>
+              <p class="mt-1 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400">
+                {post.data.description}
+              </p>
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="mt-1 block text-xs text-neutral-500 dark:text-neutral-400"
+              >
+                {formatDate(post.data.pubDate)}
+              </time>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+
+  <a
+    href="/series"
+    class="mt-8 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
+  >
+    ← 모든 시리즈
+  </a>
+</BaseLayout>

@@ -11,6 +11,7 @@ export const siteConfig = {
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Tags', href: '/tags' },
+    { label: 'Series', href: '/series' },
     { label: 'Search', href: '/search' },
     { label: 'RSS', href: '/rss.xml' },
   ],
