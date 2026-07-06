@@ -20,7 +20,7 @@ const { title, description, pubDate, tags } = post.data;
       {description}
     </p>
   </a>
-  <div class="mt-3 flex items-center gap-3 text-sm text-neutral-500">
+  <div class="mt-3 flex items-center gap-3 text-sm text-neutral-600 dark:text-neutral-400">
     <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
     {
       tags.length > 0 && (

@@ -13,7 +13,7 @@ const posts = await getPublishedPosts();
 
   {
     posts.length === 0 ? (
-      <p class="text-neutral-500">아직 작성된 글이 없습니다.</p>
+      <p class="text-neutral-600 dark:text-neutral-400">아직 작성된 글이 없습니다.</p>
     ) : (
       <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
         {posts.map((post) => (
