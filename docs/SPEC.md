@@ -105,6 +105,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 ```
 
 - **시리즈**: `series`가 같은 글끼리 하나의 연재로 묶인다. 순서는 `seriesOrder`(오름차순) → 동률/미지정 시 `pubDate`(오름차순, 1편이 먼저). `/series`(전체 목록)·`/series/[name]`(연재 상세)에서 탐색하고, 글 상세 상단엔 연재 목차(현재 편 강조)와 하단 이전/다음 편 이동을 제공한다.
+- **heroImage / OG 정책**: `heroImage`는 **본문 상단 표시 전용**. 소셜 미리보기(OG)는 `heroImage` 유무와 무관하게 **satori 생성 PNG로 통일**(브랜드 일관성·항상 1200×630 보장). heroImage를 OG로 대체하려면 `BaseLayout`의 `image` prop만 조건부로 바꾸면 됨(소규모).
 
 ---
 
@@ -139,6 +140,8 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-07-06: heroImage/OG 정책 확정(ROADMAP 기술부채 B). OG는 생성 PNG로 통일, heroImage는 본문 상단 표시 전용(코드 변경 없음, 정책 문서화). 5장에 정책 명시.
+- 2026-07-06: OG 폰트 서브셋(ROADMAP 기술부채 A). Pretendard OTF(3.15MB)를 현대 한글 음절 전체+라틴/자모/구두점만 남긴 서브셋 WOFF(1.7MB, -44%)로 교체, satori가 WOFF 직접 로드. 원본 OTF는 커밋 제외(`.gitignore`), 재생성 `scripts/subset-fonts.mjs`. `src/lib/og.ts`가 `Pretendard-*.subset.woff` 참조. CLAUDE.md 지뢰 노트도 갱신(OTF→WOFF). 프로덕션 OG 육안 검증(두부 0).
 - 2026-07-06: giscus 댓글 활성화(ROADMAP P2-6 완료). `siteConfig.giscus`에 `repoId`(R_kgDOTOsu_A)·`categoryId`(DIC_kwDOTOsu_M4DAmFs, `Announcements`) 채움, `inputPosition: bottom`. 브라우저 실측으로 iframe 로드·댓글 표시·다크↔라이트 테마 동기화 확인. (config 값을 비우면 inert 가드로 자동 비활성 — 안전장치 유지)
 - 2026-07-06: giscus 댓글 스캐폴딩(ROADMAP P2-6). `Comments.astro`(`siteConfig.giscus` config 기반, `PostLayout` 하단, 다크모드 `MutationObserver` 테마 동기화, `pathname` 매핑, ko, lazy). `repoId`/`categoryId` 미설정 시 프로덕션 렌더 안 함(inert 가드)·개발 모드 안내만.
 - 2026-07-06: 시리즈/연재 그룹핑 추가(ROADMAP P2-7). 스키마에 `series`/`seriesOrder`(5장 선행 갱신). `utils/posts.ts`에 `getAllSeries`/`getSeriesPosts`/`getSeriesContext`(정렬 seriesOrder↑→pubDate↑). `/series`·`/series/[name]` 페이지, `SeriesNav` 컴포넌트(글 상단 목차·현재 편 강조·pagefind 제외)+하단 이전/다음 편, nav에 Series. 시리즈 URL은 태그와 동일하게 원본 이름(공백·한글 인코딩). 임시 3편으로 실측 후 원복(빈 상태 확인).
