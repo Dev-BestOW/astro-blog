@@ -5,9 +5,12 @@ import sharp from 'sharp';
 import { siteConfig } from '../config';
 
 // 빌드타임에만 실행되는 코드 (정적 엔드포인트). 폰트는 process.cwd() 기준으로 읽는다.
+// 폰트는 OG 텍스트에 필요한 글자(한글 음절 전체 + 라틴/자모/구두점)만 남긴
+// 서브셋 WOFF. 원본 OTF(각 ~1.5MB) 대비 대폭 축소되어 레포/설치가 가벼워진다.
+// 재생성: `node scripts/subset-fonts.mjs` (원본 OTF는 리포에 두지 않으므로 필요 시 Pretendard에서 재취득).
 const fontDir = path.join(process.cwd(), 'src/assets/fonts');
-const bold = fs.readFileSync(path.join(fontDir, 'Pretendard-Bold.otf'));
-const regular = fs.readFileSync(path.join(fontDir, 'Pretendard-Regular.otf'));
+const bold = fs.readFileSync(path.join(fontDir, 'Pretendard-Bold.subset.woff'));
+const regular = fs.readFileSync(path.join(fontDir, 'Pretendard-Regular.subset.woff'));
 
 const host = new URL(siteConfig.url).host;
 

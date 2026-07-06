@@ -24,3 +24,6 @@ pnpm-debug.log*
 !.vscode/extensions.json
 
 .omc
+
+# OG 폰트: 서브셋 WOFF만 커밋한다. 원본 OTF는 재생성용으로만 임시 사용(커밋 금지).
+src/assets/fonts/*.otf
