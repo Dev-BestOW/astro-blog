@@ -57,7 +57,7 @@
 
 ### 백로그 (v2)
 
-- [ ] 검색 (Pagefind — 정적 클라이언트 검색, CF Pages와 궁합 좋음)
+- [x] 검색 (Pagefind — 정적 클라이언트 검색, CF Pages와 궁합 좋음) ✅
 - [ ] 댓글 (giscus)
 - [ ] 시리즈/연재 그룹핑
 - [ ] 다국어(i18n)
@@ -135,6 +135,7 @@ heroImage?: image()
 
 ## 변경 이력
 
+- 2026-07-06: Pagefind 정적 검색 추가(ROADMAP P2-5). `build`에 `pagefind --site dist` 체이닝. `PostLayout` article에 `data-pagefind-body`(글만 인덱싱)·TOC엔 `data-pagefind-ignore`, 프론트매터 `description`을 제목 하단 subtitle로 렌더해 인덱싱 포함. `/search` 페이지(Pagefind Default UI, 한글 번역·다크모드 변수), nav에 Search. 인덱스 = 제목+본문+태그+설명. 브라우저 실측(한글 접두 부분일치·설명 매칭·콘솔 에러 0). 한계: 한글 stemming 미지원, `astro dev`에선 검색 비활성(빌드 후 `preview` 필요).
 - 2026-07-06: JSON-LD 구조화 데이터 추가(ROADMAP P1-4). `BaseLayout`에 `jsonLd` prop(`<`→`<` 이스케이프 + `is:inline`으로 안전 주입). 홈(`/`)은 `WebSite`, 글 상세는 `PostLayout`에서 `BlogPosting`(headline·description·datePublished·dateModified·author·publisher·image(생성 OG)·mainEntityOfPage·keywords·inLanguage). 그 외 website 페이지엔 미출력(중복 방지). 빌드 산출물 home=1/post=1/tags=0 및 JSON 유효성 검증.
 - 2026-07-06: robots.txt 추가(ROADMAP P1-3). `src/pages/robots.txt.ts`에서 `siteConfig.url` 기반 동적 생성(도메인 변경 자동 반영). `User-agent: * / Allow: /` + `Sitemap: …/sitemap-index.xml`(절대 URL). `dist/robots.txt` 산출 확인.
 - 2026-07-06: GitHub Actions CI 도입(ROADMAP P1-2). `.github/workflows/ci.yml` — 단일 `verify` 잡에서 `pnpm/action-setup`(packageManager의 pnpm 10)+`setup-node`(`.nvmrc`=22, pnpm 캐시) → `install --frozen-lockfile` → `check`/`lint`/`format:check`/`build`. 트리거 `pull_request`+`push`(main 제외; main은 Cloudflare 담당), `concurrency`로 중복 실행 취소. 타입 오류 주입 시 `pnpm check` exit 1로 게이트 red 동작 로컬 확인.

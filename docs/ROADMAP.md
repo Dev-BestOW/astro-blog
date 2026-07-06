@@ -17,7 +17,7 @@
 | **P1** ✅    | GitHub Actions CI     | PR에서 `astro check` + build 검증 | S    |
 | **P1** ✅    | robots.txt            | 크롤러 허용 + 사이트맵 링크       | XS   |
 | **P1** ✅    | JSON-LD 구조화 데이터 | 글 상세 `BlogPosting` 스키마      | S    |
-| **P2**       | Pagefind 검색         | 정적 클라이언트 전문 검색         | M    |
+| **P2** ✅    | Pagefind 검색         | 정적 클라이언트 전문 검색         | M    |
 | **P2**       | giscus 댓글           | GitHub Discussions 기반 댓글      | S    |
 | **P2**       | 시리즈/연재 그룹핑    | 연재 글 묶음                      | M    |
 | **P3**       | i18n (다국어)         | 한/영 등 다국어 라우팅            | L    |
@@ -76,7 +76,7 @@
 
 ## P2 — 콘텐츠 경험
 
-### 5. Pagefind 검색 ⬜
+### 5. Pagefind 검색 ✅
 
 - **목적**: 정적 전문 검색(서버리스 불필요 → 현재 정적 배포와 궁합 좋음).
 - **범위**
@@ -86,6 +86,8 @@
 - **완료 기준**: 배포본에서 한글 키워드 검색 결과 정확, JS 페이로드는 검색 상호작용 시에만 로드.
 - **의존성**: 없음. 인덱싱이 `dist` 기준이라 **배포 파이프라인의 build 명령 확장** 필요.
 - **주의**: 한글 형태소 검색 한계 확인(부분일치 동작 테스트). **규모**: M
+- **결과**: `build` = `astro build && pagefind --site dist`(CF·CI 공통). `PostLayout` article에 `data-pagefind-body`(글만 인덱싱), TOC엔 `data-pagefind-ignore`. `/search` 페이지 + Pagefind Default UI(한글 번역·다크모드 변수 매핑), nav에 Search 추가. 인덱스 대상 = 제목+본문+태그+설명(설명은 글 상단 subtitle로 렌더해 자연 인덱싱). 브라우저 실측: "블로그"→1건(접두 부분일치 `블로그를`까지), "스택"→설명 매칭 1건, 콘솔 에러 0. 인덱스는 검색 상호작용 시 lazy 로드. `@pagefind/linux-x64`가 lockfile에 있어 CI/CF(Linux x64) `--frozen-lockfile` 정상.
+- **한계**: 한글 stemming 미지원(어근 매칭 X) — 접두 부분일치는 동작. `astro dev`에선 인덱스 미생성이라 검색 비활성(빌드 후 `pnpm preview`에서 확인).
 
 ### 6. giscus 댓글 ⬜
 
