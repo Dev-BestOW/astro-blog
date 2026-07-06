@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts, getAllTags } from '../../utils/posts';
+
+export const getStaticPaths = (async () => {
+  const [posts, tags] = await Promise.all([
+    getPublishedPosts(),
+    getAllTags(),
+  ]);
+  return tags.map(({ tag }) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((p) => p.data.tags.includes(tag)),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tag}`} description={`${tag} 태그의 글 모음`}>
+  <h1 class="mb-6 text-2xl font-bold tracking-tight">
+    <span class="text-neutral-400">#</span>{tag}
+  </h1>
+
+  <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+
+  <a
+    href="/tags"
+    class="mt-8 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
+  >
+    ← 모든 태그
+  </a>
+</BaseLayout>

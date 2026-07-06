@@ -1,0 +1,23 @@
+---
+import { siteConfig } from '../config';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="border-b border-neutral-200 dark:border-neutral-800">
+  <div class="mx-auto flex max-w-2xl items-center justify-between px-4 py-4">
+    <a href="/" class="text-lg font-bold tracking-tight">{siteConfig.title}</a>
+    <nav class="flex items-center gap-1 text-sm">
+      {
+        siteConfig.nav.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-md px-2 py-1 text-neutral-600 hover:bg-neutral-200/60 dark:text-neutral-300 dark:hover:bg-neutral-800"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
