@@ -134,4 +134,5 @@ heroImage?: image()
 - 2026-07-06: M1 스캐폴딩 완료. Astro 7 + Tailwind v4 + MDX + Content Collections(glob loader) 구성. 목록/상세/태그/RSS/사이트맵/다크모드/OG메타/404 페이지 구현, `astro check` 0 errors, `pnpm build` 성공.
 - 2026-07-06: M4 배포 연결 완료. Cloudflare Git 연동, main push 시 자동 재배포 검증(~84초). 배포 URL을 workers.dev 도메인으로 확정하고 canonical/OG/RSS/sitemap 전부 반영. `.nvmrc`(22)·`packageManager` 고정.
 - 2026-07-06: Lighthouse 측정 및 접근성 수정. muted 텍스트 대비(neutral-500 on dark = 4.17)가 WCAG AA 미달 → neutral-600/dark:neutral-400로 상향. 재측정 결과 Accessibility·SEO·Best Practices·Agentic 100/0-failed, 성능 LCP 130ms·CLS 0.00·TTFB 58ms. M4 완료.
+- 2026-07-06: 배포 실패 수정. wrangler가 wrangler 설정 부재 시 `astro add cloudflare` 어댑터를 자동 주입 → workerd 프리렌더에서 `node:fs` 없음으로 OG 빌드 실패. 정적 assets 배포용 `wrangler.jsonc`(assets.directory=./dist, main 없음)를 추가해 자동설정을 차단, 플레인 static 산출물을 그대로 배포하도록 고정.
 - 2026-07-06: OG 이미지 satori 자동생성 구현(M3 완결). `src/lib/og.ts` + `src/pages/og/[...slug].png.ts`로 글별 1200x630 PNG 빌드타임 생성, 사이트 기본 OG 포함. 한글 렌더용 Pretendard(Bold/Regular) OTF 벤더링(`src/assets/fonts/`). 레이아웃이 생성 PNG 참조, og:image width/height 메타 추가, 기존 SVG placeholder 제거.

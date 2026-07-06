@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "astro-blog",
+  "compatibility_date": "2026-07-06",
+  // 정적 SSG 산출물(dist)을 그대로 정적 자산으로 배포한다.
+  // Worker 엔트리(main)가 없으므로 wrangler는 어댑터를 주입하지 않고
+  // assets만 업로드한다. (astro add cloudflare 자동설정 방지)
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
