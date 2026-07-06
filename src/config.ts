@@ -3,7 +3,7 @@ export const SITE_URL = 'https://jiwon-seok.com';
 
 export const siteConfig = {
   url: SITE_URL,
-  title: 'BestOW Blog',
+  title: "BestOW's Blog",
   description: '나를 기록하는 블로그',
   author: 'BestOW',
   locale: 'ko-KR',
