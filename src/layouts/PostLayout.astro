@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
+import { siteConfig } from '../config';
 import type { Post } from '../utils/posts';
 import { formatDate, readingTimeMinutes } from '../utils/posts';
 import BaseLayout from './BaseLayout.astro';
@@ -13,18 +14,35 @@ interface Props {
 const { post, headings } = Astro.props;
 const { title, description, pubDate, updatedDate, tags, heroImage } = post.data;
 const minutes = readingTimeMinutes(post.body);
+
+const ogPath = `/og/${post.id}.png`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// 글 상세 BlogPosting 구조화 데이터 (검색엔진 리치 결과)
+const jsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: { '@type': 'Person', name: siteConfig.author },
+  publisher: { '@type': 'Organization', name: siteConfig.title },
+  image: new URL(ogPath, Astro.site).href,
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  keywords: tags,
+  inLanguage: siteConfig.locale,
+};
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  type="article"
-  image={`/og/${post.id}.png`}
->
+<BaseLayout title={title} description={description} type="article" image={ogPath} jsonLd={jsonLd}>
   <article>
     <header class="mb-8">
       <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
-      <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400">
+      <div
+        class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400"
+      >
         <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
         <span aria-hidden="true">·</span>
         <span>{minutes}분 읽기</span>
@@ -75,8 +93,6 @@ const minutes = readingTimeMinutes(post.body);
   </article>
 
   <div class="mt-12 border-t border-neutral-200 pt-6 dark:border-neutral-800">
-    <a href="/" class="text-sm text-blue-600 hover:underline dark:text-blue-400">
-      ← 목록으로
-    </a>
+    <a href="/" class="text-sm text-blue-600 hover:underline dark:text-blue-400"> ← 목록으로 </a>
   </div>
 </BaseLayout>

@@ -11,6 +11,8 @@ interface Props {
   image?: string;
   /** 글 상세면 'article' */
   type?: 'website' | 'article';
+  /** 페이지별 JSON-LD 구조화 데이터 (미지정 시 홈에서 WebSite 스키마 사용) */
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
@@ -18,11 +20,31 @@ const {
   description = siteConfig.description,
   image = '/og/default.png',
   type = 'website',
+  jsonLd,
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${siteConfig.title}` : siteConfig.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+
+// JSON-LD: 전달받은 스키마 우선, 없으면 홈(`/`)에서만 WebSite 기본값.
+const structuredData: Record<string, unknown> | undefined =
+  jsonLd ??
+  (Astro.url.pathname === '/'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteConfig.title,
+        url: siteConfig.url,
+        description: siteConfig.description,
+        inLanguage: siteConfig.locale,
+      }
+    : undefined);
+
+// `</script>` 조기 종료 방지를 위해 `<`를 이스케이프.
+const jsonLdText = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, '\\u003c')
+  : undefined;
 ---
 
 <!doctype html>
@@ -32,12 +54,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title={siteConfig.title}
-      href="/rss.xml"
-    />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href="/rss.xml" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{pageTitle}</title>
@@ -59,12 +76,13 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <!-- JSON-LD 구조화 데이터 -->
+    {jsonLdText && <script type="application/ld+json" is:inline set:html={jsonLdText} />}
+
     <!-- 다크모드 FOUC 방지: 렌더 전 테마 결정 -->
     <script is:inline>
       const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia(
-        '(prefers-color-scheme: dark)',
-      ).matches;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (stored === 'dark' || (!stored && prefersDark)) {
         document.documentElement.classList.add('dark');
       }
