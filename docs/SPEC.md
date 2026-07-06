@@ -13,7 +13,8 @@
 
 | 항목 | 결정 | 비고 |
 |------|------|------|
-| 배포 | **Cloudflare Pages** | 정적 SSG 업로드, 무료 티어, 글로벌 CDN |
+| 배포 | **Cloudflare (Git 연동)** | 정적 SSG, main push 시 자동 배포 |
+| 배포 URL | **https://astro-blog.dev-bestow.workers.dev** | GitHub `Dev-BestOW/astro-blog` 연동 |
 | 렌더링 | **완전 정적 (SSG)** `output: 'static'` | 어댑터 불필요 |
 | UI 방향 | **미니멀** | 타이포/여백 중심, 다크모드 |
 | 인터랙션 | **순수 Astro (프레임워크 없음)** | 필요 시 순수 `<script>`만 사용 |
@@ -123,7 +124,7 @@ heroImage?: image()
 | **M1 스캐폴딩** | 프로젝트 생성, Tailwind/MDX/컬렉션 스키마, 레이아웃 골격 | ✅ |
 | **M2 콘텐츠** | 목록/상세/태그 페이지, TOC, 읽기시간, 코드 하이라이팅 | ✅ (기본 완료, 페이지네이션 미구현) |
 | **M3 SEO/피드** | RSS, 사이트맵, OG 이미지, 다크모드 | 🟡 (RSS·사이트맵·다크모드·OG메타 완료 / OG 이미지 satori 자동생성 미구현) |
-| **M4 배포** | Cloudflare Pages 연결, Lighthouse 95+ 확인 | ⬜ |
+| **M4 배포** | Cloudflare 연결, Lighthouse 95+ 확인 | 🟡 (배포 연결·자동 재배포 완료 / Lighthouse 측정 미실시) |
 | **v2 백로그** | Pagefind 검색, giscus 댓글, 시리즈 | ⬜ |
 
 ---
@@ -131,3 +132,4 @@ heroImage?: image()
 ## 변경 이력
 - 2026-07-06: v1 스펙 확정 (Cloudflare Pages / 미니멀 UI / 순수 Astro).
 - 2026-07-06: M1 스캐폴딩 완료. Astro 7 + Tailwind v4 + MDX + Content Collections(glob loader) 구성. 목록/상세/태그/RSS/사이트맵/다크모드/OG메타/404 페이지 구현, `astro check` 0 errors, `pnpm build` 성공.
+- 2026-07-06: M4 배포 연결 완료. Cloudflare Git 연동, main push 시 자동 재배포 검증(~84초). 배포 URL을 workers.dev 도메인으로 확정하고 canonical/OG/RSS/sitemap 전부 반영. `.nvmrc`(22)·`packageManager` 고정.
