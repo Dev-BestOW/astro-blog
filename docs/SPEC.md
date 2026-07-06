@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-07-06: 글 추가 "MPA가 다시 빨라진다 — View Transitions와 '적게 보내기'의 귀환"(`posts/2026-view-transitions-baseline.md`). 2026 프론트엔드 이슈(View Transitions Baseline·RSC·Signals) 정리, 블로그 스택 철학과 연결. 겸사겸사 `search.astro`의 `<link is:inline>` 타입 에러(`ts(2322)`) 수정 — `<link>`엔 `is:inline`이 불필요(정적 `/pagefind/*` 경로는 미변환), 제거해 `pnpm check` 0 errors 복구. build로 글 산출·검색 CSS 경로 유지 확인.
 - 2026-07-06: heroImage/OG 정책 확정(ROADMAP 기술부채 B). OG는 생성 PNG로 통일, heroImage는 본문 상단 표시 전용(코드 변경 없음, 정책 문서화). 5장에 정책 명시.
 - 2026-07-06: OG 폰트 서브셋(ROADMAP 기술부채 A). Pretendard OTF(3.15MB)를 현대 한글 음절 전체+라틴/자모/구두점만 남긴 서브셋 WOFF(1.7MB, -44%)로 교체, satori가 WOFF 직접 로드. 원본 OTF는 커밋 제외(`.gitignore`), 재생성 `scripts/subset-fonts.mjs`. `src/lib/og.ts`가 `Pretendard-*.subset.woff` 참조. CLAUDE.md 지뢰 노트도 갱신(OTF→WOFF). 프로덕션 OG 육안 검증(두부 0).
 - 2026-07-06: giscus 댓글 활성화(ROADMAP P2-6 완료). `siteConfig.giscus`에 `repoId`(R_kgDOTOsu_A)·`categoryId`(DIC_kwDOTOsu_M4DAmFs, `Announcements`) 채움, `inputPosition: bottom`. 브라우저 실측으로 iframe 로드·댓글 표시·다크↔라이트 테마 동기화 확인. (config 값을 비우면 inert 가드로 자동 비활성 — 안전장치 유지)
