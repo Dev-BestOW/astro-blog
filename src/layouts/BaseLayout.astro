@@ -60,6 +60,18 @@ const jsonLdText = structuredData
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
 
+    <!-- 검색엔진 소유확인 (값이 있을 때만) -->
+    {
+      siteConfig.verification.naver && (
+        <meta name="naver-site-verification" content={siteConfig.verification.naver} />
+      )
+    }
+    {
+      siteConfig.verification.google && (
+        <meta name="google-site-verification" content={siteConfig.verification.google} />
+      )
+    }
+
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />

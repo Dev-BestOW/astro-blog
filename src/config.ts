@@ -8,6 +8,13 @@ export const siteConfig = {
   author: 'BestOW',
   locale: 'ko-KR',
   postsPerPage: 10,
+  // 검색엔진 소유확인 메타태그. 값이 있을 때만 <head>에 렌더된다(빈 값이면 미출력).
+  // naver: 네이버 서치어드바이저 HTML 태그 인증 코드.
+  // google: GSC는 도메인 속성(DNS TXT)으로 인증했으므로 보통 비워둔다(URL 접두어 인증 시에만 사용).
+  verification: {
+    naver: '6c4fdc94944c1b11bf151f72676d4594462a0660',
+    google: '',
+  },
   // hideOnMobile: 로고가 이미 홈 링크라 모바일에선 'Home' 중복 제거.
   // icon: 관습적으로 아이콘으로 노출하는 항목(Search/RSS) → 좁은 화면 공간 절약.
   nav: [
