@@ -3,9 +3,9 @@ export const SITE_URL = 'https://astro-blog.dev-bestow.workers.dev';
 
 export const siteConfig = {
   url: SITE_URL,
-  title: 'Dev Blog',
-  description: '개발하면서 배운 것들을 기록하는 블로그',
-  author: 'mayday',
+  title: 'BestOW Blog',
+  description: '나를 기록하는 블로그',
+  author: 'BestOW',
   locale: 'ko-KR',
   postsPerPage: 10,
   nav: [
