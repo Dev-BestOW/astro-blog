@@ -44,3 +44,5 @@ pnpm check    # astro 타입체크 (완료 전 필수, 0 errors 유지)
 ## 글 쓰는 법
 
 `src/content/posts/<slug>.md`(또는 `.mdx`) 추가 → 프론트매터(`title`,`description`,`pubDate`,`tags`, 선택 `draft`/`updatedDate`/`heroImage`) → `git push`. OG/RSS/사이트맵/태그는 자동 생성. 초안은 `draft: true`(프로덕션 제외).
+
+**예약 발행(매일 1편)**: `content-queue/`(컬렉션 밖)에 미리 쓴 글을 쌓아두면 `.github/workflows/daily-post.yml`이 매일 09:00 KST에 1편씩 `posts/`로 옮겨 발행(`scripts/publish-next.mjs`, 파일명 오름차순·선행 `NN-` 접두어는 slug에서 제거·`pubDate`는 발행일로 자동 갱신). 큐가 비면 무동작. 자세한 사용법은 `content-queue/README.md`.

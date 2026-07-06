@@ -1,0 +1,37 @@
+name: Daily post
+
+# 매일 1편씩 예약 발행: content-queue/의 다음 글을 src/content/posts/로 옮기고 push.
+# push되면 Cloudflare가 자동 재배포한다(main). 큐가 비면 아무 커밋도 하지 않는다.
+on:
+  schedule:
+    - cron: '0 0 * * *' # 00:00 UTC = 09:00 KST (GitHub 크론은 수 분 지연될 수 있음)
+  workflow_dispatch: {} # 수동 실행(테스트/즉시 발행)
+
+permissions:
+  contents: write # 발행 커밋을 main에 push하기 위해 필요
+
+concurrency:
+  group: daily-post
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Publish next queued post
+        run: node scripts/publish-next.mjs
+      - name: Commit & push if changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "변경 없음 — 큐가 비었거나 발행할 글 없음. 건너뜀."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(post): publish scheduled post ($(TZ=Asia/Seoul date +%Y-%m-%d))"
+          git push
