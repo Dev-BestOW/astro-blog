@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-07-07
 title: '클로저는 어떻게 메모리 누수가 되는가'
 description: '클로저는 강력하지만, 무엇을 붙잡고 있는지 모르면 누수가 됩니다. SPA에서 흔한 누수 패턴과 진단법을 정리합니다.'
 tags: ['javascript', 'performance']
