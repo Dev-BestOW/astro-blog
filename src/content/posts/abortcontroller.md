@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-07-08
 title: 'AbortController — 비동기 취소의 표준 도구'
 description: 'fetch 취소로만 알고 있다면 절반만 쓰는 겁니다. 리스너 정리, 타임아웃, 신호 결합까지 AbortController의 실전 활용을 정리합니다.'
 tags: ['javascript', 'async', 'web-api']
