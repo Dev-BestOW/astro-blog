@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-07-10
 title: '불변 배열 메서드 — toSorted, toReversed, with (ES2023)'
 description: 'sort()가 원본을 바꿔서 React 상태가 꼬인 경험이 있다면. ES2023의 불변 배열 메서드가 그 문제를 문법 차원에서 없앱니다.'
 tags: ['javascript', 'typescript']
