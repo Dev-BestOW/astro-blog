@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-07-11
 title: 'TypeScript satisfies — 타입 검사와 추론을 동시에'
 description: '`as`는 위험하고, `: Type`는 타입을 넓혀버립니다. satisfies는 "검사는 하되 좁은 추론은 유지"하는 세 번째 길입니다.'
 tags: ['typescript']
