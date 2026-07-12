@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-07-12
 title: 'CSS :has() — 드디어 온 "부모 선택자"'
 description: '20년 넘게 CSS에 없던 부모 선택자. :has()는 단순한 부모 선택을 넘어 상태 기반 스타일링의 판을 바꿉니다.'
 tags: ['css', 'frontend']
