@@ -77,6 +77,23 @@ html {
 .prose img {
   @apply my-6 rounded-lg;
 }
+/* 표: Tailwind preflight 가 테두리·여백을 지워 글자만 늘어서 보이므로 칸을 다시 그린다.
+   한글은 낱말 단위로 줄바꿈(keep-all). 마크다운 `---:` 정렬은 인라인 style 이라 text-left 보다 우선한다. */
+.prose table {
+  @apply my-6 w-full border-collapse text-[0.95em] leading-6;
+  word-break: keep-all;
+  overflow-wrap: break-word; /* anywhere 는 칸의 최소 폭을 한 글자로 줄여 "항/목/수" 처럼 끊긴다 */
+}
+.prose th,
+.prose td {
+  @apply border border-neutral-300 dark:border-neutral-700 px-3 py-2 align-top text-left;
+}
+.prose th {
+  @apply bg-neutral-100 dark:bg-neutral-800 font-semibold text-neutral-900 dark:text-neutral-100 whitespace-nowrap;
+}
+.prose tbody tr:nth-child(even) {
+  @apply bg-neutral-50 dark:bg-neutral-900/60;
+}
 
 /* Shiki 라이트/다크 테마 전환 */
 html.dark .astro-code,

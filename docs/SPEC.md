@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-10-23: 본문 표 스타일 추가(`global.css` `.prose table`). Tailwind preflight 가 테두리·여백을 지워 표가 글자만 늘어서 보이던 문제 — 칸 테두리(neutral-300/700)·안쪽 여백·머리줄 배경(neutral-100/800, 줄바꿈 없음)·짝수 줄 배경, 한글 `keep-all` + `overflow-wrap: break-word`(anywhere 는 칸 최소 폭을 한 글자로 줄여 "항/목/수" 로 끊김). 마크다운 `---:` 정렬은 인라인 style 이라 그대로 적용. 라이트·다크·375px 스크린샷 확인(가로 스크롤 없음), `check`·`build`·lint·format 통과.
 - 2026-07-06: 글 목록 카드(`PostCard`) 메타 행 반응형화. 모바일에서 발행일과 태그를 세로 스택(`flex-col gap-1`), `sm`+에서 기존처럼 한 줄(`sm:flex-row sm:items-center sm:gap-3`). 브라우저 실측(375px 줄바꿈·1024px 한 줄) 및 `check`/`build` 통과.
 - 2026-07-06: 예약 발행(매일 1편) 자동화. `content-queue/`(콘텐츠 컬렉션 밖 → 대기 글은 빌드 미포함)에 미리 쓴 글을 쌓아두면 `scripts/publish-next.mjs`가 파일명 오름차순으로 다음 1편을 `src/content/posts/`로 이동(선행 `NN-` 접두어는 slug에서 제거, `pubDate`는 발행일 KST로 자동 갱신, 파일명 충돌·프론트매터 부재 시 중단). `.github/workflows/daily-post.yml`이 매일 00:00 UTC(=09:00 KST) 크론+`workflow_dispatch`로 실행→변경 있으면 `github-actions[bot]`이 main에 commit&push→Cloudflare 자동 배포. 큐가 비면 무커밋. 로컬 실측(빈 큐 무동작·발행 시 접두어 제거+pubDate 갱신+큐 제거). 기존 `ci.yml`은 main push 제외라 충돌 없음.
 - 2026-07-06: 검색엔진 소유확인 메타 배선. `siteConfig.verification.{naver,google}` 필드 추가, `BaseLayout` `<head>`에 값이 있을 때만 렌더(빈 값 미출력 안전장치). 네이버 서치어드바이저 인증코드 채움(google은 GSC 도메인 속성=DNS TXT로 인증했으므로 공란). GSC: 도메인 속성 DNS TXT 인증 완료 + `sitemap-index.xml` 제출 완료. build로 홈 head 렌더 검증.
