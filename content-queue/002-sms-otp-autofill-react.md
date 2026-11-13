@@ -3,7 +3,7 @@ title: 'React 인증번호 입력에 문자 자동 채우기 붙이기'
 description: '휴대폰 본인인증 화면의 6칸 인증번호 입력은 칸을 여섯 개 만들면 문자 자동 채우기·붙여넣기·스크린리더가 한꺼번에 어긋납니다. 입력창 하나에 칸 모양만 그리는 방법, autocomplete="one-time-code" 와 WebOTP, 타이머 알림까지 정리합니다.'
 pubDate: 2026-11-13
 tags: ['react', 'forms', 'accessibility', 'mobile']
-draft: true
+draft: false
 ---
 
 한국 서비스의 회원가입에는 거의 빠짐없이 "인증번호 6자리" 칸이 있습니다. 디자인 시안은 대개 네모 칸 여섯 개이고, 처음 만들 때는 `<input maxLength={1}>` 을 여섯 개 두고 한 글자를 치면 다음 칸으로 포커스를 옮기는 식으로 구현하기 쉽습니다.
