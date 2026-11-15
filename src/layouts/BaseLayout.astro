@@ -72,6 +72,21 @@ const jsonLdText = structuredData
       )
     }
 
+    <!-- Google AdSense: 게시자 ID 가 있을 때만(사이트 소유 확인 메타 + 광고 스크립트) -->
+    {
+      siteConfig.ads.adsenseClient && (
+        <>
+          <meta name="google-adsense-account" content={siteConfig.ads.adsenseClient} />
+          <script
+            is:inline
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.ads.adsenseClient}`}
+            crossorigin="anonymous"
+          />
+        </>
+      )
+    }
+
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />

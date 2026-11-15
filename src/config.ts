@@ -37,4 +37,18 @@ export const siteConfig = {
     inputPosition: 'bottom',
     lang: 'ko',
   },
+  // 광고. 값이 비어 있으면 광고 스크립트·광고 칸을 전혀 그리지 않는다(giscus 와 같은 방식).
+  // 자세한 순서는 docs/ADS.md.
+  ads: {
+    // Google AdSense 게시자 ID('ca-pub-…'). 채우면 모든 쪽 <head> 에 소유 확인 메타·광고 스크립트, ads.txt 에 한 줄이 들어간다.
+    adsenseClient: '' as string,
+    // AdSense 수동 광고 단위 ID(숫자). 채우면 글 끝 광고 칸에 그 광고를 넣는다(비우면 자동 광고만).
+    adsenseSlot: '' as string,
+    // 카카오 애드핏 광고 단위('DAN-…'). AdSense 광고 단위가 없을 때 글 끝 광고 칸에 넣는다.
+    adfitUnit: '' as string,
+    adfitWidth: 320,
+    adfitHeight: 100,
+  },
+  // 개인정보처리방침의 문의처(공개 저장소 이슈)
+  contactUrl: 'https://github.com/Dev-BestOW/astro-blog/issues',
 } as const;

@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config';
+
+// 개인정보처리방침. 실제로 쓰는 서비스만 적는다 — 서비스를 더하거나 빼면(광고·댓글·통계) 이 쪽도 고친다.
+const effectiveDate = '2026년 11월 15일';
+const { adfitUnit } = siteConfig.ads;
+const commentsOn = Boolean(siteConfig.giscus.repoId && siteConfig.giscus.categoryId);
+---
+
+<BaseLayout title="개인정보처리방침" description={`${siteConfig.title}의 개인정보처리방침`}>
+  <article class="prose max-w-none">
+    <h1>개인정보처리방침</h1>
+    <p>
+      {siteConfig.title}(이하 "블로그")는 방문자의 개인정보를 소중히 다룹니다. 이 문서는 블로그를
+      이용할 때 어떤 정보가 어떻게 처리되는지 설명합니다.
+    </p>
+
+    <h2>1. 블로그가 직접 수집하는 정보</h2>
+    <p>
+      블로그에는 회원가입·입력 양식이 없으며, 운영자가 방문자의 개인정보를 직접 수집하거나 저장하지
+      않습니다.
+    </p>
+
+    <h2>2. 외부 서비스가 처리하는 정보</h2>
+    <h3>호스팅 (Cloudflare)</h3>
+    <p>
+      블로그는 Cloudflare 를 통해 제공됩니다. Cloudflare 는 서비스 운영과 보안을 위해 접속 기록(IP
+      주소, 브라우저 정보, 접속 시각 등)을 처리할 수 있습니다. 자세한 내용은
+      <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare 개인정보처리방침</a>을
+      참고하세요.
+    </p>
+
+    {
+      commentsOn && (
+        <>
+          <h3>댓글 (giscus · GitHub)</h3>
+          <p>
+            댓글은 GitHub Discussions 를 이용하는 giscus 로 운영됩니다. 댓글을 쓰려면 GitHub
+            계정으로 로그인해야 하며, 작성한 댓글과 GitHub 계정 정보는 GitHub 에 저장됩니다. 자세한
+            내용은
+            <a href="https://docs.github.com/ko/site-policy/privacy-policies/github-general-privacy-statement">
+              GitHub 개인정보처리방침
+            </a>
+            을 참고하세요.
+          </p>
+        </>
+      )
+    }
+
+    <h3>광고 (Google AdSense)</h3>
+    <p>
+      블로그는 Google AdSense 광고를 게재합니다. Google 을 비롯한 제3자 광고 사업자는 쿠키를 사용해
+      방문자가 이 블로그나 다른 웹사이트를 방문한 기록을 바탕으로 광고를 보여 줄 수 있습니다. Google
+      이 광고 쿠키를 사용하면 Google 과 파트너가 이 기록을 바탕으로 맞춤 광고를 제공할 수 있습니다.
+    </p>
+    <ul>
+      <li>
+        맞춤 광고는 <a href="https://myadcenter.google.com/">Google 내 광고 센터</a>에서 끌 수
+        있습니다.
+      </li>
+      <li>
+        Google 이 정보를 사용하는 방식은
+        <a href="https://policies.google.com/technologies/partner-sites">
+          Google 파트너 사이트의 정보 사용 방식
+        </a>
+        에서 볼 수 있습니다.
+      </li>
+    </ul>
+
+    {
+      adfitUnit && (
+        <>
+          <h3>광고 (카카오 애드핏)</h3>
+          <p>
+            블로그는 카카오 애드핏 광고를 게재합니다. 카카오는 광고 제공을 위해 쿠키 등으로 방문
+            정보를 처리할 수 있습니다. 자세한 내용은{' '}
+            <a href="https://www.kakao.com/policy/privacy">카카오 개인정보처리방침</a>을 참고하세요.
+          </p>
+        </>
+      )
+    }
+
+    <h2>3. 브라우저에만 저장하는 정보</h2>
+    <p>
+      화면 테마(라이트·다크) 선택은 방문자의 브라우저 저장소(localStorage)에만 저장되며 서버로
+      보내지 않습니다. 글 검색은 브라우저 안에서 처리되어 검색어가 외부로 전송되지 않습니다.
+    </p>
+
+    <h2>4. 쿠키를 거부하는 방법</h2>
+    <p>
+      브라우저 설정에서 쿠키 저장을 거부하거나 저장된 쿠키를 삭제할 수 있습니다. 쿠키를 거부해도
+      글을 읽는 데에는 지장이 없습니다.
+    </p>
+
+    <h2>5. 문의</h2>
+    <p>
+      개인정보와 관련한 문의는 <a href={siteConfig.contactUrl}>블로그 저장소의 이슈</a>로 남겨
+      주세요.
+    </p>
+
+    <h2>6. 시행일</h2>
+    <p>이 방침은 {effectiveDate}부터 적용됩니다. 내용이 바뀌면 이 쪽에 알립니다.</p>
+  </article>
+</BaseLayout>
