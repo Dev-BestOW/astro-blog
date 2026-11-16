@@ -1,7 +1,7 @@
 ---
 title: 'React 인증번호 입력에 문자 자동 채우기 붙이기'
 description: '휴대폰 본인인증 화면의 6칸 인증번호 입력은 칸을 여섯 개 만들면 문자 자동 채우기·붙여넣기·스크린리더가 한꺼번에 어긋납니다. 입력창 하나에 칸 모양만 그리는 방법, autocomplete="one-time-code" 와 WebOTP, 타이머 알림까지 정리합니다.'
-pubDate: 2026-11-13
+pubDate: 2026-11-16
 tags: ['react', 'forms', 'accessibility', 'mobile']
 draft: false
 ---
