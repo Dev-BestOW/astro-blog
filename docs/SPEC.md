@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-17: 글 예약 — 대기열 004(디자인 시스템 문서 SEO·GEO) + 005~~014(BestOW UI 만들기 10편: 커서 유지·스크린리더 알림 타이밍·고대비·CSS @layer·네이티브 라디오·트리 셰이킹·서버 컴포넌트·다크 모드·React 18/19·npm Trusted Publishing)가 11/18~~11/28 매일 1편. 사실·코드는 BestOW UI 저장소의 코드·기록과 대조. 네이버 서치어드바이저에 `/rss.xml` 제출(사용자), AdSense 는 "검토 중"(사용자 확인).
 - 2026-11-17: 도메인 정리(Cloudflare 설정, 사용자) — 옛 workers.dev 주소 끄기, `www` → 루트 301, Always Use HTTPS, SPF `-all`·DMARC `reject`. 모든 주소가 `https://jiwon-seok.com` 으로 모이는 것을 확인. 메일을 쓰게 되면 SPF·DMARC 부터 바꾼다.
 - 2026-11-17: ROADMAP 정리 — 남은 일만(광고 심사·옛 workers.dev 주소 끄기·DNS 정리·조회수 표시·i18n·이미지 파이프라인), 끝난 항목 상세는 `docs/ROADMAP-HISTORY.md` 로. 커스텀 도메인·애널리틱스 수집은 이미 끝나 있어 완료로 옮김. 개인정보처리방침에 실제로 쓰는 Cloudflare Web Analytics 항목 추가(시행일 11/17).
 - 2026-11-17: CLAUDE.md 정리 — BestOW UI 작업 규칙 중 맞는 것(한국어 답변·커밋은 사용자·gitmoji 추천·검증 전부 통과·브라우저 점검·접근성 기준·글은 확인한 것만) 추가, 옛 문구(workers.dev·`gh api`·"매일 09:00 발행") 정리. 검증 중 `pnpm format:check` 가 md 7개로 실패하던 것을 발견(CI 는 main push 에서 안 돎) — `pnpm format` 이 글 속 코드 블록까지 바꿔서 `.prettierrc.json` 에 md·mdx `embeddedLanguageFormatting: off` 를 두고 서식만 정리(글 5편 빌드 HTML 이 정리 전과 동일함을 비교).
