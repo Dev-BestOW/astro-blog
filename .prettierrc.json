@@ -7,7 +7,15 @@
   "overrides": [
     {
       "files": "*.astro",
-      "options": { "parser": "astro" }
+      "options": {
+        "parser": "astro"
+      }
+    },
+    {
+      "files": ["*.md", "*.mdx"],
+      "options": {
+        "embeddedLanguageFormatting": "off"
+      }
     }
   ]
 }
