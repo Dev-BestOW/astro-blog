@@ -38,7 +38,8 @@ pnpm check    # astro 타입체크 (완료 전 필수, 0 errors 유지)
 - OG 생성(`src/lib/og.ts`)은 **빌드타임 전용**(`node:fs`로 폰트 읽음). 런타임/워커로 옮기지 말 것.
 - 폰트 (둘 다 삭제 금지):
   - `src/assets/fonts/Pretendard-*.subset.woff`(정적 400/700) — **OG 렌더용**(빌드타임). 원본 OTF는 커밋 안 함(`.gitignore`). 재생성: OTF를 임시로 두고 `node scripts/subset-fonts.mjs`.
-  - `src/assets/fonts/PretendardVariable.subset.woff2`(전 weight Variable) — **사이트 본문 웹폰트**(`global.css` `@font-face`). 재생성: `pnpm add -D pretendard` 후 `node scripts/subset-body-font.mjs`(pretendard 패키지의 Variable woff2를 상용 글자로 서브셋).
+  - `src/assets/fonts/PretendardVariable.subset.woff2`(전 weight Variable) — **사이트 본문 웹폰트 원본**(`global.css` `@font-face`). 재생성: `pnpm add -D pretendard` 후 `node scripts/subset-body-font.mjs`(pretendard 패키지의 Variable woff2를 상용 글자로 서브셋).
+    배포 빌드는 `scripts/subset-dist-font.mjs`(build 스크립트에 포함)가 dist 의 이 파일을 **사이트에 쓰인 글자 + 굵기 400~700** 만 남겨 다시 줄이고(630 → 약 116 kB), 내용 해시로 이름을 바꿔 CSS 참조를 고친다. 400~700 밖 굵기를 쓰려면 `global.css` font-weight 와 스크립트의 `weight` 를 함께 바꾼다.
 - `SITE_URL`은 `src/config.ts`와 `astro.config.mjs`(그리고 도메인 변경 시 `wrangler.jsonc`) **세 곳을 일치**시킬 것.
 
 ## 글 쓰는 법

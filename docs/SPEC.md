@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-17: 본문 글꼴 경량화. 쪽마다 받던 `PretendardVariable.subset.woff2`(상용 2,780자·전 굵기) 630 kB 가 전송량의 2/3 → 빌드 뒤 `scripts/subset-dist-font.mjs` 가 dist 의 모든 HTML·XML 에 쓰인 글자(+ASCII·기호, 현재 853자·한글 661)와 굵기 400~700 만 남겨 116 kB 로(`@font-face` font-weight 400 700). 줄인 파일은 내용 해시로 이름을 새로 짓고 CSS 참조를 바꾼다(Astro 해시는 원본 기준이라 글자가 늘어도 이름이 같아 옛 캐시가 쓰임). 글꼴·참조를 못 찾으면 빌드 실패. 동적 서브셋(92조각)은 쪽당 370~505 kB·여러 쪽이면 822 kB 라 택하지 않음. 쪽의 모든 글자가 새 글꼴에 있는지 대조(빠진 ⌊⌋·이모지는 원래 글꼴에도 없음). 블로그 자체 전송량 쪽당 약 640 → 130 kB.
 - 2026-11-17: 가독성·접근성 점검(라이브 32화면 axe·스크린샷) 반영. 본문 전체 `word-break: keep-all`(한글이 "붙이/기" 처럼 낱말 가운데서 끊기던 문제 — 전엔 표에만), 머리글 메뉴 한국어(홈·태그·시리즈·검색), 첫 화면의 중복 바로가기 링크 줄 제거, "본문으로 건너뛰기" 링크 + `<main id="main">`, 검색 입력 `aria-label`(Pagefind 는 title 만), 404 에 h1, 페이지 이동 비활성 글자 대비(neutral-500/dark:neutral-400), Shiki 고대비 테마(`github-*-high-contrast` — 기본 테마는 주석 등 대비 4.5:1 미만). 글 5편의 옛 `dev-bestow.github.io/BestOW-UI` 링크를 `bestow-ui.com` 으로(인증번호·약관·사업자번호 글은 새 컴포넌트 문서 쪽으로). 재점검 axe 위반 0·가로 넘침 0. 남은 것: 본문 글꼴 631 kB 경량화, About 쪽, 이전·다음 글.
 - 2026-11-17: 글 두 편(kwcag-automated-testing, oklch-contrast-theme)의 BestOW UI Storybook 링크를 `/BestOW-UI/?path=` → `/BestOW-UI/storybook/?path=` 로 수정. 문서 사이트 첫 화면이 소개 페이지로 바뀌어 옛 링크로는 해당 문서가 열리지 않았음.
 - 2026-11-15: 광고 준비(수익화). `siteConfig.ads`(AdSense 게시자 ID·광고 단위, 카카오 애드핏 단위 — 비어 있으면 아무것도 그리지 않음), 글 끝 `AdSlot.astro`(댓글 위, CLS 막는 최소 높이, pagefind 제외), head 의 AdSense 소유 확인 메타·스크립트, `/ads.txt`(`src/pages/ads.txt.ts`), 개인정보처리방침 `/privacy/` + 푸터 링크. 신청 순서는 `docs/ADS.md`.

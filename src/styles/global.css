@@ -3,14 +3,15 @@
 /* 다크모드: html.dark 클래스 기준 */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 본문 웹폰트: Pretendard 가변(Variable) 상용 서브셋 — 전 weight 한 파일(~0.6MB).
-   생성: node scripts/subset-body-font.mjs (원본은 devDep 'pretendard').
+/* 본문 웹폰트: Pretendard 가변(Variable) 상용 서브셋(개발용 원본 ~0.6MB, 생성: node scripts/subset-body-font.mjs).
+   배포 빌드는 scripts/subset-dist-font.mjs 가 사이트에 쓰인 글자·굵기 400~700 만 남겨 ~0.1MB 로 다시 줄인다
+   — 굵기를 이 범위 밖으로 쓰려면 font-weight 와 그 스크립트의 weight 를 함께 바꾼다.
    서브셋에 없는 희귀 음절은 아래 폴백 스택(시스템 한글 폰트)이 렌더 → 두부 없음. */
 @font-face {
   font-family: 'Pretendard Variable';
   font-style: normal;
   font-display: swap;
-  font-weight: 45 920;
+  font-weight: 400 700;
   src: url('../assets/fonts/PretendardVariable.subset.woff2') format('woff2');
 }
 
