@@ -13,6 +13,14 @@ const configured = Boolean(g.repoId && g.categoryId);
       data-pagefind-ignore
     >
       <h2 class="mb-4 text-lg font-semibold tracking-tight">댓글</h2>
+      {/* giscus 가 뜨기 전(늦게 불러옴)·막혔을 때 빈 칸 대신 보이는 안내 — giscus 가 메시지를 보내면 지운다 */}
+      <p class="giscus-loading text-sm text-neutral-600 dark:text-neutral-400">
+        댓글을 불러오는 중이에요. 보이지 않으면{' '}
+        <a href={`https://github.com/${g.repo}/discussions`} class="text-accent hover:underline">
+          GitHub Discussions
+        </a>
+        에서 볼 수 있어요.
+      </p>
       <div class="giscus" />
     </section>
   )
@@ -50,6 +58,13 @@ const configured = Boolean(g.repoId && g.categoryId);
     s.setAttribute('data-lang', g.lang);
     s.setAttribute('data-loading', 'lazy');
     container.appendChild(s);
+
+    // giscus 가 뜨면(iframe 이 giscus.app 에서 메시지를 보냄) "불러오는 중" 안내를 지운다
+    window.addEventListener('message', function onGiscus(event) {
+      if (event.origin !== 'https://giscus.app' || !event.data?.giscus) return;
+      document.querySelector('.giscus-loading')?.remove();
+      window.removeEventListener('message', onGiscus);
+    });
 
     // 다크모드 토글(html.class 변경)에 맞춰 giscus iframe 테마 동기화
     const observer = new MutationObserver(() => {

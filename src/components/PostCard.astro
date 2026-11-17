@@ -7,6 +7,7 @@ interface Props {
 }
 const { post } = Astro.props;
 const { title, description, pubDate, tags } = post.data;
+// 태그 링크는 누름 영역 24px 이상(WCAG 2.5.8) — py-1 로 넓히고 -my-1 로 줄 간격은 그대로 둔다(한 줄이라 겹치지 않음)
 ---
 
 <article class="group py-6">
@@ -26,7 +27,7 @@ const { title, description, pubDate, tags } = post.data;
       tags.length > 0 && (
         <div class="flex gap-2">
           {tags.map((tag) => (
-            <a href={`/tags/${tag}/`} class="hover:text-accent">
+            <a href={`/tags/${tag}/`} class="-my-1 py-1 hover:text-accent">
               #{tag}
             </a>
           ))}
