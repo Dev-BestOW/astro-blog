@@ -65,7 +65,7 @@ export function componentProps(name: string): string {
 
 이동 경로는 화면의 Breadcrumb 컴포넌트와 JSON-LD 를 **같은 배열 하나에서** 만듭니다. 따로 적으면 언젠가 둘이 어긋납니다.
 
-JSON-LD 는 `<script>` 안에 넣는 JSON 이라, 데이터 글자에 `</script>` 가 있으면 거기서 스크립트가 끊깁니다. `<` 를 `<` 로 바꿔 넣습니다. JSON 문자열 안에서는 같은 글자라 `JSON.parse` 결과는 같습니다.
+JSON-LD 는 `<script>` 안에 넣는 JSON 이라, 데이터 글자에 `</script>` 가 있으면 거기서 스크립트가 끊깁니다. `<` 를 `\u003c` 로 바꿔 넣습니다. JSON 문자열 안에서는 같은 글자라 `JSON.parse` 결과는 같습니다.
 
 ```ts
 export function serializeJsonLd(data: object) {
@@ -77,7 +77,7 @@ Google 리치 결과 테스트에서는 세 가지를 배웠습니다.
 
 1. **첫 결과가 "리치 결과 없음" 이었는데, 배포보다 1분 먼저 크롤링한 것**이었습니다. 크롤링 시각(13:47:36)과 배포 완료 시각(13:48:49)을 비교해 보고 알았습니다. 테스트는 배포가 끝난 것을 확인하고 돌립니다.
 2. **`SoftwareSourceCode` 는 리치 결과 종류가 아닙니다.** 첫 화면은 다시 해도 "없음" 이 정상입니다. 검색 엔진과 AI 가 읽게 하려고 넣은 것이고, 확인은 Schema Markup Validator 로 합니다.
-3. 문서 쪽은 Breadcrumbs 와 Articles 가 잡혔는데, Articles 에 "심각하지 않은 문제" 가 붙었습니다. Google 문서를 보면 Article 은 필수 속성이 없고 `image`·`author`·`datePublished`·`dateModified` 가 권장입니다. 넷을 넣자 경고가 사라졌습니다.
+3. 문서 쪽은 Breadcrumbs 와 Articles 가 잡혔는데, Articles 에 "심각하지 않은 문제" 가 붙었습니다. Google 문서를 보면 Article 은 필수 속성이 없고 `headline`·`image`·`author`·`datePublished`·`dateModified` 가 권장입니다. 빠져 있던 `image`·`author`·`datePublished`·`dateModified` 넷을 넣자 경고가 사라졌습니다.
 
 날짜는 빌드 때 git 기록에서 읽으려 했지만, 배포 워크플로의 checkout 이 기록을 한 개만 받아(`fetch-depth` 기본값) 쓸 수 없었습니다. 데이터 파일에 "처음 낸 날·마지막으로 고친 날" 상수를 두고, 글을 고치면 그날로 바꾸는 규칙으로 했습니다. 손으로 바꾸는 값이라 잊을 수 있다는 점은 남아 있습니다.
 

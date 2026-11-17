@@ -1,6 +1,6 @@
 ---
 title: 'npm 토큰 없이 배포하기 — Trusted Publishing(OIDC)과 pnpm 11 함정'
-description: 'GitHub Actions 에서 npm 에 배포할 때 NPM_TOKEN 을 저장소 비밀값에 넣지 않아도 됩니다. Trusted Publishing(OIDC)으로 바꾸며 여러 번 실패한 원인 — pnpm 10 은 지원하지 않음, "Direct publishing" 체크, 새 패키지의 첫 배포 순서 — 와 changesets 로 묶은 배포 흐름을 정리합니다.'
+description: 'GitHub Actions 에서 npm 에 배포할 때 NPM_TOKEN 을 저장소 비밀값에 넣지 않아도 됩니다. Trusted Publishing(OIDC)으로 바꾸며 여러 번 실패한 원인 — pnpm 10 에서 실패, "Direct publishing" 체크, 새 패키지의 첫 배포 순서 — 와 changesets 로 묶은 배포 흐름을 정리합니다.'
 tags: ['npm', 'github-actions', 'devops']
 series: 'BestOW UI 만들기'
 draft: false
@@ -47,9 +47,9 @@ jobs:
 
 `id-token: write` 가 OIDC 토큰을 받게 해 줍니다. `NPM_TOKEN` 은 어디에도 없습니다.
 
-## 함정 1: pnpm 10 은 OIDC 로 배포하지 못한다
+## 함정 1: pnpm 10 으로는 OIDC 배포가 되지 않았다
 
-첫 시도는 실패했습니다. pnpm 10 의 `publish` 는 Trusted Publishing 의 OIDC 토큰 교환을 하지 못했습니다. pnpm 11 은 이 교환을 직접 처리합니다. 그래서 저장소를 pnpm 11 로 올렸습니다(`packageManager: pnpm@11.x`).
+첫 시도는 실패했습니다. 당시 쓰던 pnpm 10(10.34.7)의 `publish` 로는 Trusted Publishing 의 OIDC 토큰 교환이 되지 않았습니다. 저장소를 pnpm 11 로 올리자(`packageManager: pnpm@11.x`) 배포가 됐습니다. pnpm 11 은 publish 를 직접 구현해 이 교환을 스스로 처리합니다. (npm CLI 를 11.5.1 이상으로 따로 올려 pnpm 10 에서 배포했다는 사례도 있으니, pnpm 10 을 유지해야 한다면 그 방법도 확인해 보세요.)
 
 pnpm 11 로 올리며 따라온 변화도 있습니다.
 
@@ -76,7 +76,7 @@ Trusted Publisher 는 **npm 에 이미 있는 패키지**에만 설정할 수 �
 
 ## 함정 4: 기본 GITHUB_TOKEN 으로 만든 PR
 
-버전 PR 을 기본 `GITHUB_TOKEN` 으로 만들면, 그 PR 의 CI 가 바로 돌지 않고 승인 대기로 멈췄습니다. GitHub 는 `GITHUB_TOKEN` 으로 만든 이벤트가 다른 워크플로를 연쇄로 실행하지 않게 막습니다. 그래서 버전 PR·커밋·태그는 별도로 만든 **GitHub App 의 토큰**으로 만듭니다(위 코드의 `create-github-app-token`). 시각 회귀 기준 이미지를 봇이 커밋할 때도 같은 이유로 App 토큰을 씁니다. 기본 토큰으로 push 한 기준 이미지 커밋이 버전 PR 을 다시 만들지 않아, PR 이 옛 기준 이미지로 실패한 적이 있습니다.
+버전 PR 을 기본 `GITHUB_TOKEN` 으로 만들면, 그 PR 의 CI 가 돌지 않고 승인 대기로 멈췄다가 "This workflow run required approval but was not approved before it expired." 로 끝났습니다. GitHub 는 `GITHUB_TOKEN` 으로 만든 이벤트가 다른 워크플로를 마음대로 연쇄 실행하지 않게 막습니다. 그래서 버전 PR·커밋·태그는 별도로 만든 **GitHub App 의 토큰**으로 만듭니다(위 코드의 `create-github-app-token`). 시각 회귀 기준 이미지를 봇이 커밋할 때도 같은 이유로 App 토큰을 씁니다. 기본 토큰으로 push 한 기준 이미지 커밋이 버전 PR 을 다시 만들지 않아, PR 이 옛 기준 이미지로 실패한 적이 있습니다.
 
 ## 실패했을 때
 
@@ -85,7 +85,7 @@ GitHub Actions 의 단계별 로그는 로그인해야 볼 수 있습니다. 배
 ## 정리
 
 - `id-token: write` + npm Trusted Publisher 등록이면 **저장할 npm 토큰이 없습니다.**
-- pnpm 은 **11 이상**이어야 OIDC 로 배포합니다. 24시간 미만 버전 거부 정책도 함께 알아 둡니다.
+- 저희 환경에서는 pnpm 을 **11 로 올려야** OIDC 배포가 됐습니다. pnpm 11 의 24시간 미만 버전 거부 정책도 함께 알아 둡니다.
 - Trusted Publisher 설정에서 **Direct publishing** 을 체크합니다. 설정은 수정이 안 되니 지우고 다시 만듭니다.
 - 새 패키지는 첫 버전을 직접 배포한 뒤 설정하고, 그것을 의존하는 패키지보다 **먼저** 올립니다.
 - 버전 PR 은 GitHub App 토큰으로 만들어야 CI 가 돕니다.
