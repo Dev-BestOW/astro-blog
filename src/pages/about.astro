@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config';
+
+// 소개 쪽 — 누가 무엇을 쓰는 블로그인지(검색 엔진·광고 심사가 보는 신뢰 정보). 하는 일이 바뀌면 함께 고친다.
+// 연락처는 공개된 GitHub 만 적는다(이메일·실명은 운영자가 정해서 넣는다).
+const github = 'https://github.com/Dev-BestOW';
+const discussions = 'https://github.com/Dev-BestOW/astro-blog/discussions';
+---
+
+<BaseLayout
+  title="소개"
+  description={`${siteConfig.title}를 쓰는 사람과 다루는 주제, 연락 방법을 소개합니다.`}
+>
+  <article class="prose max-w-none">
+    <h1>소개</h1>
+    <p>
+      안녕하세요, 프론트엔드 개발자 {siteConfig.author} 입니다. 이 블로그에는 웹 화면을 만들며 직접 확인한
+      것을 기록합니다. 다른 글을 옮기기보다, 코드를 돌려 보고 측정한 결과를 남기려고 합니다.
+    </p>
+
+    <h2>주로 쓰는 주제</h2>
+    <ul>
+      <li>
+        <strong>웹 접근성</strong> — KWCAG·WCAG 기준, 스크린리더로 직접 들어 본 결과, 자동 검사
+      </li>
+      <li><strong>React 와 디자인 시스템</strong> — 컴포넌트 설계, 폼과 입력, 테마·색 대비</li>
+      <li>
+        <strong>JavaScript·CSS·브라우저</strong> — 새 웹 API, 비동기, 성능 지표(Core Web Vitals)
+      </li>
+      <li>
+        <strong>한국 서비스 화면</strong> — 전화번호·사업자등록번호·약관 동의처럼 한국에서만 쓰는 입력
+      </li>
+    </ul>
+
+    <h2>만들고 있는 것</h2>
+    <p>
+      <a href="https://bestow-ui.com/">BestOW UI</a> — 한국 서비스를 위한 React 디자인 시스템입니다. 약관
+      동의·인증번호·전화번호·사업자등록번호·금액·주소 입력 같은 부품을 제공하고, 모든 컴포넌트를 CI 에서
+      접근성 검사합니다. 이 블로그의 접근성·폼 관련 글 상당수는 이 라이브러리를 만들며 겪은 일입니다.
+    </p>
+
+    <h2>연락</h2>
+    <ul>
+      <li>
+        글에 대한 질문·정정 요청: 각 글 아래 댓글, 또는 <a href={discussions}>블로그 Discussions</a>
+      </li>
+      <li>GitHub: <a href={github}>{github.replace('https://', '')}</a></li>
+    </ul>
+    <p>
+      틀린 내용을 알려 주시면 확인한 뒤 고치고, 고친 날을 글에 적습니다. 광고와 외부 서비스가
+      처리하는 정보는{' '}
+      <a href="/privacy/">개인정보처리방침</a>에 정리해 두었습니다.
+    </p>
+  </article>
+</BaseLayout>

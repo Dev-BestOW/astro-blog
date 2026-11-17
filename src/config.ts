@@ -4,7 +4,8 @@ export const SITE_URL = 'https://jiwon-seok.com';
 export const siteConfig = {
   url: SITE_URL,
   title: "BestOW's Blog",
-  description: '나를 기록하는 블로그',
+  // 첫 화면 소개·meta description·RSS 설명 — 무엇을 다루는 블로그인지 드러나게
+  description: '프론트엔드·웹 접근성·디자인 시스템을 만들며 직접 확인한 것을 기록합니다.',
   author: 'BestOW',
   locale: 'ko-KR',
   postsPerPage: 10,
@@ -21,6 +22,7 @@ export const siteConfig = {
     { label: '홈', href: '/', hideOnMobile: true },
     { label: '태그', href: '/tags' },
     { label: '시리즈', href: '/series' },
+    { label: '소개', href: '/about/', hideOnMobile: true }, // 모바일은 바닥글 링크로(머리글이 넘쳐 로고가 두 줄이 됨)
     { label: '검색', href: '/search', icon: 'search' },
     { label: 'RSS', href: '/rss.xml', icon: 'rss' },
   ],
