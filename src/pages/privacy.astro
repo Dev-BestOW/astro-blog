@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../config';
 
 // 개인정보처리방침. 실제로 쓰는 서비스만 적는다 — 서비스를 더하거나 빼면(광고·댓글·통계) 이 쪽도 고친다.
-const effectiveDate = '2026년 11월 15일';
+const effectiveDate = '2026년 11월 17일';
 const { adfitUnit } = siteConfig.ads;
 const commentsOn = Boolean(siteConfig.giscus.repoId && siteConfig.giscus.categoryId);
 ---
@@ -29,6 +29,14 @@ const commentsOn = Boolean(siteConfig.giscus.repoId && siteConfig.giscus.categor
       주소, 브라우저 정보, 접속 시각 등)을 처리할 수 있습니다. 자세한 내용은
       <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare 개인정보처리방침</a>을
       참고하세요.
+    </p>
+
+    <h3>방문 통계 (Cloudflare Web Analytics)</h3>
+    <p>
+      어떤 글이 읽히는지 알기 위해 Cloudflare Web Analytics 로 방문 수·쪽 주소·유입 경로·브라우저
+      종류 같은 집계 정보를 봅니다. 쿠키를 쓰지 않고 방문자를 개인별로 추적하지 않으며, 운영자는
+      개인을 알아볼 수 있는 정보를 받지 않습니다. 자세한 내용은
+      <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a>를 참고하세요.
     </p>
 
     {

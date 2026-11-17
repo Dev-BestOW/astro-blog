@@ -6,7 +6,7 @@ Astro로 만든 개발 블로그. 정적 SSG → Cloudflare(Workers 정적 자�
 ## 먼저 읽을 것 (이 순서로)
 
 1. **[docs/SPEC.md](docs/SPEC.md)** — 단일 기준(SSOT). 기술 스택·구조·결정·변경 이력. 무엇이 이미 되어 있는지 여기서 확인.
-2. **[docs/ROADMAP.md](docs/ROADMAP.md)** — 남은 작업 백로그. 사용자가 작업을 지정하지 않았을 때 여기서 고른다.
+2. **[docs/ROADMAP.md](docs/ROADMAP.md)** — 남은 일만 둔다(끝난 항목 상세는 `docs/ROADMAP-HISTORY.md`). 사용자가 작업을 지정하지 않았을 때 여기서 고른다.
 3. 광고는 [docs/ADS.md](docs/ADS.md), 예약 발행은 [content-queue/README.md](content-queue/README.md).
 
 ## 작업 규칙 (반드시 지킬 것)
@@ -17,7 +17,7 @@ Astro로 만든 개발 블로그. 정적 SSG → Cloudflare(Workers 정적 자�
   자주 쓰는 것: ✨ 기능 · 🐛 버그 · ♻️ 리팩터링 · 📝 문서·글 · ♿️ 접근성 · 💄 UI 스타일 · ⚡️ 성능 · 🔧 설정 · 🔍️ SEO.
 - 다음 단계를 시작하기 전에 앞 단계가 커밋·push 됐는지 확인한다(`git status`, `git log origin/main`).
 - 작업을 마치면 **SPEC.md "변경 이력"(맨 위)에 한 줄** 추가. 결정·스키마가 바뀌면 SPEC 본문도 갱신,
-  ROADMAP 항목이면 상태(⬜ 🟡 ✅)도 갱신. **콘텐츠 스키마를 바꾸는 작업**은 착수 전 SPEC 5장(프론트매터)부터.
+  ROADMAP 항목이면 상태를 갱신하고, 끝나면 ROADMAP-HISTORY 로 옮긴다. **콘텐츠 스키마를 바꾸는 작업**은 착수 전 SPEC 5장(프론트매터)부터.
 - 확인하지 않은 것을 됐다고 보고하지 않는다. 실패·건너뛴 단계는 그대로 적는다.
 
 ## 명령어
@@ -80,7 +80,8 @@ lint·서식 실패가 드러나지 않는다(2026-11-17 format:check 가 md 7�
 - **Prettier 는 md 안의 코드 블록을 건드리지 않게 해 두었다**(`.prettierrc.json` 의 `embeddedLanguageFormatting: off`).
   켜면 `pnpm format` 이 글 속 코드 예시의 줄바꿈·괄호까지 바꾼다(2026-11-17 확인). 글 파일 서식을 고칠 때는 고치기 전후 빌드 결과(글 HTML)를 비교한다.
 - 광고·댓글·통계 등 외부 서비스를 더하거나 빼면 **개인정보처리방침(`src/pages/privacy.astro`)과 시행일**을 함께 고친다.
-  광고 심사 중에는 `ads.txt`·소유 확인 메타·`/privacy/` 를 바꾸지 않는다.
+  광고 심사 중에는 `ads.txt`·소유 확인 메타를 바꾸지 않고, `/privacy/` 는 지우거나 주소를 바꾸지 않는다(내용을 사실에 맞게 고치는 것은 된다).
+  방문 통계(Cloudflare Web Analytics)는 코드가 아니라 Cloudflare 설정으로 붙어 있다 — 끄거나 바꾸면 방침도 고친다.
 - 소개 쪽(`/about/`)에는 공개 GitHub 연락처만 둔다 — 이메일·실명은 운영자가 정해서 넣는다.
 
 ## 글 쓰는 법

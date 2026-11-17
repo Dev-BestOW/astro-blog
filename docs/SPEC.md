@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-17: ROADMAP 정리 — 남은 일만(광고 심사·옛 workers.dev 주소 끄기·DNS 정리·조회수 표시·i18n·이미지 파이프라인), 끝난 항목 상세는 `docs/ROADMAP-HISTORY.md` 로. 커스텀 도메인·애널리틱스 수집은 이미 끝나 있어 완료로 옮김. 개인정보처리방침에 실제로 쓰는 Cloudflare Web Analytics 항목 추가(시행일 11/17).
 - 2026-11-17: CLAUDE.md 정리 — BestOW UI 작업 규칙 중 맞는 것(한국어 답변·커밋은 사용자·gitmoji 추천·검증 전부 통과·브라우저 점검·접근성 기준·글은 확인한 것만) 추가, 옛 문구(workers.dev·`gh api`·"매일 09:00 발행") 정리. 검증 중 `pnpm format:check` 가 md 7개로 실패하던 것을 발견(CI 는 main push 에서 안 돎) — `pnpm format` 이 글 속 코드 블록까지 바꿔서 `.prettierrc.json` 에 md·mdx `embeddedLanguageFormatting: off` 를 두고 서식만 정리(글 5편 빌드 HTML 이 정리 전과 동일함을 비교).
 - 2026-11-17: 댓글 칸 "불러오는 중" 안내(giscus 는 지연 로딩이라 제목 아래가 비어 보였음) — giscus.app 메시지를 받으면 지우고, 막혀서 안 뜨면 남아 GitHub Discussions 링크를 준다. 글 목록·글 머리의 태그 링크 누름 영역 20 → 28px(WCAG 2.5.8, `py-1 -my-1` 로 줄 간격은 그대로 — 한 줄이라 겹치지 않음). axe 위반 0.
 - 2026-11-17: 글 끝 이동·추천. 시리즈 글은 이전·다음 편, 아닌 글은 발행일 기준 이전·다음 글(`getAdjacentPosts`), 그 아래 "함께 읽으면 좋은 글" 3편(`getRelatedPosts` — 태그가 많이 겹치는 순, 겹치는 태그가 없으면 넣지 않음, 바로 위 이전·다음 글은 뺌, pagefind 제외). BestOW UI 관련 글 5편 + 대기열 004 를 시리즈 `BestOW UI 만들기` 로 묶고, 첫 화면 "최근 글" 위에 2편 이상인 시리즈 카드. 태그·시리즈 쪽 제목 한국어. axe 위반 0(데스크톱 라이트·모바일 다크).
