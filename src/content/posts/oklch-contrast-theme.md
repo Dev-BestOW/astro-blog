@@ -68,5 +68,5 @@ const focusOn = (candidate, fallback, bg) => (contrastRatio(candidate, bg) >= 3 
 
 남은 한계도 있습니다. 대비를 맞추느라 버튼 색이 넣은 색과 조금 달라질 수 있습니다(초록 #059669 → #1b9e70). 브랜드 가이드상 정확한 색이 꼭 필요하면 `createTheme` 에 값을 직접 넣어 덮어쓸 수 있고, 그때 대비는 다시 쓰는 쪽 몫이 됩니다.
 
-- 테마 빌더(색을 골라 대비 리포트 보기): https://dev-bestow.github.io/BestOW-UI/?path=/story/foundations-theme-builder--builder
+- 테마 빌더(색을 골라 대비 리포트 보기): https://dev-bestow.github.io/BestOW-UI/storybook/?path=/story/foundations-theme-builder--builder
 - 소스: https://github.com/Dev-BestOW/BestOW-UI/blob/main/packages/react/src/theme/color.ts

@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-17: 글 두 편(kwcag-automated-testing, oklch-contrast-theme)의 BestOW UI Storybook 링크를 `/BestOW-UI/?path=` → `/BestOW-UI/storybook/?path=` 로 수정. 문서 사이트 첫 화면이 소개 페이지로 바뀌어 옛 링크로는 해당 문서가 열리지 않았음.
 - 2026-11-15: 광고 준비(수익화). `siteConfig.ads`(AdSense 게시자 ID·광고 단위, 카카오 애드핏 단위 — 비어 있으면 아무것도 그리지 않음), 글 끝 `AdSlot.astro`(댓글 위, CLS 막는 최소 높이, pagefind 제외), head 의 AdSense 소유 확인 메타·스크립트, `/ads.txt`(`src/pages/ads.txt.ts`), 개인정보처리방침 `/privacy/` + 푸터 링크. 신청 순서는 `docs/ADS.md`.
 - 2026-10-23: 본문 표 스타일 추가(`global.css` `.prose table`). Tailwind preflight 가 테두리·여백을 지워 표가 글자만 늘어서 보이던 문제 — 칸 테두리(neutral-300/700)·안쪽 여백·머리줄 배경(neutral-100/800, 줄바꿈 없음)·짝수 줄 배경, 한글 `keep-all` + `overflow-wrap: break-word`(anywhere 는 칸 최소 폭을 한 글자로 줄여 "항/목/수" 로 끊김). 마크다운 `---:` 정렬은 인라인 style 이라 그대로 적용. 라이트·다크·375px 스크린샷 확인(가로 스크롤 없음), `check`·`build`·lint·format 통과.
 - 2026-07-06: 글 목록 카드(`PostCard`) 메타 행 반응형화. 모바일에서 발행일과 태그를 세로 스택(`flex-col gap-1`), `sm`+에서 기존처럼 한 줄(`sm:flex-row sm:items-center sm:gap-3`). 브라우저 실측(375px 줄바꿈·1024px 한 줄) 및 `check`/`build` 통과.
