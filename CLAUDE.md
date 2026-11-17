@@ -77,6 +77,7 @@ lint·서식 실패가 드러나지 않는다(2026-11-17 format:check 가 md 7�
   - `src/assets/fonts/PretendardVariable.subset.woff2`(전 weight Variable) — **사이트 본문 웹폰트 원본**(`global.css` `@font-face`). 재생성: `pnpm add -D pretendard` 후 `node scripts/subset-body-font.mjs`(pretendard 패키지의 Variable woff2를 상용 글자로 서브셋).
     배포 빌드는 `scripts/subset-dist-font.mjs`(build 스크립트에 포함)가 dist 의 이 파일을 **사이트에 쓰인 글자 + 굵기 400~700** 만 남겨 다시 줄이고(630 → 약 116 kB), 내용 해시로 이름을 바꿔 CSS 참조를 고친다. 400~700 밖 굵기를 쓰려면 `global.css` font-weight 와 스크립트의 `weight` 를 함께 바꾼다.
 - `SITE_URL`은 `src/config.ts`와 `astro.config.mjs`(그리고 도메인 변경 시 `wrangler.jsonc`) **세 곳을 일치**시킬 것.
+- 도메인 설정(Cloudflare): `www` → 루트 301 규칙, Always Use HTTPS, **메일을 안 쓰는 도메인이라 SPF `-all`·DMARC `reject`** — 이 도메인으로 메일을 쓰게 되면 이 두 TXT 부터 바꾼다. Search Console 확인 TXT 는 지우지 않는다.
 - **Prettier 는 md 안의 코드 블록을 건드리지 않게 해 두었다**(`.prettierrc.json` 의 `embeddedLanguageFormatting: off`).
   켜면 `pnpm format` 이 글 속 코드 예시의 줄바꿈·괄호까지 바꾼다(2026-11-17 확인). 글 파일 서식을 고칠 때는 고치기 전후 빌드 결과(글 HTML)를 비교한다.
 - 광고·댓글·통계 등 외부 서비스를 더하거나 빼면 **개인정보처리방침(`src/pages/privacy.astro`)과 시행일**을 함께 고친다.
