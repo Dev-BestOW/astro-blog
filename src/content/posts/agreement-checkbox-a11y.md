@@ -149,4 +149,4 @@ function hasAllRequiredAgreements(items: AgreementItem[], agreed: string[]) {
 
 이 중 5번의 스크롤 영역은 axe 같은 자동 검사가 잡아 주지만, 3번의 붙어 읽히는 공백과 4번의 같은 이름 버튼은 자동 검사를 통과합니다. 이름은 테스트로 고정해 두고, 한 번은 스크린리더로 직접 들어 보는 걸 권합니다. 저는 NVDA(Chrome)와 VoiceOver(Safari)로 혼합 상태와 "필수 …/선택 …" 으로 시작하는 이름이 들리는 것을 확인했습니다.
 
-위 내용은 제가 만든 React 디자인 시스템 [BestOW UI](https://dev-bestow.github.io/BestOW-UI/) 의 `AgreementGroup` 에 그대로 들어 있습니다. [Storybook](https://dev-bestow.github.io/BestOW-UI/storybook/?path=/docs/korean-kit-agreementgroup--docs) 에서 키보드와 스크린리더로 직접 확인해 볼 수 있습니다.
+위 내용은 제가 만든 React 디자인 시스템 [BestOW UI](https://bestow-ui.com/) 의 `AgreementGroup` 에 그대로 들어 있습니다. [컴포넌트 문서](https://bestow-ui.com/components/agreement-group/) 에서 키보드와 스크린리더로 직접 확인해 볼 수 있습니다.

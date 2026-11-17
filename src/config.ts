@@ -15,13 +15,13 @@ export const siteConfig = {
     naver: '6c4fdc94944c1b11bf151f72676d4594462a0660',
     google: '',
   },
-  // hideOnMobile: 로고가 이미 홈 링크라 모바일에선 'Home' 중복 제거.
+  // 메뉴 글자는 한국어(본문·첫 화면과 통일). hideOnMobile: 로고가 이미 홈 링크라 모바일에선 '홈' 중복 제거.
   // icon: 관습적으로 아이콘으로 노출하는 항목(Search/RSS) → 좁은 화면 공간 절약.
   nav: [
-    { label: 'Home', href: '/', hideOnMobile: true },
-    { label: 'Tags', href: '/tags' },
-    { label: 'Series', href: '/series' },
-    { label: 'Search', href: '/search', icon: 'search' },
+    { label: '홈', href: '/', hideOnMobile: true },
+    { label: '태그', href: '/tags' },
+    { label: '시리즈', href: '/series' },
+    { label: '검색', href: '/search', icon: 'search' },
     { label: 'RSS', href: '/rss.xml', icon: 'rss' },
   ],
   // giscus 댓글 (GitHub Discussions 기반).

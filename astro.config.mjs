@@ -14,7 +14,8 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
-      themes: { light: 'github-light', dark: 'github-dark' },
+      // 고대비 테마 — 기본 github-light/dark 는 주석·일부 토큰 대비가 4.5:1 미만(axe color-contrast)
+      themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },
       wrap: true,
       // 코드블록 <pre>에 data-language를 심는다(언어 라벨 + 복사 버튼용, 클라이언트 스크립트가 사용).
       transformers: [

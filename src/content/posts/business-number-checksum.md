@@ -109,4 +109,4 @@ isValidBusinessNumber('0000000000');   // false
 - 한 자리 오타는 모두 잡고, 이웃한 숫자를 바꿔 치는 실수는 약 11% 를 놓칩니다.
 - 공식은 형식 확인일 뿐입니다. 실제 등록·폐업 여부는 국세청 API 로 확인합니다.
 
-이 글의 함수는 제가 만든 [`@bestow-ui/korean-utils`](https://dev-bestow.github.io/BestOW-UI/korean-utils/business-number/) 의 `isValidBusinessNumber` 와 같습니다. 위 링크에서 번호를 직접 쳐 보며 확인할 수 있고, React 를 쓴다면 위의 입력 시점 처리까지 들어 있는 `BusinessNumberInput` 컴포넌트도 있습니다.
+이 글의 함수는 제가 만든 [`@bestow-ui/korean-utils`](https://bestow-ui.com/korean-utils/business-number/) 의 `isValidBusinessNumber` 와 같습니다. 위 링크에서 번호를 직접 쳐 보며 확인할 수 있고, React 를 쓴다면 위의 입력 시점 처리까지 들어 있는 [`BusinessNumberInput`](https://bestow-ui.com/components/business-number-input/) 컴포넌트도 있습니다.

@@ -150,4 +150,4 @@ TypeScript 기본 타입에 `otp` 옵션이 없어서 위처럼 형을 맞춰 �
 - iOS 는 `one-time-code` 만으로, Android Chrome 은 WebOTP + 문자 마지막 줄 `@도메인 #번호` 로 자동 채우기가 됩니다.
 - 자동 제출은 한 번만, 미리 알리고. 타이머는 `role="timer"`, 만료는 처음부터 있는 `role="status"` 로 한 번 알립니다.
 
-이 구조는 제가 만든 React 디자인 시스템 [BestOW UI](https://dev-bestow.github.io/BestOW-UI/) 의 `VerificationCodeInput` 과 같습니다. 남은 시간·재전송·만료 알림까지 들어 있고, [Storybook](https://dev-bestow.github.io/BestOW-UI/storybook/?path=/docs/korean-kit-verificationcodeinput--docs) 에서 붙여넣기와 키보드 동작을 직접 해 볼 수 있습니다.
+이 구조는 제가 만든 React 디자인 시스템 [BestOW UI](https://bestow-ui.com/) 의 `VerificationCodeInput` 과 같습니다. 남은 시간·재전송·만료 알림까지 들어 있고, [컴포넌트 문서](https://bestow-ui.com/components/verification-code-input/) 에서 붙여넣기와 키보드 동작을 직접 해 볼 수 있습니다.

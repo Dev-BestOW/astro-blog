@@ -8,7 +8,8 @@ interface Props {
 const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
 const linkClass =
   'rounded-md px-3 py-1.5 text-sm text-neutral-700 hover:bg-neutral-200/60 dark:text-neutral-300 dark:hover:bg-neutral-800';
-const disabledClass = 'rounded-md px-3 py-1.5 text-sm text-neutral-400 dark:text-neutral-600';
+// 비활성도 글자 대비 4.5:1 이상(neutral-500) — 활성 링크(neutral-700/300)보다는 흐리게
+const disabledClass = 'rounded-md px-3 py-1.5 text-sm text-neutral-500 dark:text-neutral-400';
 ---
 
 {

@@ -32,6 +32,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           searching: '"[SEARCH_TERM]" 검색 중…',
         },
       });
+      // Pagefind 입력칸은 title 만 있어 접근 가능한 이름이 약하다(axe label-title-only) — 이름을 붙인다
+      document.querySelector('#search input')?.setAttribute('aria-label', '블로그 글 검색');
     });
   </script>
 

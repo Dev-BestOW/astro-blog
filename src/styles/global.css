@@ -43,6 +43,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 한글은 낱말 단위로 줄바꿈("붙이/기" 처럼 낱말 가운데서 끊기지 않게). 긴 URL·영문은 넘칠 때만 끊는다. */
+body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 /* 본문 타이포그래피(미니멀) */
 .prose {
   @apply text-neutral-800 dark:text-neutral-200 leading-7;

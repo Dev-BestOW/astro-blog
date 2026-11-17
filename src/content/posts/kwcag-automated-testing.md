@@ -69,5 +69,5 @@ VoiceOver 때 "고칠 만하다" 고 적어 둔 것도 이때 마무리했습니
 
 자동 검사는 "다시 깨지지 않게" 지켜 주는 데 강합니다. 처음 발견은 여전히 사람이 직접 써 보고 들어 봐야 했습니다. 다만 한 번 찾은 문제를 테스트로 남겨 두면, 그 뒤로는 사람이 다시 들을 필요가 없습니다.
 
-- KWCAG 2.2 항목별 대응 표: https://dev-bestow.github.io/BestOW-UI/storybook/?path=/docs/accessibility-kwcag-2-2-%EB%8C%80%EC%9D%91--docs
+- KWCAG 2.2 항목별 대응 표: https://bestow-ui.com/storybook/?path=/docs/accessibility-kwcag-2-2-%EB%8C%80%EC%9D%91--docs
 - 저장소: https://github.com/Dev-BestOW/BestOW-UI
