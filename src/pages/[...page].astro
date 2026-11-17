@@ -3,7 +3,7 @@ import type { GetStaticPaths, Page } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import Pagination from '../components/Pagination.astro';
-import { getPublishedPosts, type Post } from '../utils/posts';
+import { getAllSeries, getPublishedPosts, type Post } from '../utils/posts';
 import { siteConfig } from '../config';
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -13,6 +13,8 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { page } = Astro.props as { page: Page<Post> };
 const isFirst = page.currentPage === 1;
+// 첫 화면 시리즈 안내 — 블로그가 무엇을 꾸준히 다루는지 보여 준다(2편 이상인 시리즈만)
+const series = isFirst ? (await getAllSeries()).filter(({ count }) => count >= 2) : [];
 ---
 
 <BaseLayout title={isFirst ? undefined : `${page.currentPage}페이지`}>
@@ -25,6 +27,31 @@ const isFirst = page.currentPage === 1;
             {siteConfig.description}
           </p>
         </section>
+        {series.length > 0 && (
+          <section aria-labelledby="series-title" class="mb-10">
+            <h2 id="series-title" class="mb-3 text-xl font-bold tracking-tight">
+              시리즈
+            </h2>
+            <ul class="space-y-2">
+              {series.map(({ name, count, posts }) => (
+                <li>
+                  <a
+                    href={`/series/${name}/`}
+                    class="group block rounded-lg border border-neutral-200 p-4 hover:border-accent dark:border-neutral-800"
+                  >
+                    <span class="font-semibold tracking-tight group-hover:text-accent">{name}</span>
+                    <span class="ml-2 text-sm text-neutral-600 dark:text-neutral-400">
+                      {count}편
+                    </span>
+                    <span class="mt-1 block text-sm text-neutral-600 dark:text-neutral-400">
+                      최근: {posts[posts.length - 1].data.title}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         <h2 class="mb-2 text-xl font-bold tracking-tight">최근 글</h2>
       </>
     ) : (

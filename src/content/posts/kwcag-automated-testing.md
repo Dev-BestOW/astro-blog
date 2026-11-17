@@ -3,6 +3,7 @@ title: 'KWCAG 2.2 33개 항목, 자동 검사로 어디까지 지킬 수 있을�
 description: 'React 디자인 시스템을 만들며 웹 접근성 근거를 문서 대신 CI 테스트로 남겼습니다. 라이트·다크 axe, 고대비·리플로 E2E, 변이 확인으로 무엇이 지켜지고, 스크린리더로 직접 들어야만 찾은 문제는 무엇이었는지 정리합니다.'
 pubDate: 2026-10-23
 tags: ['accessibility', 'kwcag', 'testing', 'react']
+series: 'BestOW UI 만들기'
 draft: false
 ---
 

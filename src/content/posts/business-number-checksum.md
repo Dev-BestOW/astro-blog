@@ -3,6 +3,7 @@ title: '사업자등록번호 검증 공식, 이상한 마지막 항은 왜 있�
 description: '사업자등록번호 10자리의 마지막 숫자는 앞 9자리로 계산한 검증 숫자입니다. 가중치 1,3,7,1,3,7,1,3,5 공식을 예시 번호로 직접 계산해 보고, 9번째 자리에만 붙는 이상한 항이 왜 필요한지, 입력 화면에서는 언제 검증해야 하는지 정리합니다.'
 pubDate: 2026-11-15
 tags: ['javascript', 'validation', 'korean', 'forms']
+series: 'BestOW UI 만들기'
 draft: false
 ---
 

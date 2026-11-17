@@ -76,6 +76,37 @@ export async function getSeriesContext(post: Post): Promise<{
   };
 }
 
+/** 시리즈가 아닌 글의 앞뒤 글(발행일 기준). older = 이전 글, newer = 다음 글. */
+export async function getAdjacentPosts(
+  post: Post,
+): Promise<{ older: Post | null; newer: Post | null }> {
+  const posts = await getPublishedPosts(); // 최신순
+  const index = posts.findIndex((p) => p.id === post.id);
+  if (index === -1) return { older: null, newer: null };
+  return { newer: posts[index - 1] ?? null, older: posts[index + 1] ?? null };
+}
+
+/**
+ * 함께 읽을 글 — 태그가 많이 겹치는 순(같으면 최신순). 겹치는 태그가 없는 글은 넣지 않는다(채우려고 아무 글이나 넣지 않음).
+ * exclude: 이미 바로 위에 보여 준 글(이전·다음)을 빼서 같은 글이 두 번 나오지 않게.
+ */
+export async function getRelatedPosts(
+  post: Post,
+  limit = 3,
+  exclude: (string | undefined)[] = [],
+): Promise<Post[]> {
+  const tags = new Set(post.data.tags);
+  const skip = new Set([post.id, ...exclude.filter(Boolean)]);
+  const posts = await getPublishedPosts(); // 최신순 — sort 가 안정적이라 점수가 같으면 최신 글이 앞
+  return posts
+    .filter((p) => !skip.has(p.id))
+    .map((p) => ({ p, score: p.data.tags.filter((t) => tags.has(t)).length }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ p }) => p);
+}
+
 const WORDS_PER_MINUTE = 200;
 
 /** 한글/영문 혼용 본문의 대략적 읽기 시간(분). */

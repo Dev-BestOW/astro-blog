@@ -5,8 +5,8 @@ import { getAllTags } from '../../utils/posts';
 const tags = await getAllTags();
 ---
 
-<BaseLayout title="Tags" description="태그별 글 모음">
-  <h1 class="mb-6 text-2xl font-bold tracking-tight">Tags</h1>
+<BaseLayout title="태그" description="태그별 글 모음">
+  <h1 class="mb-6 text-2xl font-bold tracking-tight">태그</h1>
 
   {
     tags.length === 0 ? (
