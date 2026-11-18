@@ -2,6 +2,7 @@
 title: 'React 인증번호 입력에 문자 자동 채우기 붙이기'
 description: '휴대폰 본인인증 화면의 6칸 인증번호 입력은 칸을 여섯 개 만들면 문자 자동 채우기·붙여넣기·스크린리더가 한꺼번에 어긋납니다. 입력창 하나에 칸 모양만 그리는 방법, autocomplete="one-time-code" 와 WebOTP, 타이머 알림까지 정리합니다.'
 pubDate: 2026-11-16
+updatedDate: 2026-11-18
 tags: ['react', 'forms', 'accessibility', 'mobile']
 series: 'BestOW UI 만들기'
 draft: false
@@ -25,6 +26,7 @@ draft: false
 방향을 바꾸면 간단해집니다. **실제 입력창은 하나**만 두고, 칸 여섯 개는 그 값을 보여 주는 그림으로만 그립니다. 입력창은 칸들 위에 투명하게 겹쳐 둡니다.
 
 ```tsx
+// 줄인 코드 — 안내 문구(id="otp-hint")·타이머는 생략
 function OtpInput({ length = 6, value, onChange }: Props) {
   const [focused, setFocused] = useState(false);
   const active = Math.min(value.length, length - 1);
@@ -40,6 +42,7 @@ function OtpInput({ length = 6, value, onChange }: Props) {
         onChange={(e) => onChange(e.target.value.replace(/\D/g, '').slice(0, length))}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
+        aria-label="인증번호"
         aria-describedby="otp-hint"
         className="otp-input"
       />

@@ -2,6 +2,7 @@
 title: 'MPA가 다시 빨라진다 — 2026년 View Transitions와 "적게 보내기"의 귀환'
 description: 'View Transitions API가 Baseline에 오르면서, 자바스크립트 없이도 페이지 전환이 SPA처럼 매끄러워졌습니다. 2026년 프론트엔드가 다시 서버·MPA로 무게추를 옮기는 흐름을 정리합니다.'
 pubDate: 2026-07-06
+updatedDate: 2026-11-18
 tags: ['frontend', 'view-transitions', 'astro', 'performance']
 draft: false
 ---
@@ -12,7 +13,7 @@ draft: false
 
 MPA(다중 페이지 앱)의 오래된 약점은 "페이지가 하얗게 깜빡인다"였습니다. SPA가 이겼던 진짜 이유의 상당 부분이 여기에 있었죠. 이제 이 문제가 브라우저 표준으로 풀렸습니다.
 
-- **같은 문서(SPA형) 전환**은 이미 Baseline Newly Available입니다 — Chrome/Edge 111+, Firefox 133+, Safari 18+.
+- **같은 문서(SPA형) 전환**은 이미 Baseline Newly Available입니다 — Chrome/Edge 111+, Safari 18+, Firefox 144+(2025년 10월, 이때 Baseline이 됐습니다).
 - **문서 간(MPA) 전환**은 CSS 한 줄로 켜집니다 — Chrome 126+, Safari 18.2+ 지원(Firefox는 아직).
 
 핵심은 문서 간 전환이 **자바스크립트 0바이트**로 동작한다는 점입니다. 라우터도, 프레임워크도 필요 없습니다.
@@ -41,13 +42,13 @@ View Transitions는 더 큰 흐름의 한 조각입니다. 2026년 프론트엔�
 
 1. **View Transitions** — 전환 애니메이션을 JS에서 브라우저로.
 2. **React Server Components** — 렌더링과 데이터 페칭을 클라이언트에서 서버로. 클라이언트로 내려보내는 JS 자체를 줄입니다.
-3. **Signals(세밀한 반응성)** — Angular는 4월 기준 zoneless가 기본이 됐고, Svelte 5·Solid·Vue가 같은 원시 개념을 공유합니다. 컴포넌트 트리 전체를 dirty-check 하는 대신 바뀐 것만 갱신합니다.
+3. **Signals(세밀한 반응성)** — Angular는 v21(2025년 11월)부터 새 프로젝트가 zoneless로 시작하고, Svelte 5·Solid·Vue가 같은 원시 개념을 공유합니다. 컴포넌트 트리 전체를 dirty-check 하는 대신 바뀐 것만 갱신합니다.
 
 React Compiler가 `useMemo`/`useCallback`을 손으로 짜던 시대를 끝내고 있는 것도 같은 맥락입니다 — **개발자가 최적화를 외우는 대신, 도구가 기본으로 최적화**합니다. 공통 주제는 하나입니다. _클라이언트에 보내는 자바스크립트를 줄여라._
 
 ## 이 블로그의 관점
 
-이 사이트는 애초에 이 방향으로 만들어졌습니다. Astro로 **완전 정적(SSG)**, 프레임워크 없는 순수 MPA, 클라이언트 JS는 다크모드 토글과 TOC 하이라이트 정도가 전부입니다. 몇 년 전이면 "그럼 전환이 투박하지 않나?"가 정당한 반문이었지만, 지금은 CSS 몇 줄로 메웁니다.
+이 사이트는 애초에 이 방향으로 만들어졌습니다. Astro로 **완전 정적(SSG)**, 프레임워크 없는 순수 MPA, 클라이언트 JS는 다크모드 토글·목차 강조·코드 복사 버튼, 그리고 필요한 곳에서만 불러오는 검색(Pagefind)·댓글(giscus)·광고 스크립트 정도입니다. 몇 년 전이면 "그럼 전환이 투박하지 않나?"가 정당한 반문이었지만, 이제는 CSS 몇 줄로 메울 수 있습니다(이 블로그는 아직 전환을 켜지 않았습니다).
 
 정리하면 선택지는 이렇습니다.
 
@@ -69,5 +70,6 @@ React Compiler가 `useMemo`/`useCallback`을 손으로 짜던 시대를 끝내�
 **참고**
 
 - [Frontend trends 2026: adopt now, watch, or skip (Netguru)](https://www.netguru.com/blog/front-end-trends)
-- [2026 Frontend Framework War: Signals Won (DEV)](https://dev.to/linou518/2026-frontend-framework-war-signals-won-react-is-living-off-its-ecosystem-2dki)
+- [View Transition API 브라우저 지원 (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API#browser_compatibility)
+- [@view-transition 브라우저 지원 (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS/@view-transition#browser_compatibility)
 - [10 Frontend Performance Trends in 2026](https://www.alphonsolabs.com/frontend-performance-trends-2026/)

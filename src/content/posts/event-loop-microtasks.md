@@ -1,7 +1,8 @@
 ---
 pubDate: 2026-07-06
+updatedDate: 2026-11-18
 title: '이벤트 루프 다시 보기 — 태스크와 마이크로태스크'
-description: 'setTimeout과 Promise의 실행 순서는 왜 다를까. 마이크로태스크 큐의 동작을 정확히 이해하면 비동기 버그의 8할이 보입니다.'
+description: 'setTimeout과 Promise의 실행 순서는 왜 다를까. 마이크로태스크 큐의 동작을 정확히 이해하면 헷갈리던 비동기 실행 순서가 한 그림으로 보입니다.'
 tags: ['javascript', 'async']
 ---
 

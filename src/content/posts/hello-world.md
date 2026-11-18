@@ -2,6 +2,7 @@
 title: 'Hello, World — 블로그를 시작합니다'
 description: 'Astro로 만든 개발 블로그의 첫 글입니다. 스택과 앞으로의 계획을 간단히 소개합니다.'
 pubDate: 2026-07-06
+updatedDate: 2026-11-18
 tags: ['astro', 'blog']
 draft: false
 ---
@@ -31,3 +32,5 @@ console.log(greet('world'));
 검색(Pagefind), 댓글(giscus), 시리즈 기능을 v2에서 추가할 예정입니다. 자세한 내용은 저장소의 `docs/SPEC.md`를 참고하세요.
 
 > 꾸준히 기록하는 것이 목표입니다.
+
+_2026-11 덧붙임: 지금은 Cloudflare Workers(정적 자산)로 배포하고, 검색(Pagefind)·댓글(giscus)·시리즈는 모두 붙였습니다._

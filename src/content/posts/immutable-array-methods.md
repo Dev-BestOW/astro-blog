@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-07-10
+updatedDate: 2026-11-18
 title: '불변 배열 메서드 — toSorted, toReversed, with (ES2023)'
 description: 'sort()가 원본을 바꿔서 React 상태가 꼬인 경험이 있다면. ES2023의 불변 배열 메서드가 그 문제를 문법 차원에서 없앱니다.'
 tags: ['javascript', 'typescript']
@@ -56,6 +57,6 @@ logs.findLastIndex((l) => !l.ok); // 1
 ## 지원 범위와 한 걸음 더
 
 - 위 메서드들은 **ES2023**으로, 최신 브라우저와 Node 20+에서 널리 사용 가능합니다(Baseline). 아주 오래된 환경을 지원해야 하면 폴리필/트랜스파일 확인.
-- **`Object.groupBy` / `Map.groupBy`**(ES2024)는 배열을 키로 그룹핑해 주는 더 최신 메서드입니다. 지원이 아직 얇을 수 있으니 타겟 환경을 확인하고 쓰세요.
+- **`Object.groupBy` / `Map.groupBy`**(ES2024)는 배열을 키로 그룹핑해 주는 더 최신 메서드입니다. 2024년 3월 Safari 17.4가 합류하며 모든 최신 브라우저에서 쓸 수 있게 됐고(Baseline 2024), Node는 21부터 지원합니다.
 
 > "복사본을 반환하느냐, 원본을 바꾸느냐"를 메서드 이름(`to-` 접두어)만 보고 구분할 수 있게 됐습니다. 상태 관리 코드에선 기본적으로 불변 쪽을 쓰세요.

@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-07-09
+updatedDate: 2026-11-18
 title: 'structuredClone — JSON 깊은 복사의 함정에서 벗어나기'
 description: '`JSON.parse(JSON.stringify(x))`로 깊은 복사하던 시절은 끝났습니다. structuredClone이 무엇을 되고 무엇을 안 되는지 정확히 정리합니다.'
 tags: ['javascript', 'web-api']
@@ -19,7 +20,7 @@ const obj = {
   set: new Set([1, 2]),
 };
 JSON.parse(JSON.stringify(obj));
-// { date: "2026-...Z"(문자열!), score: null }
+// { date: "2026-...Z"(문자열!), score: null, set: {} }
 // → Date는 문자열로, undefined 키는 사라지고, NaN은 null, Set은 {}로 소실
 ```
 

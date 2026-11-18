@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-07-12
+updatedDate: 2026-11-18
 title: 'CSS :has() — 드디어 온 "부모 선택자"'
 description: '20년 넘게 CSS에 없던 부모 선택자. :has()는 단순한 부모 선택을 넘어 상태 기반 스타일링의 판을 바꿉니다.'
 tags: ['css', 'frontend']
@@ -28,8 +29,8 @@ form:has(:invalid) {
 `:has()`는 결합자와 함께 쓰면 형제·상태 조합까지 표현합니다.
 
 ```css
-/* 체크된 체크박스 바로 뒤의 라벨 */
-input:checked + label {
+/* 체크된 체크박스를 감싼 라벨 */
+label:has(input:checked) {
   font-weight: 700;
 }
 

@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-07-11
+updatedDate: 2026-11-18
 title: 'TypeScript satisfies — 타입 검사와 추론을 동시에'
 description: '`as`는 위험하고, `: Type`는 타입을 넓혀버립니다. satisfies는 "검사는 하되 좁은 추론은 유지"하는 세 번째 길입니다.'
 tags: ['typescript']
@@ -17,11 +18,12 @@ const a: Config = { port: 8080, host: 'localhost' };
 a.port; // string | number (숫자인 걸 잃음)
 a.timeuot; // ❌ 오타지만... 넓은 인덱스 시그니처라 접근은 통과되기도
 
-// 방법 B) as → 추론은 유지되지만 검사를 건너뜀(위험)
+// 방법 B) as → 타입이 Config로 바뀌어 똑같이 넓어지고, 검사도 느슨함
 const b = { port: 8080, host: 'localhost' } as Config;
+b.port; // string | number — as도 좁은 타입을 지키지 못함
 ```
 
-애노테이션은 안전하지만 `a.port`가 `string | number`로 넓어지고, `as`는 좁지만 **틀린 값도 통과**시킵니다.
+애노테이션은 안전하지만 `a.port`가 `string | number`로 넓어집니다. `as`도 결과 타입이 `Config`라 똑같이 넓어지고, 검사는 "두 타입이 겹치는지"만 봅니다. `{ port: true } as Config`처럼 아예 안 겹치면 오류가 나지만, 필요한 속성이 빠진 값처럼 **애노테이션이라면 막았을 값을 통과**시키는 경우가 많습니다.
 
 ## satisfies: 둘 다 얻기
 
