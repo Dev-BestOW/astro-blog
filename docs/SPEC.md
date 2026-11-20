@@ -112,7 +112,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 ## 6. 품질 / 운영
 
 - ESLint + Prettier ✅ (`pnpm lint`/`format`)
-- `astro check` (타입 검사)
+- `astro check` (타입 검사) + `scripts/check-meta.mjs`(글 제목 40·설명 80자 — 발행 글·대기열, 낱말 반복은 경고) — 둘 다 `pnpm check`
 - GitHub Actions CI ✅: PR·비-main push에서 `check`+`lint`+`format:check`+`build` (`.github/workflows/ci.yml`)
 - Lighthouse 목표: Performance / SEO / Accessibility **95+**
 
@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-20: 제목·설명 길이 검사 `scripts/check-meta.mjs` 를 `pnpm check` 에(로컬 검증·CI). 발행 글과 대기열(컬렉션 밖이라 스키마로 못 잡음)을 함께 보고 제목 40·설명 80자 초과·빈 값·제목=설명이면 실패, 낱말 반복은 경고(조사까지 세는 단순 방식이라 비교 문장과 키워드 반복을 못 가림 — container-queries 설명 "미디어 쿼리는 … 컨테이너 쿼리는" 이 경고로 남음). 처음 돌려 sms-otp 제목의 "입력" 반복(같은 날 오전에 바꾼 제목)을 찾아 "React 6칸 인증번호 입력 — 문자 자동 채우기 붙이기" 로. 43자 시험 글로 실패하는 것 확인. 스키마 `.max()` 는 대기열을 못 잡아 쓰지 않음(SPEC 5장 변경 없음).
 - 2026-11-20: 발행 글 길이 맞추기 — 제목이 넘던 2편(view-transitions 51 → 31자 "View Transitions 로 MPA가 다시 빨라진다", SEO 글 47 → 38자 "Storybook 문서가 검색에 안 잡힐 때 — 디자인 시스템 SEO")은 제목·설명, 설명만 넘던 5편(abortcontroller·약관·event-loop·커서·signals)은 설명만 80자 안으로(제목은 잦은 변경을 피해 그대로). 목록 `/2/` 에 고유 설명. 빌드 결과 51쪽 모두 제목 40·설명 80자 이내, 중복 제목·설명 0, h1 1개.
 - 2026-11-20: RSS 에 본문 전체(`content:encoded`) — 네이버 "RSS 및 사이트맵 제출" 권장. `rss.xml.ts` 가 Astro Container(`experimental_AstroContainer`)로 글 쪽과 같은 HTML(Shiki 포함)을 그리고, `utils/rss.ts` `absolutizeUrls` 가 본문의 사이트 상대 주소를 절대 주소로(피드에서만, 글 쪽은 그대로 — 006 임시 복사본으로 확인). 피드 19편 337 kB(제한 10MB), XML 파싱 정상. 파비콘·RSS `<link>` 를 절대 주소로(네이버 "파비콘": href 절대 경로, SVG 32×32).
 - 2026-11-20: 대기열 007~~014 제목·설명을 검색 노출 기준으로 — 제목 41~~56 → 32~~40자, 설명 145~~207 → 68~80자. 검색어(고대비 모드·@layer·화살표 키·트리 셰이킹·서버 컴포넌트·다크 모드 깜빡임·React 18·19·npm 토큰 없이 배포)를 앞쪽에, 숫자·이름은 본문과 대조(40 kB·네이티브 radio·useSyncExternalStore 등). 임시 복사본으로 check·build, 8편 모두 title·description·h1 1개 확인. 대기열 항목은 끝.

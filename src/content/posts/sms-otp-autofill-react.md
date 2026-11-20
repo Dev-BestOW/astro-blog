@@ -1,5 +1,5 @@
 ---
-title: 'React 인증번호 입력 — 문자 자동 채우기와 6칸 입력 만들기'
+title: 'React 6칸 인증번호 입력 — 문자 자동 채우기 붙이기'
 description: '6칸 인증번호 입력을 입력창 하나로 만들고 one-time-code·WebOTP 문자 자동 채우기와 타이머 알림을 붙입니다.'
 pubDate: 2026-11-16
 updatedDate: 2026-11-18

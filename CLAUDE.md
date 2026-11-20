@@ -29,7 +29,7 @@ pnpm 이 셸에 없으면 `corepack pnpm …` 으로 실행한다.
 pnpm dev            # 로컬 개발 서버 (Pagefind 검색은 build 뒤 preview 에서만 동작)
 pnpm build          # astro build → 본문 글꼴 줄이기 → pagefind (dist/, OG PNG·RSS·사이트맵 포함)
 pnpm preview        # dist 를 로컬로 띄움 (브라우저 점검용)
-pnpm check          # astro 타입체크
+pnpm check          # astro 타입체크 + 글 제목·설명 검사(scripts/check-meta.mjs — 발행 글·대기열, 제목 40·설명 80자 초과면 실패, 낱말 반복은 경고)
 pnpm lint           # ESLint
 pnpm format:check   # Prettier (pnpm format 으로 고침)
 ```
@@ -110,7 +110,7 @@ OG/RSS/사이트맵/태그는 자동 생성. 초안은 `draft: true`(프로덕�
 
 **예약 발행(매일 1편)**: `content-queue/`(컬렉션 밖)에 미리 쓴 글을 쌓아두면 `.github/workflows/daily-post.yml`이 매일 1편씩 `posts/`로 옮겨 발행(`scripts/publish-next.mjs`, 파일명 오름차순·선행 `NN-` 접두어는 slug에서 제거·`pubDate`는 발행일로 자동 갱신). 큐가 비면 무동작. 자세한 사용법은 `content-queue/README.md`.
 
-- 큐 글은 빌드·검사 대상이 아니다. 넣기 전에 `posts/` 에 잠깐 복사(`pubDate` 추가)해 `pnpm check`·`pnpm build` 로 확인하고 복사본을 지운다.
+- 큐 글은 빌드 대상이 아니다(제목·설명 길이는 `pnpm check` 가 큐까지 검사). 넣기 전에 `posts/` 에 잠깐 복사(`pubDate` 추가)해 `pnpm check`·`pnpm build` 로 확인하고 복사본을 지운다.
 - cron 은 00:00 UTC(09:00 KST)지만 **실제 실행은 4~5시간 늦다**(14시 KST 전후). 오전에 안 돈 것은 대개 지연이다 — 오후에 다시 본다.
   `curl -s "https://api.github.com/repos/Dev-BestOW/astro-blog/actions/runs?per_page=3"`
 - 저장소에 60일 동안 활동이 없으면 GitHub 가 예약 워크플로를 끈다(2026-09~11 에 멈춘 적 있음). 다시 켜는 것은 사용자(Actions › Daily post › Enable workflow).
