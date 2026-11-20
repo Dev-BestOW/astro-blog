@@ -1,6 +1,6 @@
 ---
-title: 'React 18·19 를 함께 지원하는 라이브러리 — CI 에서 잡은 것들'
-description: 'peerDependencies 에 "^18 || ^19" 라고 적기는 쉽지만, 개발은 19 로만 하면 18 에서 깨지는 것을 모릅니다. 서버 렌더링의 useLayoutEffect 경고, @types/react 18 의 useRef 오버로드, 19 에서 바뀐 ref, 그리고 React 를 두 벌 섞지 않고 18 로 테스트하는 pnpm overrides 설정을 정리합니다.'
+title: 'React 18·19 동시 지원 라이브러리 — CI 로 호환성 테스트하기'
+description: 'peerDependencies 만 넓히면 18 에서 깨져도 모릅니다. SSR 경고·useRef 타입·ref 변화와 pnpm overrides.'
 tags: ['react', 'testing', 'typescript']
 series: 'BestOW UI 만들기'
 draft: false

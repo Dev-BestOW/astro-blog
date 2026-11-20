@@ -1,6 +1,6 @@
 ---
-title: 'Radix RadioGroup 을 네이티브 radio 로 바꾼 이유 — E2E 20회 중 19회 실패'
-description: '화살표 키로 라디오를 옮기면 포커스만 가고 선택이 빠지는 문제가 있었습니다. 원인은 Radix RadioGroup 이 "키가 아직 눌려 있는지" 로 선택을 정하는 방식이었습니다. 재현 방법, 네이티브 <input type="radio"> 로 다시 만들며 챙긴 것(이름 없는 묶음, 모양, 고대비, 테스트)을 정리합니다.'
+title: 'Radix RadioGroup 화살표 키 선택 누락과 해결'
+description: '화살표 키로 옮기면 선택이 빠지던 원인과, 네이티브 radio 로 다시 만들며 챙긴 이름·모양·고대비·테스트를 정리합니다.'
 tags: ['react', 'accessibility', 'testing']
 series: 'BestOW UI 만들기'
 draft: false

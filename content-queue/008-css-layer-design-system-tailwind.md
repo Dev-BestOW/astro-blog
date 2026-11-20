@@ -1,6 +1,6 @@
 ---
-title: 'CSS @layer 로 디자인 시스템과 Tailwind 가 싸우지 않게 하기'
-description: '라이브러리 컴포넌트를 className 으로 조금 고치려다 선택자 우선순위 싸움과 !important 로 끝난 적이 있다면, CSS 레이어가 답입니다. 디자인 시스템 스타일 전체를 @layer 로 감싸며 얻은 것, 리셋 CSS 때문에 major 버전이 된 이유, Tailwind v4 와 순서를 맞추는 한 줄을 정리합니다.'
+title: 'CSS @layer 로 Tailwind 우선순위 충돌 없애기'
+description: 'className 으로 고치다 !important 로 끝난다면 @layer 가 답입니다. 레이어로 감싼 과정과 Tailwind v4 설정.'
 tags: ['css', 'design-system', 'tailwind']
 series: 'BestOW UI 만들기'
 draft: false

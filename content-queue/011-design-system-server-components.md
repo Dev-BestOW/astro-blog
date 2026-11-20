@@ -1,6 +1,6 @@
 ---
-title: '서버 컴포넌트에서 쓰는 디자인 시스템 — "use client" 를 어디에 붙일까'
-description: 'UI 라이브러리 번들 전체에 "use client" 를 붙이면 서버 컴포넌트에서 테마 함수 하나도 부를 수 없습니다. 진입점을 shared·client 두 파일로 나눈 방법과, 같은 이름을 양쪽에서 내보내면 Next.js 에서 이름이 사라지는 함정, 이를 테스트로 막는 방법을 정리합니다.'
+title: 'Next.js 서버 컴포넌트용 디자인 시스템 — use client 위치'
+description: '라이브러리 전체에 use client 를 붙이면 서버에서 함수도 못 부릅니다. 진입점을 둘로 나눈 법과 이름이 사라지는 함정.'
 tags: ['react', 'nextjs', 'design-system']
 series: 'BestOW UI 만들기'
 draft: false

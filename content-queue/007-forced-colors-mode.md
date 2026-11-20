@@ -1,6 +1,6 @@
 ---
-title: 'Windows 고대비 모드에서 사라지는 UI — forced-colors 대응'
-description: 'Windows 고대비(대비 테마)를 켜면 브라우저가 배경색과 그림자를 시스템 색으로 바꿉니다. 켜진 스위치, 선택된 탭, 진행 막대처럼 상태를 배경색으로만 보여 주던 UI 가 통째로 사라집니다. forced-colors 미디어쿼리로 다시 그리는 방법과, 이를 Playwright 로 검사할 때의 함정을 정리합니다.'
+title: 'Windows 고대비 모드 대응 — forced-colors CSS'
+description: '고대비 모드는 배경색을 시스템 색으로 바꿔 켜진 스위치·선택된 탭이 사라집니다. forced-colors 로 다시 그리는 법과 검사 함정.'
 tags: ['accessibility', 'css', 'testing']
 series: 'BestOW UI 만들기'
 draft: false

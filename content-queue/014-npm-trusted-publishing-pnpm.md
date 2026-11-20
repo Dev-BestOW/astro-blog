@@ -1,6 +1,6 @@
 ---
-title: 'npm 토큰 없이 배포하기 — Trusted Publishing(OIDC)과 pnpm 11 함정'
-description: 'GitHub Actions 에서 npm 에 배포할 때 NPM_TOKEN 을 저장소 비밀값에 넣지 않아도 됩니다. Trusted Publishing(OIDC)으로 바꾸며 여러 번 실패한 원인 — pnpm 10 에서 실패, "Direct publishing" 체크, 새 패키지의 첫 배포 순서 — 와 changesets 로 묶은 배포 흐름을 정리합니다.'
+title: 'npm 토큰 없이 배포 — Trusted Publishing 함정'
+description: 'GitHub Actions 에서 토큰 없이 npm 에 배포하는 Trusted Publishing(OIDC)으로 바꾸며 실패한 원인과 배포 흐름.'
 tags: ['npm', 'github-actions', 'devops']
 series: 'BestOW UI 만들기'
 draft: false

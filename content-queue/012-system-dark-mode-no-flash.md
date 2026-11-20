@@ -1,6 +1,6 @@
 ---
-title: '다크 모드 깜빡임 없이 OS 설정 따르기 — 서버 렌더링에서 라이브러리가 할 수 있는 것'
-description: '서버는 사용자의 OS 가 다크 모드인지 모릅니다. 그래서 라이트로 그렸다가 hydration 뒤 다크로 바뀌며 화면이 번쩍입니다. 스크립트를 head 에 넣을 수 없는 UI 라이브러리 입장에서, CSS 미디어쿼리와 useSyncExternalStore 로 깜빡임 없이 OS 설정을 따르게 한 방법을 정리합니다.'
+title: '다크 모드 깜빡임 없애기 — SSR 에서 OS 설정 따르기'
+description: 'OS 설정을 모르는 서버 렌더링의 깜빡임을 prefers-color-scheme 미디어쿼리와 useSyncExternalStore 로 막은 법.'
 tags: ['react', 'css', 'nextjs']
 series: 'BestOW UI 만들기'
 draft: false

@@ -1,6 +1,6 @@
 ---
-title: 'Button 하나 썼는데 40 kB — /* @__PURE__ */ 와 트리 셰이킹'
-description: 'UI 라이브러리에서 Button 하나만 import 했는데 번들에 거의 모든 컴포넌트가 들어 있었습니다. forwardRef, vanilla-extract recipe, 객체 속성 읽기처럼 "부작용이 있을지 모르는" 최상위 코드가 트리 셰이킹을 막은 세 가지 사례와, size-limit 로 다시 깨지지 않게 감시하는 방법을 정리합니다.'
+title: '트리 셰이킹 안 될 때 — Button 하나가 40 kB 였던 이유'
+description: 'Button 하나 import 했는데 번들에 다 들어온 세 사례(forwardRef·recipe·객체 속성)와 size-limit 감시법.'
 tags: ['javascript', 'performance', 'design-system']
 series: 'BestOW UI 만들기'
 draft: false
