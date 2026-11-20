@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-20
 title: '스크린리더가 aria-live 알림을 안 읽을 때 — 원인과 고치는 법'
 description: 'live region 을 새로 만들거나 입력·포커스 이동과 같은 순간에 바꾸면 VoiceOver 가 버립니다. 직접 들으며 고친 네 사례입니다.'
 tags: ['accessibility', 'react', 'forms']
