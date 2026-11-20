@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-20: 대기열 006 제목·설명을 검색 노출 기준으로 — 제목 47 → 39자("스크린리더가 aria-live 알림을 안 읽을 때 — 원인과 고치는 법"), 설명 145 → 80자(두 원인·네 사례, 본문과 대조). 임시 복사본으로 check·build, 제목·설명·h1 확인.
 - 2026-11-20: 네이버 서치어드바이저 웹마스터 가이드 54쪽 전체 검토 → 운영 사이트 51쪽을 Yeti UA 로 점검(robots·301·404·사이트맵·canonical·OG·alt 정상). 남은 일(RSS 본문 전체·파비콘 절대 주소·대기열 9편과 발행 글 9편 길이·IndexNow·길이 검사)을 ROADMAP 에, 글 쓸 때 지킬 검색 노출 기준을 CLAUDE.md "글 쓰는 법" 에.
 - 2026-11-20: 검색 노출 개선 — 방문 통계(Web Analytics 7일: 사람 방문 32, 그중 약 26 은 운영자 본인 macOS 27, 외부 유입은 velog 4·baidu 1)·Search Console(28일 노출 60·클릭 3·평균 7위, 잡힌 검색어는 7월 글 영어 용어뿐)을 보고 8편의 `title`·`description` 에 한국어 검색어(깊은 복사·부모 선택자·INP FID 차이·유효성 검사·웹 접근성·명도 대비·문자 자동 채우기 등)를 넣고 네이버 권장 길이(제목 40·설명 80자) 안으로. 본문 사실과 대조(200ms·toSpliced·형제 선택·TS 코드). `BaseLayout` 은 "제목 · 사이트 이름" 이 40자를 넘으면 사이트 이름을 뺀다. `updatedDate` 는 본문이 그대로라 올리지 않음.
 - 2026-11-18: 발행 글 17편 사실 점검 후 12편 수정(`updatedDate` 추가) — view-transitions 같은 문서 전환 Firefox 133→144(MDN BCD)·Angular zoneless 시점·사이트 JS 설명·의견 글 출처를 MDN 으로, satisfies 의 `as` 설명(tsc 로 확인), css-has 의 `:has()` 없는 예시, closures 예시(Node 22 실측), INP 기준값·scroll, structuredClone 주석, groupBy 지원, 약관 글 "다섯 번"·버튼 기준(WCAG 2.4.6), OTP 예시에 이름·"줄인 코드", KWCAG 글 hover 대비 발견 경위, hello-world 배포 방식 덧붙임. BestOW UI 글 수치·코드는 원본·재계산과 일치.

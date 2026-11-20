@@ -1,6 +1,6 @@
 ---
-title: '스크린리더가 알림을 버리는 순간 — live region 은 처음부터, 0.8초 뒤에'
-description: 'aria-live 영역에 메시지를 넣었는데 VoiceOver 가 읽지 않는다면 대개 둘 중 하나입니다. 영역을 메시지와 함께 새로 만들었거나, 입력·포커스 이동과 같은 순간에 바꿨거나. 스크린리더로 직접 들어 보며 찾은 네 가지 사례와 고친 방법을 정리합니다.'
+title: '스크린리더가 aria-live 알림을 안 읽을 때 — 원인과 고치는 법'
+description: 'live region 을 새로 만들거나 입력·포커스 이동과 같은 순간에 바꾸면 VoiceOver 가 버립니다. 직접 들으며 고친 네 사례입니다.'
 tags: ['accessibility', 'react', 'forms']
 series: 'BestOW UI 만들기'
 draft: false
