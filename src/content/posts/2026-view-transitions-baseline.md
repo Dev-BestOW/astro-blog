@@ -1,6 +1,6 @@
 ---
-title: 'MPA가 다시 빨라진다 — 2026년 View Transitions와 "적게 보내기"의 귀환'
-description: 'View Transitions API가 Baseline에 오르면서, 자바스크립트 없이도 페이지 전환이 SPA처럼 매끄러워졌습니다. 2026년 프론트엔드가 다시 서버·MPA로 무게추를 옮기는 흐름을 정리합니다.'
+title: 'View Transitions 로 MPA가 다시 빨라진다'
+description: 'View Transitions API 가 Baseline 이 되며 자바스크립트 없이 페이지 전환이 매끄러워졌습니다. 서버·MPA 로 가는 흐름.'
 pubDate: 2026-07-06
 updatedDate: 2026-11-18
 tags: ['frontend', 'view-transitions', 'astro', 'performance']

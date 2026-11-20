@@ -1,7 +1,7 @@
 ---
 pubDate: 2026-07-15
 title: 'Signals — 프레임워크 반응성이 수렴하는 지점'
-description: 'Solid, Preact, Angular, Vue, Svelte가 서로 다른 이름으로 같은 것을 향해 갑니다. Signals라는 반응성 원시 개념과, 이것이 왜 지금 이슈인지 정리합니다.'
+description: 'Solid·Preact·Angular·Vue·Svelte 가 이름만 다르게 향하는 Signals 반응성 개념과, 왜 지금 이슈인지 정리합니다.'
 tags: ['frontend', 'javascript']
 ---
 

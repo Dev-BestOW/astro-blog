@@ -17,7 +17,12 @@ const isFirst = page.currentPage === 1;
 const series = isFirst ? (await getAllSeries()).filter(({ count }) => count >= 2) : [];
 ---
 
-<BaseLayout title={isFirst ? undefined : `${page.currentPage}페이지`}>
+<BaseLayout
+  title={isFirst ? undefined : `${page.currentPage}페이지`}
+  description={isFirst
+    ? undefined
+    : `${siteConfig.title} 글 목록 ${page.currentPage}페이지 — 프론트엔드·웹 접근성·디자인 시스템 글을 최신순으로 모았습니다.`}
+>
   {
     isFirst ? (
       <>

@@ -1,7 +1,7 @@
 ---
 pubDate: 2026-11-18
-title: 'Storybook 문서는 검색에 안 잡힌다 — 디자인 시스템 문서 SEO·GEO 정리'
-description: 'React 디자인 시스템 문서를 Storybook 으로만 두었더니 검색 엔진에는 같은 제목의 빈 쪽 하나로 보였습니다. 소스에서 만드는 정적 문서 쪽, JSON-LD, 네이버 제목 길이, 비교 쪽, llms.txt 와 Context7 까지 하루 동안 한 일과 걸린 함정을 정리합니다.'
+title: 'Storybook 문서가 검색에 안 잡힐 때 — 디자인 시스템 SEO'
+description: 'Storybook 만으로는 검색에 빈 쪽으로 보였습니다. 정적 문서 쪽·JSON-LD·네이버 제목 길이·llms.txt 로 고친 하루.'
 tags: ['seo', 'geo', 'react', 'documentation']
 series: 'BestOW UI 만들기'
 draft: false

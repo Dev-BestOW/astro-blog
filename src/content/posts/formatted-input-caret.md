@@ -1,7 +1,7 @@
 ---
 pubDate: 2026-11-19
 title: '하이픈 넣는 입력에서 커서가 끝으로 튀는 이유와 고치는 법'
-description: '전화번호 입력에 하이픈을 자동으로 넣으면, 가운데 숫자를 고칠 때 커서가 맨 끝으로 튀고 하이픈 뒤 Backspace 가 먹지 않습니다. 커서 위치를 "글자 위치" 가 아니라 "숫자 개수" 로 기억해 되돌리는 방법과, 이 동작을 실제 브라우저에서 테스트하는 방법을 정리합니다.'
+description: '전화번호 하이픈 자동 입력에서 커서가 끝으로 튀고 Backspace 가 안 먹는 문제를, 숫자 개수로 커서를 되돌려 고칩니다.'
 tags: ['react', 'forms', 'javascript']
 series: 'BestOW UI 만들기'
 draft: false
