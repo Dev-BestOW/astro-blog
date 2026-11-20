@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-20: RSS 에 본문 전체(`content:encoded`) — 네이버 "RSS 및 사이트맵 제출" 권장. `rss.xml.ts` 가 Astro Container(`experimental_AstroContainer`)로 글 쪽과 같은 HTML(Shiki 포함)을 그리고, `utils/rss.ts` `absolutizeUrls` 가 본문의 사이트 상대 주소를 절대 주소로(피드에서만, 글 쪽은 그대로 — 006 임시 복사본으로 확인). 피드 19편 337 kB(제한 10MB), XML 파싱 정상. 파비콘·RSS `<link>` 를 절대 주소로(네이버 "파비콘": href 절대 경로, SVG 32×32).
 - 2026-11-20: 대기열 007~~014 제목·설명을 검색 노출 기준으로 — 제목 41~~56 → 32~~40자, 설명 145~~207 → 68~80자. 검색어(고대비 모드·@layer·화살표 키·트리 셰이킹·서버 컴포넌트·다크 모드 깜빡임·React 18·19·npm 토큰 없이 배포)를 앞쪽에, 숫자·이름은 본문과 대조(40 kB·네이티브 radio·useSyncExternalStore 등). 임시 복사본으로 check·build, 8편 모두 title·description·h1 1개 확인. 대기열 항목은 끝.
 - 2026-11-20: 대기열 006 제목·설명을 검색 노출 기준으로 — 제목 47 → 39자("스크린리더가 aria-live 알림을 안 읽을 때 — 원인과 고치는 법"), 설명 145 → 80자(두 원인·네 사례, 본문과 대조). 임시 복사본으로 check·build, 제목·설명·h1 확인.
 - 2026-11-20: 네이버 서치어드바이저 웹마스터 가이드 54쪽 전체 검토 → 운영 사이트 51쪽을 Yeti UA 로 점검(robots·301·404·사이트맵·canonical·OG·alt 정상). 남은 일(RSS 본문 전체·파비콘 절대 주소·대기열 9편과 발행 글 9편 길이·IndexNow·길이 검사)을 ROADMAP 에, 글 쓸 때 지킬 검색 노출 기준을 CLAUDE.md "글 쓰는 법" 에.

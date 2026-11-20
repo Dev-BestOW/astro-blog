@@ -29,6 +29,9 @@ const withSite = title ? `${title} · ${siteConfig.title}` : siteConfig.title;
 const pageTitle = title && withSite.length > TITLE_MAX ? title : withSite;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+// 네이버 "파비콘": href 는 상대 경로가 아닌 절대 경로. 32×32 정사각형 SVG(권장 32px 이상).
+const favicon = new URL('/favicon.svg', Astro.site);
+const rssUrl = new URL('/rss.xml', Astro.site);
 
 // JSON-LD: 전달받은 스키마 우선, 없으면 홈(`/`)에서만 WebSite 기본값.
 const structuredData: Record<string, unknown> | undefined =
@@ -55,9 +58,9 @@ const jsonLdText = structuredData
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href={rssUrl} />
     <meta name="generator" content={Astro.generator} />
 
     <title>{pageTitle}</title>
