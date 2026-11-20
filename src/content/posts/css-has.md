@@ -1,8 +1,8 @@
 ---
 pubDate: 2026-07-12
 updatedDate: 2026-11-18
-title: 'CSS :has() — 드디어 온 "부모 선택자"'
-description: '20년 넘게 CSS에 없던 부모 선택자. :has()는 단순한 부모 선택을 넘어 상태 기반 스타일링의 판을 바꿉니다.'
+title: 'CSS :has() 부모 선택자 — 사용법과 실전 패턴'
+description: '20년 넘게 CSS에 없던 부모 선택자 :has()의 사용법, 형제·상태 선택 패턴, 자바스크립트를 걷어내는 예와 브라우저 지원을 정리합니다.'
 tags: ['css', 'frontend']
 ---
 

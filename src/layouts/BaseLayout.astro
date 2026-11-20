@@ -23,7 +23,10 @@ const {
   jsonLd,
 } = Astro.props;
 
-const pageTitle = title ? `${title} · ${siteConfig.title}` : siteConfig.title;
+// 네이버 권장 제목 길이(40자) 안에 들 때만 사이트 이름을 붙인다 — 넘치면 검색 결과에서 글 제목이 잘린다
+const TITLE_MAX = 40;
+const withSite = title ? `${title} · ${siteConfig.title}` : siteConfig.title;
+const pageTitle = title && withSite.length > TITLE_MAX ? title : withSite;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 

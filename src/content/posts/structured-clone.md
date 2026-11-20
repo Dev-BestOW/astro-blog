@@ -1,8 +1,8 @@
 ---
 pubDate: 2026-07-09
 updatedDate: 2026-11-18
-title: 'structuredClone — JSON 깊은 복사의 함정에서 벗어나기'
-description: '`JSON.parse(JSON.stringify(x))`로 깊은 복사하던 시절은 끝났습니다. structuredClone이 무엇을 되고 무엇을 안 되는지 정확히 정리합니다.'
+title: 'structuredClone으로 자바스크립트 깊은 복사하기'
+description: 'JSON.stringify 깊은 복사의 함정과 structuredClone이 복사하는 것·못 하는 것, 얕은 복사와 나눠 쓰는 기준을 봅니다.'
 tags: ['javascript', 'web-api']
 ---
 

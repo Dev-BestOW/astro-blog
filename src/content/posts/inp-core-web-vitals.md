@@ -1,8 +1,8 @@
 ---
 pubDate: 2026-07-14
 updatedDate: 2026-11-18
-title: 'INP — FID를 대체한 반응성 지표, 무엇이 달라졌나'
-description: '2024년 3월, Core Web Vitals의 반응성 지표가 FID에서 INP로 바뀌었습니다. 무엇을 재고, 왜 더 엄격하며, 어떻게 개선하는지 정리합니다.'
+title: 'INP와 FID 차이 — 바뀐 반응성 지표와 개선 방법'
+description: 'Core Web Vitals 반응성 지표가 FID에서 INP로 바뀌었습니다. INP가 재는 것, 기준값 200ms, 개선 방법을 정리합니다.'
 tags: ['performance', 'frontend']
 ---
 

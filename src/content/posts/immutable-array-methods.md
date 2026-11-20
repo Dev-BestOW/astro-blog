@@ -1,8 +1,8 @@
 ---
 pubDate: 2026-07-10
 updatedDate: 2026-11-18
-title: '불변 배열 메서드 — toSorted, toReversed, with (ES2023)'
-description: 'sort()가 원본을 바꿔서 React 상태가 꼬인 경험이 있다면. ES2023의 불변 배열 메서드가 그 문제를 문법 차원에서 없앱니다.'
+title: 'toSorted·toReversed — 원본을 안 바꾸는 배열 메서드'
+description: '원본을 바꾸지 않는 ES2023 배열 메서드 toSorted·toReversed·toSpliced·with를 React 상태 예로 정리합니다.'
 tags: ['javascript', 'typescript']
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: '대표색 하나로 대비 4.5:1을 보장하는 테마 만들기'
-description: '브랜드 색 hex 하나로 라이트·다크 색 세트를 만들면서, 어떤 색을 넣어도 글자 대비 4.5:1과 포커스 링 3:1을 지키는 방법을 OKLCH와 실제 계산 예(노랑·초록)로 정리합니다.'
+title: '대표색 하나로 명도 대비 4.5:1 지키기 — OKLCH 다크 모드 테마'
+description: '대표색 hex 하나로 라이트·다크 테마를 만들며 어떤 색이든 명도 대비 4.5:1, 포커스 링 3:1을 지키는 법을 OKLCH로 정리합니다.'
 pubDate: 2026-10-21
 tags: ['accessibility', 'design-system', 'color', 'oklch']
 series: 'BestOW UI 만들기'
