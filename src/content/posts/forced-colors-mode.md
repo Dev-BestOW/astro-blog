@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-21
 title: 'Windows 고대비 모드 대응 — forced-colors CSS'
 description: '고대비 모드는 배경색을 시스템 색으로 바꿔 켜진 스위치·선택된 탭이 사라집니다. forced-colors 로 다시 그리는 법과 검사 함정.'
 tags: ['accessibility', 'css', 'testing']
