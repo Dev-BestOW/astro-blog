@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-22
 title: 'CSS @layer 로 Tailwind 우선순위 충돌 없애기'
 description: 'className 으로 고치다 !important 로 끝난다면 @layer 가 답입니다. 레이어로 감싼 과정과 Tailwind v4 설정.'
 tags: ['css', 'design-system', 'tailwind']
