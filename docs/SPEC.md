@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-22: 예약 글 `content-queue/015-github-actions-ci-speed.md`(BestOW UI 만들기) — BestOW UI CI 를 7분에서 약 4.3분으로 줄인 기록(job 분리·Playwright 이미지·샤딩, workers 늘리기가 효과 없던 이유, upload-artifact 숨김 폴더로 기준 이미지가 지워진 버그). 숫자는 모두 실행 로그 값. 제목 40·설명 72자, 대기열 8번째(008~014 뒤)라 2026-11-29 무렵 발행.
 - 2026-11-20: 파비콘을 PNG 로 — 구글 파비콘 형식 목록에 SVG 가 없음(korean-seo 스킬 검사). `scripts/generate-favicons.mjs`(sharp)가 `public/favicon.svg` 에서 `favicon-96.png`(96×96, `<link rel="icon">` 하나·절대 주소)와 루트 `favicon.ico`(32·48px PNG 를 담은 ICO)를 만든다. sharp 는 `ui-monospace` 를 못 찾아 "D" 가 고딕체로 그려진다(브라우저 SVG 와 글꼴만 조금 다름). `favicon.svg` 는 원본으로 남김.
 - 2026-11-20: 네이버 서치어드바이저에 사이트를 `https://jiwon-seok.com` 으로 새로 등록(기존 등록이 `http://` 였음 — 네이버는 scheme 이 다르면 다른 사이트, "HTTPS 사이트로 등록 바랍니다" 대상). 소유 확인은 기존 meta 값 그대로(`siteConfig.verification.naver`). 사이트맵(`sitemap-index.xml`)·RSS(`rss.xml`)는 이미 제출돼 있어 그대로(네이버가 주기적으로 다시 읽음), 제목·설명을 바꾼 15편 + `/2/` 웹 페이지 수집 요청(사용자). 옛 http 등록은 새 리포트가 쌓인 뒤 삭제.
 - 2026-11-20: 제목·설명 길이 검사 `scripts/check-meta.mjs` 를 `pnpm check` 에(로컬 검증·CI). 발행 글과 대기열(컬렉션 밖이라 스키마로 못 잡음)을 함께 보고 제목 40·설명 80자 초과·빈 값·제목=설명이면 실패, 낱말 반복은 경고(조사까지 세는 단순 방식이라 비교 문장과 키워드 반복을 못 가림 — container-queries 설명 "미디어 쿼리는 … 컨테이너 쿼리는" 이 경고로 남음). 처음 돌려 sms-otp 제목의 "입력" 반복(같은 날 오전에 바꾼 제목)을 찾아 "React 6칸 인증번호 입력 — 문자 자동 채우기 붙이기" 로. 43자 시험 글로 실패하는 것 확인. 스키마 `.max()` 는 대기열을 못 잡아 쓰지 않음(SPEC 5장 변경 없음).
