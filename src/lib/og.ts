@@ -19,6 +19,27 @@ export interface OgOptions {
   description?: string;
 }
 
+/**
+ * 공백으로만 줄을 바꾸는 글 상자 — 본문의 `word-break: keep-all` 과 같은 결과.
+ * satori 는 기본(normal)이면 한글 음절 사이("7분/을"), `wordBreak: 'keep-all'` 이어도 숫자와 한글 사이("7/분을")에서 줄을 바꾼다.
+ * 그래서 공백으로 나눈 낱말을 하나씩 flex 항목으로 두고 flex-wrap 으로 줄을 바꾼다(항목 안에서는 줄이 바뀌지 않음).
+ */
+function words(text: string, style: Record<string, unknown>, spaceWidth: number) {
+  return {
+    type: 'div',
+    props: {
+      style: { ...style, display: 'flex', flexWrap: 'wrap', columnGap: `${spaceWidth}px` },
+      children: text
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((word) => ({
+          type: 'div',
+          props: { style: { display: 'flex', whiteSpace: 'nowrap' }, children: word },
+        })),
+    },
+  };
+}
+
 /** satori 노드 트리 (JSX 없이 순수 객체로 구성). */
 function template({ title, description }: OgOptions) {
   return {
@@ -66,39 +87,33 @@ function template({ title, description }: OgOptions) {
           props: {
             style: { display: 'flex', flexDirection: 'column', gap: '24px' },
             children: [
-              {
-                type: 'div',
-                props: {
-                  style: {
-                    display: 'block',
-                    fontSize: '68px',
-                    fontWeight: 700,
-                    color: '#fafafa',
-                    lineHeight: 1.25,
-                    maxHeight: '255px',
-                    overflow: 'hidden',
-                    lineClamp: 3,
-                  },
-                  children: title,
+              // 줄 높이 85px × 3줄 = 255px 에서 자른다
+              words(
+                title,
+                {
+                  fontSize: '68px',
+                  fontWeight: 700,
+                  color: '#fafafa',
+                  lineHeight: 1.25,
+                  maxHeight: '255px',
+                  overflow: 'hidden',
                 },
-              },
+                18,
+              ),
               description
-                ? {
-                    type: 'div',
-                    props: {
-                      style: {
-                        display: 'block',
-                        fontSize: '30px',
-                        fontWeight: 400,
-                        color: '#a3a3a3',
-                        lineHeight: 1.4,
-                        maxHeight: '84px',
-                        overflow: 'hidden',
-                        lineClamp: 2,
-                      },
-                      children: description,
+                ? // 줄 높이 42px × 2줄 = 84px 에서 자른다
+                  words(
+                    description,
+                    {
+                      fontSize: '30px',
+                      fontWeight: 400,
+                      color: '#a3a3a3',
+                      lineHeight: 1.4,
+                      maxHeight: '84px',
+                      overflow: 'hidden',
                     },
-                  }
+                    8,
+                  )
                 : null,
             ].filter(Boolean),
           },
