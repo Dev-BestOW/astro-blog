@@ -140,6 +140,7 @@ seriesOrder?: number          // 시리즈 내 순서(오름차순). 없으면 p
 
 ## 변경 이력
 
+- 2026-11-22: 예약 글 2편(BestOW UI 만들기) — `016-naver-search-advisor-site-audit.md`(네이버 웹마스터 가이드 54문서·구글 44쪽으로 bestow-ui.com 을 대조해 고친 7가지: 파비콘 절대 경로·PNG, playground noindex, 이동 경로 "홈", Storybook 제목·설명, `WebSite` JSON-LD)와 `017-claude-code-seo-skill.md`(korean-seo 스킬 구조·스크립트·스킬 없이/있이 평가 30/54 → 54/54). 구글 파비콘 형식(SVG 없음)은 원문을 다시 확인(2026-11-22). 016 은 017 을 링크하지 않고(하루 먼저 나가 404 가 되므로) 017 이 016 을 링크. 대기열 9·10번째라 2026-11-30·12-01 무렵 발행.
 - 2026-11-22: 예약 글 `content-queue/015-github-actions-ci-speed.md`(BestOW UI 만들기) — BestOW UI CI 를 7분에서 약 4.3분으로 줄인 기록(job 분리·Playwright 이미지·샤딩, workers 늘리기가 효과 없던 이유, upload-artifact 숨김 폴더로 기준 이미지가 지워진 버그). 숫자는 모두 실행 로그 값. 제목 40·설명 72자, 대기열 8번째(008~014 뒤)라 2026-11-29 무렵 발행.
 - 2026-11-20: 파비콘을 PNG 로 — 구글 파비콘 형식 목록에 SVG 가 없음(korean-seo 스킬 검사). `scripts/generate-favicons.mjs`(sharp)가 `public/favicon.svg` 에서 `favicon-96.png`(96×96, `<link rel="icon">` 하나·절대 주소)와 루트 `favicon.ico`(32·48px PNG 를 담은 ICO)를 만든다. sharp 는 `ui-monospace` 를 못 찾아 "D" 가 고딕체로 그려진다(브라우저 SVG 와 글꼴만 조금 다름). `favicon.svg` 는 원본으로 남김.
 - 2026-11-20: 네이버 서치어드바이저에 사이트를 `https://jiwon-seok.com` 으로 새로 등록(기존 등록이 `http://` 였음 — 네이버는 scheme 이 다르면 다른 사이트, "HTTPS 사이트로 등록 바랍니다" 대상). 소유 확인은 기존 meta 값 그대로(`siteConfig.verification.naver`). 사이트맵(`sitemap-index.xml`)·RSS(`rss.xml`)는 이미 제출돼 있어 그대로(네이버가 주기적으로 다시 읽음), 제목·설명을 바꾼 15편 + `/2/` 웹 페이지 수집 요청(사용자). 옛 http 등록은 새 리포트가 쌓인 뒤 삭제.
