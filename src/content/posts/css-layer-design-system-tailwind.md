@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-11-22
+updatedDate: 2026-11-23
 title: 'CSS @layer 로 Tailwind 우선순위 충돌 없애기'
 description: 'className 으로 고치다 !important 로 끝난다면 @layer 가 답입니다. 레이어로 감싼 과정과 Tailwind v4 설정.'
 tags: ['css', 'design-system', 'tailwind']
@@ -30,6 +31,8 @@ React 디자인 시스템 [BestOW UI](https://bestow-ui.com/) 는 2.0 에서 모
   border-radius: 0;
 }
 ```
+
+예외가 하나 있습니다. `!important` 를 붙인 선언끼리는 순서가 **뒤집혀**, 레이어 안의 `!important` 가 레이어 밖보다 강합니다. 레이어 밖에서 `!important` 를 붙여도 이기지 못합니다. BestOW 는 이것을 움직임 줄이기 설정(`prefers-reduced-motion`)에서 열림·닫힘 애니메이션을 끄는 `animation: none !important` 에만 씁니다. 이 설정을 켠 사용자에게는 className 으로 준 애니메이션도 나오지 않는데, 의도한 동작입니다.
 
 ## 비용: 리셋 CSS 도 컴포넌트를 이긴다
 

@@ -2,7 +2,7 @@
 title: 'KWCAG 2.2 웹 접근성, 자동 검사로 어디까지 지킬 수 있을까'
 description: 'React 디자인 시스템의 KWCAG 2.2 웹 접근성을 axe·E2E 자동 검사로 어디까지 지켰는지, 스크린리더로만 찾은 문제를 정리합니다.'
 pubDate: 2026-10-23
-updatedDate: 2026-11-18
+updatedDate: 2026-11-23
 tags: ['accessibility', 'kwcag', 'testing', 'react']
 series: 'BestOW UI 만들기'
 draft: false
@@ -25,7 +25,7 @@ KWCAG 2.2(KS X OT0003:2022)는 4원칙 14지침 33개 검사항목입니다. 디
 
 ## 1단계: 모든 스토리를 실제 브라우저에서, 두 테마로 axe
 
-Storybook 의 Vitest 애드온으로 모든 스토리(약 260개)를 실제 브라우저에서 렌더링하고 axe 를 돌립니다. 같은 스토리를 **라이트·다크 두 테마로 한 번씩** 돌리는 것이 중요했습니다. 다크 모드의 대비 문제는 라이트만 검사하면 영원히 안 보입니다. 같은 검사를 Chromium·WebKit·Firefox 에서 돌립니다.
+Storybook 의 Vitest 애드온으로 모든 스토리(지금은 약 340개)를 실제 브라우저에서 렌더링하고 axe 를 돌립니다. 같은 스토리를 **라이트·다크 두 테마로 한 번씩** 돌리는 것이 중요했습니다. 다크 모드의 대비 문제는 라이트만 검사하면 영원히 안 보입니다. 같은 검사를 Chromium·WebKit·Firefox 에서 돌립니다.
 
 열어야 보이는 상태(Select 목록, 대화상자)는 axe 가 못 봅니다. 그래서 `play` 함수로 목록을 열어 둔 스토리를 따로 만들어 열린 상태까지 검사합니다.
 

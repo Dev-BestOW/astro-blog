@@ -16,7 +16,7 @@ Claude Code 스킬은 `SKILL.md` 파일 하나와 필요한 참고 파일·스�
 
 ```text
 skills/korean-seo/
-  SKILL.md              핵심 점검표(126줄) — 항상 읽는 부분
+  SKILL.md              핵심 점검표(0.5.0 기준 126줄) — 항상 읽는 부분
   reference.md          네이버 가이드 54개 문서 요약과 원문 주소
   google-reference.md   구글 핵심 44쪽 요약과 원문 주소
   scripts/check-site.py 배포된 사이트 검사(Python 표준 라이브러리만)

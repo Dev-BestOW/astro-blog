@@ -2,7 +2,7 @@
 title: 'React 6칸 인증번호 입력 — 문자 자동 채우기 붙이기'
 description: '6칸 인증번호 입력을 입력창 하나로 만들고 one-time-code·WebOTP 문자 자동 채우기와 타이머 알림을 붙입니다.'
 pubDate: 2026-11-16
-updatedDate: 2026-11-18
+updatedDate: 2026-11-23
 tags: ['react', 'forms', 'accessibility', 'mobile']
 series: 'BestOW UI 만들기'
 draft: false
@@ -154,4 +154,4 @@ TypeScript 기본 타입에 `otp` 옵션이 없어서 위처럼 형을 맞춰 �
 - iOS 는 `one-time-code` 만으로, Android Chrome 은 WebOTP + 문자 마지막 줄 `@도메인 #번호` 로 자동 채우기가 됩니다.
 - 자동 제출은 한 번만, 미리 알리고. 타이머는 `role="timer"`, 만료는 처음부터 있는 `role="status"` 로 한 번 알립니다.
 
-이 구조는 제가 만든 React 디자인 시스템 [BestOW UI](https://bestow-ui.com/) 의 `VerificationCodeInput` 과 같습니다. 남은 시간·재전송·만료 알림까지 들어 있고, [컴포넌트 문서](https://bestow-ui.com/components/verification-code-input/) 에서 붙여넣기와 키보드 동작을 직접 해 볼 수 있습니다.
+이 구조는 제가 만든 React 디자인 시스템 [BestOW UI](https://bestow-ui.com/) 의 `VerificationCodeInput` 과 같습니다. 남은 시간·재전송·만료 알림까지 들어 있습니다. 다만 WebOTP 는 컴포넌트에 들어 있지 않아서, Android 자동 채우기를 쓰려면 위 코드처럼 앱에서 번호를 받아 `value` 로 넘겨 주세요. [컴포넌트 문서](https://bestow-ui.com/components/verification-code-input/) 에서 붙여넣기와 키보드 동작을 직접 해 볼 수 있습니다.
