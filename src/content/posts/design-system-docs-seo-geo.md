@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-11-18
+updatedDate: 2026-11-23
 title: 'Storybook 문서가 검색에 안 잡힐 때 — 디자인 시스템 SEO'
 description: 'Storybook 만으로는 검색에 빈 쪽으로 보였습니다. 정적 문서 쪽·JSON-LD·네이버 제목 길이·llms.txt 로 고친 하루.'
 tags: ['seo', 'geo', 'react', 'documentation']
@@ -19,6 +20,14 @@ Storybook 문서 주소는 `/storybook/?path=/docs/korean-kit-phonenumberinput--
 - 내용은 JavaScript 로 그려서, HTML 에 들어 있는 글자는 약 3 kB 뿐입니다.
 
 검색 엔진 입장에서는 "같은 제목의 거의 빈 쪽" 이 하나 있을 뿐이고, 컴포넌트마다 다른 문서가 있다는 것을 알 방법이 없습니다. Storybook 을 서버 렌더링하도록 고치는 길도 있지만 손이 크게 갑니다. 대신 **검색어가 분명한 컴포넌트만 골라 정적 HTML 문서 쪽을 따로 만들고**, Storybook 은 "직접 조작해 보기" 용도로 남겼습니다.
+
+나중에 Search Console 에서 한 가지를 더 알게 됐습니다(11월 23일 추가). 11월 17일 크롤링에서 Storybook 주소 3개가 "사용자가 선택한 표준이 없는 중복 페이지" 로 잡혔는데, 모두 스토리 단독 화면 `/storybook/iframe.html` 에 쿼리가 붙은 주소였습니다. Storybook 은 문서 화면 안에 스토리를 이 `iframe.html` 로 끼워 그리는데, 이 주소도 따로 열 수 있는 쪽이라 검색 엔진이 찾아간 것입니다. 그래서 `.storybook/preview-head.html` 에 한 줄을 넣었습니다.
+
+```html
+<meta name="robots" content="noindex, indexifembedded" />
+```
+
+`noindex` 는 그 주소를 검색 결과에서 빼고, `indexifembedded` 는 다른 쪽(`/storybook/`) 안에 끼워진 내용은 그 쪽의 일부로 색인해도 된다는 뜻입니다. 구글 문서에 따르면 `indexifembedded` 는 `noindex` 와 함께 쓸 때만 효과가 있습니다. 배포 스크립트가 배포 폴더의 `iframe.html` 에 이 태그가 있는지 확인합니다.
 
 ## 1. 소스에서 읽어 만드는 정적 문서 쪽
 
@@ -61,8 +70,10 @@ export function componentProps(name: string): string {
 
 쪽마다 구조화 데이터(JSON-LD)를 넣었습니다.
 
-- 첫 화면: `SoftwareSourceCode`(저장소·라이선스·언어)
+- 첫 화면: `WebSite`(사이트 이름) + `SoftwareSourceCode`(저장소·라이선스·언어)
 - 문서 쪽: `TechArticle` + `BreadcrumbList`
+
+`WebSite` 는 나중에(11월 20일) 더했습니다. 구글은 검색 결과에 보이는 사이트 이름을 첫 화면 `WebSite` 의 `name` 으로 정합니다.
 
 이동 경로는 화면의 Breadcrumb 컴포넌트와 JSON-LD 를 **같은 배열 하나에서** 만듭니다. 따로 적으면 언젠가 둘이 어긋납니다.
 
@@ -80,7 +91,7 @@ Google 리치 결과 테스트에서는 세 가지를 배웠습니다.
 2. **`SoftwareSourceCode` 는 리치 결과 종류가 아닙니다.** 첫 화면은 다시 해도 "없음" 이 정상입니다. 검색 엔진과 AI 가 읽게 하려고 넣은 것이고, 확인은 Schema Markup Validator 로 합니다.
 3. 문서 쪽은 Breadcrumbs 와 Articles 가 잡혔는데, Articles 에 "심각하지 않은 문제" 가 붙었습니다. Google 문서를 보면 Article 은 필수 속성이 없고 `headline`·`image`·`author`·`datePublished`·`dateModified` 가 권장입니다. 빠져 있던 `image`·`author`·`datePublished`·`dateModified` 넷을 넣자 경고가 사라졌습니다.
 
-날짜는 빌드 때 git 기록에서 읽으려 했지만, 배포 워크플로의 checkout 이 기록을 한 개만 받아(`fetch-depth` 기본값) 쓸 수 없었습니다. 데이터 파일에 "처음 낸 날·마지막으로 고친 날" 상수를 두고, 글을 고치면 그날로 바꾸는 규칙으로 했습니다. 손으로 바꾸는 값이라 잊을 수 있다는 점은 남아 있습니다.
+날짜는 빌드 때 git 기록에서 읽으려 했지만, 배포 워크플로의 checkout 이 기록을 한 개만 받아(`fetch-depth` 기본값) 쓸 수 없었습니다. 나중에 변경 기록 쪽을 만들며 `fetch-depth: 0` 으로 전체 기록을 받게 바꿨지만, 문서 날짜는 그대로 두었습니다. 한국 키트 13쪽의 글은 `kit.ts` 하나에, 함수 문서의 글은 `guides.ts` 하나에 있어서, git 으로는 파일을 고친 날만 알고 어느 쪽을 고쳤는지는 모르기 때문입니다. 그래서 데이터 파일에 "처음 낸 날·마지막으로 고친 날" 상수를 두고, 글을 고치면 그날로 바꾸는 규칙으로 했습니다. 손으로 바꾸는 값이라 잊을 수 있다는 점은 남아 있습니다.
 
 ## 3. 네이버는 제목 40자, 설명 80자
 
