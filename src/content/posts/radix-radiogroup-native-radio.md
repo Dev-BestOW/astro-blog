@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-23
 title: 'Radix RadioGroup 화살표 키 선택 누락과 해결'
 description: '화살표 키로 옮기면 선택이 빠지던 원인과, 네이티브 radio 로 다시 만들며 챙긴 이름·모양·고대비·테스트를 정리합니다.'
 tags: ['react', 'accessibility', 'testing']
