@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-24
 title: '트리 셰이킹 안 될 때 — Button 하나가 40 kB 였던 이유'
 description: 'Button 하나 import 했는데 번들에 다 들어온 세 사례(forwardRef·recipe·객체 속성)와 size-limit 감시법.'
 tags: ['javascript', 'performance', 'design-system']
