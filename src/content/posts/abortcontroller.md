@@ -1,5 +1,6 @@
 ---
 pubDate: 2026-07-08
+updatedDate: 2026-11-25
 title: 'AbortController — 비동기 취소의 표준 도구'
 description: 'fetch 취소만 알면 절반만 쓰는 겁니다. 리스너 정리·타임아웃·신호 결합까지 AbortController 실전 활용.'
 tags: ['javascript', 'async', 'web-api']
@@ -23,7 +24,7 @@ fetch('/api/data', { signal: controller.signal })
 controller.abort(); // 요청 취소
 ```
 
-취소 시 던져지는 에러는 `AbortError`라, 진짜 실패와 구분해서 처리해야 합니다.
+`abort()`로 취소하면 `AbortError`가 던져지므로, 진짜 실패와 구분해서 처리해야 합니다. 다만 **에러 이름이 늘 `AbortError`인 것은 아닙니다.** 아래 "에러 이름은 하나가 아니다"에서 직접 확인한 결과를 봅니다.
 
 ## 잘 안 쓰는 강력한 용도 — 리스너 일괄 정리
 
@@ -41,7 +42,9 @@ el.addEventListener('click', onClick, { signal });
 controller.abort();
 ```
 
-수동 `removeEventListener` 짝맞추기(그리고 그로 인한 누수)에서 해방됩니다.
+수동 `removeEventListener` 짝맞추기(그리고 그로 인한 누수)에서 해방됩니다. 리스너를 지우지 않아 생기는 누수는 [클로저 메모리 누수](/posts/closures-memory-leaks/) 글에서 측정해 봤습니다.
+
+Chrome 158에서 위 세 리스너(`resize`·`keydown`·`click`)를 등록하고 이벤트를 직접 일으켜 보면, `abort()` 전에는 3번 불리고 뒤에는 0번 불립니다. Node 22의 `EventTarget`에서는 하나를 더 확인했습니다. **이미 abort된 signal로 등록하면 리스너가 아예 붙지 않습니다.** 컨트롤러를 다시 쓰려면 새로 만들어야 합니다.
 
 ## 타임아웃과 신호 결합
 
@@ -53,6 +56,29 @@ controller.abort();
 const userCancel = new AbortController();
 const signal = AbortSignal.any([userCancel.signal, AbortSignal.timeout(5000)]);
 await fetch('/api/slow', { signal });
+```
+
+## 에러 이름은 하나가 아니다
+
+응답하지 않는 요청에 `fetch`를 걸고 세 가지 방법으로 끊어서, 던져진 에러를 Chrome 158과 Node 22.23.4에서 확인했습니다. 결과는 두 곳이 같았습니다. `timeout`·`any`는 `AbortSignal.timeout(50)`, 그리고 사용자 취소 signal과 그것을 묶은 `AbortSignal.any([…])`입니다.
+
+| 끊는 방법                  | `err.name`     |
+| -------------------------- | -------------- |
+| `abort()`                  | `AbortError`   |
+| `timeout(50)`              | `TimeoutError` |
+| `any([…])`                 | `TimeoutError` |
+| `abort(new Error('닫음'))` | `Error`        |
+
+시간 초과는 `TimeoutError`이고, `abort()`에 이유를 넘기면 그 값이 그대로 던져집니다. 그래서 `if (err.name === 'AbortError') return` 만으로 걸러 내면, **위 타임아웃 예제는 시간이 지났을 때 진짜 실패처럼 처리됩니다.** 이름 대신 signal 상태를 보는 편이 안전합니다.
+
+```js
+try {
+  await fetch('/api/slow', { signal });
+} catch (err) {
+  if (err.name === 'TimeoutError') return showTimeoutMessage(); // 시간 초과는 따로 알리고 싶을 때
+  if (signal.aborted) return; // 그 밖의 취소는 정상 흐름
+  throw err;
+}
 ```
 
 ## React에서
@@ -70,5 +96,7 @@ useEffect(() => {
   return () => controller.abort(); // 언마운트/의존성 변경 시 취소
 }, [url]);
 ```
+
+여기서는 cleanup이 이유 없이 `abort()`만 부르므로 `AbortError` 검사로 충분합니다. 타임아웃을 함께 걸면 위처럼 `TimeoutError`도 따로 처리해야 합니다.
 
 > "정리(cleanup)"가 필요한 모든 비동기·구독에 `AbortController`를 떠올리세요. fetch 전용 도구가 아니라 **취소의 공통 언어**입니다.
