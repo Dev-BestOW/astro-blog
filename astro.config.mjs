@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import rehypeTableWrap from './src/lib/rehype-table-wrap.mjs';
 
 // 배포 도메인 (src/config.ts의 SITE_URL과 일치시킬 것)
 const SITE = 'https://jiwon-seok.com';
@@ -13,6 +14,8 @@ export default defineConfig({
   output: 'static',
   integrations: [mdx(), sitemap()],
   markdown: {
+    // 본문 표를 가로 스크롤 상자로 감싼다(좁은 화면 넘침 방지). MDX 도 이 설정을 이어받는다.
+    rehypePlugins: [rehypeTableWrap],
     shikiConfig: {
       // 고대비 테마 — 기본 github-light/dark 는 주석·일부 토큰 대비가 4.5:1 미만(axe color-contrast)
       themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },

@@ -106,6 +106,14 @@ body {
   word-break: keep-all;
   overflow-wrap: break-word; /* anywhere 는 칸의 최소 폭을 한 글자로 줄여 "항/목/수" 처럼 끊긴다 */
 }
+/* 표 상자(rehype-table-wrap 이 감싼다): 넓은 표는 쪽이 아니라 이 상자 안에서만 가로로 스크롤된다.
+   넘치는 상자에는 PostLayout 스크립트가 tabindex·role·이름을 붙인다 — 포커스 링은 아래 전역 :focus-visible 규칙. */
+.prose .table-wrap {
+  @apply my-6 overflow-x-auto;
+}
+.prose .table-wrap > table {
+  @apply my-0;
+}
 .prose th,
 .prose td {
   @apply border border-neutral-300 dark:border-neutral-700 px-3 py-2 align-top text-left;
