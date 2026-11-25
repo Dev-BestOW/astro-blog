@@ -16,7 +16,11 @@ const configured = Boolean(g.repoId && g.categoryId);
       {/* giscus 가 뜨기 전(늦게 불러옴)·막혔을 때 빈 칸 대신 보이는 안내 — giscus 가 메시지를 보내면 지운다 */}
       <p class="giscus-loading text-sm text-neutral-600 dark:text-neutral-400">
         댓글을 불러오는 중이에요. 보이지 않으면{' '}
-        <a href={`https://github.com/${g.repo}/discussions`} class="text-accent hover:underline">
+        {/* 문장 속 링크라 색만으로 구분하면 안 된다(WCAG 1.4.1, axe link-in-text-block) — 본문 링크처럼 늘 밑줄 */}
+        <a
+          href={`https://github.com/${g.repo}/discussions`}
+          class="text-accent underline underline-offset-2"
+        >
           GitHub Discussions
         </a>
         에서 볼 수 있어요.
