@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-25
 title: 'Next.js 서버 컴포넌트용 디자인 시스템 — use client 위치'
 description: '라이브러리 전체에 use client 를 붙이면 서버에서 함수도 못 부릅니다. 진입점을 둘로 나눈 법과 이름이 사라지는 함정.'
 tags: ['react', 'nextjs', 'design-system']
