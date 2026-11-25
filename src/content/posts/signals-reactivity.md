@@ -3,6 +3,7 @@ pubDate: 2026-07-15
 title: 'Signals — 프레임워크 반응성이 수렴하는 지점'
 description: 'Solid·Preact·Angular·Vue·Svelte 가 이름만 다르게 향하는 Signals 반응성 개념과, 왜 지금 이슈인지 정리합니다.'
 tags: ['frontend', 'javascript']
+draft: true
 ---
 
 최근 프론트엔드 프레임워크들이 약속이나 한 듯 **Signals**라는 개념으로 수렴하고 있습니다. 이름은 제각각이지만(runes, refs, signals) 핵심 아이디어는 같습니다. 6년차라면 특정 프레임워크가 아니라 **이 원시 개념 자체**를 이해해 두는 게 남는 장사입니다.

@@ -1,0 +1,6 @@
+# Cloudflare 정적 자산 리디렉션 — 빌드 때 dist/_redirects 로 복사된다.
+# 내린 글(draft: true)의 옛 주소를 소개 쪽으로 보낸다(2026-11-25, AdSense "가치가 별로 없는 콘텐츠" 대응).
+/posts/hello-world/ /about/ 301
+/posts/hello-world /about/ 301
+/posts/signals-reactivity/ /about/ 301
+/posts/signals-reactivity /about/ 301

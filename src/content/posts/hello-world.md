@@ -4,7 +4,7 @@ description: 'Astro로 만든 개발 블로그의 첫 글입니다. 스택과 �
 pubDate: 2026-07-06
 updatedDate: 2026-11-18
 tags: ['astro', 'blog']
-draft: false
+draft: true
 ---
 
 첫 글입니다. 이 블로그는 **Astro**로 만들어졌고, 정적으로 빌드되어 Cloudflare Pages에 배포됩니다.
