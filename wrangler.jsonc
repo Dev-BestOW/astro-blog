@@ -2,6 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "astro-blog",
   "compatibility_date": "2026-07-06",
+  // 옛 주소 astro-blog.dev-bestow.workers.dev 를 끈다. 대시보드에서만 끄면 배포 때 다시 켜진다
+  // (2026-11-17 껐는데 2026-11-25 에 200 으로 열려 있었음). 사이트 주소는 https://jiwon-seok.com 하나.
+  "workers_dev": false,
   // 정적 SSG 산출물(dist)을 그대로 정적 자산으로 배포한다.
   // Worker 엔트리(main)가 없으므로 wrangler는 어댑터를 주입하지 않고
   // assets만 업로드한다. (astro add cloudflare 자동설정 방지)

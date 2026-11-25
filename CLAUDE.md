@@ -72,6 +72,8 @@ lint·서식 실패가 드러나지 않는다(2026-11-17 format:check 가 md 7�
 - **`wrangler.jsonc` 삭제/변경 금지** (assets-only, `main` 없음). 이게 없으면 `wrangler deploy`가
   `astro add cloudflare` 어댑터를 자동 주입 → workerd 프리렌더에서 `node:fs` 부재로 **빌드 실패**.
   (자세한 배경은 SPEC 변경 이력 참고)
+  예외: `"workers_dev": false`(2026-11-25, 사용자 승인) — 옛 workers.dev 주소를 끄는 줄. 대시보드에서만 끄면 배포 때 다시 켜진다.
+  `preview_urls` 는 적지 않는다(생략하면 기존 버전 미리보기 설정을 그대로 둔다 — Cloudflare 문서).
 - OG 생성(`src/lib/og.ts`)은 **빌드타임 전용**(`node:fs`로 폰트 읽음). 런타임/워커로 옮기지 말 것.
 - 폰트 (둘 다 삭제 금지):
   - `src/assets/fonts/Pretendard-*.subset.woff`(정적 400/700) — **OG 렌더용**(빌드타임). 원본 OTF는 커밋 안 함(`.gitignore`). 재생성: OTF를 임시로 두고 `node scripts/subset-fonts.mjs`.
