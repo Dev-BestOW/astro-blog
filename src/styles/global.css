@@ -44,6 +44,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 쪽 이동 전환(문서 간 View Transitions) — 같은 출처 링크로 옮길 때 브라우저가 이전·다음 화면을 겹쳐 페이드한다.
+   자바스크립트 없음. 지원하지 않는 브라우저는 예전처럼 바로 바뀐다. 움직임 줄이기를 켠 사람에게는 켜지 않는다.
+   머리글(.site-header)은 이름을 따로 줘서 쪽이 바뀌어도 제자리에 그대로 있게 한다(본문만 페이드). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+.site-header {
+  view-transition-name: site-header;
+}
+
 /* 한글은 낱말 단위로 줄바꿈("붙이/기" 처럼 낱말 가운데서 끊기지 않게). 긴 URL·영문은 넘칠 때만 끊는다. */
 body {
   word-break: keep-all;
