@@ -35,3 +35,15 @@ jobs:
           git add -A
           git commit -m "chore(post): publish scheduled post ($(TZ=Asia/Seoul date +%Y-%m-%d))"
           git push
+          # 방금 발행한 글의 주소 — 다음 단계(IndexNow)가 쓴다
+          slug=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- src/content/posts | sed -E 's#.*/##; s#\.mdx?$##' | head -1)
+          if [ -n "$slug" ]; then
+            echo "url=https://jiwon-seok.com/posts/$slug/" >> "$GITHUB_OUTPUT"
+          fi
+        id: publish
+      # 새 글을 네이버·IndexNow 에 알린다. Cloudflare 배포가 끝나 쪽이 열릴 때까지 스크립트가 기다린다(최대 10분).
+      # 알림이 실패해도 발행은 이미 끝났으므로 워크플로를 실패로 만들지 않는다.
+      - name: Notify IndexNow
+        if: steps.publish.outputs.url != ''
+        continue-on-error: true
+        run: node scripts/indexnow.mjs "${{ steps.publish.outputs.url }}"

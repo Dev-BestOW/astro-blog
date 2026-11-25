@@ -165,3 +165,4 @@
 
 - **댓글 안내 링크 밑줄** ✅ — 댓글 칸 "불러오는 중" 안내의 `GitHub Discussions` 링크가 색으로만 구분돼 axe `link-in-text-block` 이 모든 글에서 나오던 것을 늘 밑줄로. 상세는 SPEC 변경 이력.
 - **표 가로 넘침** ✅ — 본문 표를 빌드 때 가로 스크롤 상자로 감싸고(rehype 플러그인), 넘치는 상자만 키보드 포커스·이름. `business-number-checksum`·`screen-reader-live-region-timing` 쪽 넘침 0. 상세는 SPEC 변경 이력.
+- **옛 workers.dev 주소 재확인** ✅ — 11/25 다시 200 이던 것을 `wrangler.jsonc` `"workers_dev": false` 로 끔. 배포(62e4861) 뒤 `/`·글 쪽 404(error 1042), 본 도메인 200. `/robots.txt` 200 은 Cloudflare 자체 안내문(우리 파일 아님).

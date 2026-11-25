@@ -115,4 +115,5 @@ OG/RSS/사이트맵/태그는 자동 생성. 초안은 `draft: true`(프로덕�
 - 큐 글은 빌드 대상이 아니다(제목·설명 길이는 `pnpm check` 가 큐까지 검사). 넣기 전에 `posts/` 에 잠깐 복사(`pubDate` 추가)해 `pnpm check`·`pnpm build` 로 확인하고 복사본을 지운다.
 - cron 은 00:00 UTC(09:00 KST)지만 **실제 실행은 4~5시간 늦다**(14시 KST 전후). 오전에 안 돈 것은 대개 지연이다 — 오후에 다시 본다.
   `curl -s "https://api.github.com/repos/Dev-BestOW/astro-blog/actions/runs?per_page=3"`
+- **IndexNow**: 발행 뒤 같은 워크플로가 새 글 주소를 네이버·IndexNow(`api.indexnow.org`)에 알린다(`scripts/indexnow.mjs` — 쪽이 200 이 될 때까지 최대 10분 기다린 뒤 POST, 실패해도 발행은 성공). 고친 글은 Actions › IndexNow › Run workflow 에 주소를 넣어 손으로 알린다. 키 파일 `public/98a1af9fcf71704a5a83646e64a4ed3a.txt` 는 지우거나 바꾸지 않는다(바꾸면 스크립트의 `KEY` 도 함께).
 - 저장소에 60일 동안 활동이 없으면 GitHub 가 예약 워크플로를 끈다(2026-09~11 에 멈춘 적 있음). 다시 켜는 것은 사용자(Actions › Daily post › Enable workflow).

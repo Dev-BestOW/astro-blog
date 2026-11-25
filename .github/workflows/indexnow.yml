@@ -1,0 +1,27 @@
+name: IndexNow
+
+# 글을 고친 뒤 등, 원하는 주소를 손으로 검색 엔진(네이버·IndexNow)에 알린다.
+# Actions › IndexNow › Run workflow 에서 주소를 공백으로 띄워 넣는다. 새 글은 daily-post.yml 이 발행 때 알아서 알린다.
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: '알릴 주소(https://jiwon-seok.com/…), 여러 개는 공백으로'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Notify IndexNow
+        env:
+          URLS: ${{ inputs.urls }}
+        run: node scripts/indexnow.mjs $URLS

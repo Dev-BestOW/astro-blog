@@ -31,3 +31,4 @@
 - **즉시/테스트 발행**: GitHub → Actions → "Daily post" → _Run workflow_ (수동 실행).
 - 프론트매터가 잘못되면 그날 사이트 빌드가 실패할 수 있습니다(라이브는 직전 배포 유지). 넣기 전에 형식을 확인하세요.
 - 크론은 GitHub 부하에 따라 몇 분 지연될 수 있습니다.
+- 발행 뒤 같은 워크플로가 새 글 주소를 네이버·IndexNow 에 알립니다(`scripts/indexnow.mjs`). 이미 발행한 글을 고쳤다면 Actions → "IndexNow" → _Run workflow_ 에 주소를 넣어 알립니다.
