@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // `astro dev`에서는 동작하지 않는다(빌드 후 `pnpm preview`에서 확인).
 ---
 
-<BaseLayout title="검색" description="블로그 글을 검색합니다.">
+<BaseLayout title="검색" description="블로그 글을 검색합니다." noindex>
   <h1 class="mb-6 text-2xl font-bold tracking-tight">검색</h1>
 
   <div id="search" data-pagefind-ignore></div>

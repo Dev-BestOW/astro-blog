@@ -14,7 +14,14 @@ export default defineConfig({
   site: SITE,
   output: 'static',
   // 사이트맵: 글 쪽에만 lastmod(updatedDate ?? pubDate) — src/lib/sitemap-lastmod.mjs
-  integrations: [mdx(), sitemap({ serialize: withPostLastmod('./src/content/posts') })],
+  integrations: [
+    mdx(),
+    sitemap({
+      serialize: withPostLastmod('./src/content/posts'),
+      // 사이트 내부 검색 쪽은 검색 대상이 아니다(search.astro 의 noindex 와 함께)
+      filter: (page) => new URL(page).pathname !== '/search/',
+    }),
+  ],
   markdown: {
     // 본문 표를 가로 스크롤 상자로 감싼다(좁은 화면 넘침 방지). MDX 도 이 설정을 이어받는다.
     rehypePlugins: [rehypeTableWrap],

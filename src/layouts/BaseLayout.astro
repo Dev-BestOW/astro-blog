@@ -13,6 +13,8 @@ interface Props {
   type?: 'website' | 'article';
   /** 페이지별 JSON-LD 구조화 데이터 (미지정 시 홈에서 WebSite 스키마 사용) */
   jsonLd?: Record<string, unknown>;
+  /** 검색 결과에 나올 필요 없는 쪽(사이트 내부 검색) — `noindex, follow`. 사이트맵에서도 뺀다(astro.config `sitemap.filter`) */
+  noindex?: boolean;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   image = '/og/default.png',
   type = 'website',
   jsonLd,
+  noindex = false,
 } = Astro.props;
 
 // 네이버 권장 제목 길이(40자) 안에 들 때만 사이트 이름을 붙인다 — 넘치면 검색 결과에서 글 제목이 잘린다
@@ -61,6 +64,7 @@ const jsonLdText = structuredData
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" sizes="96x96" href={favicon} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href={rssUrl} />
     <meta name="generator" content={Astro.generator} />
 
