@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-26
 title: '다크 모드 깜빡임 없애기 — SSR 에서 OS 설정 따르기'
 description: 'OS 설정을 모르는 서버 렌더링의 깜빡임을 prefers-color-scheme 미디어쿼리와 useSyncExternalStore 로 막은 법.'
 tags: ['react', 'css', 'nextjs']
