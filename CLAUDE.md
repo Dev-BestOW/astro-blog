@@ -91,6 +91,7 @@ lint·서식 실패가 드러나지 않는다(2026-11-17 format:check 가 md 7�
 ## 글 쓰는 법
 
 `src/content/posts/<slug>.md`(또는 `.mdx`) 추가 → 프론트매터(`title`,`description`,`pubDate`,`tags`, 선택 `draft`/`updatedDate`/`heroImage`/`series`/`seriesOrder`) → `git push`.
+발행한 글의 내용을 고치면 `updatedDate` 를 그날로 — 글 머리 날짜·JSON-LD `dateModified`·사이트맵 `lastmod`(`src/lib/sitemap-lastmod.mjs`, 글 쪽만)가 이 값을 쓴다. 오타만 고쳤으면 올리지 않는다(구글: 내용 없이 날짜만 바꾸면 lastmod 를 믿지 않음).
 파일 이름이 주소가 된다(영어 kebab-case, 한글·공백 없음). 본문에 `# 제목` 줄은 쓰지 않는다(레이아웃이 그린다).
 OG/RSS/사이트맵/태그는 자동 생성. 초안은 `draft: true`(프로덕션 제외).
 

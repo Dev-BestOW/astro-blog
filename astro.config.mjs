@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeTableWrap from './src/lib/rehype-table-wrap.mjs';
+import { withPostLastmod } from './src/lib/sitemap-lastmod.mjs';
 
 // 배포 도메인 (src/config.ts의 SITE_URL과 일치시킬 것)
 const SITE = 'https://jiwon-seok.com';
@@ -12,7 +13,8 @@ const SITE = 'https://jiwon-seok.com';
 export default defineConfig({
   site: SITE,
   output: 'static',
-  integrations: [mdx(), sitemap()],
+  // 사이트맵: 글 쪽에만 lastmod(updatedDate ?? pubDate) — src/lib/sitemap-lastmod.mjs
+  integrations: [mdx(), sitemap({ serialize: withPostLastmod('./src/content/posts') })],
   markdown: {
     // 본문 표를 가로 스크롤 상자로 감싼다(좁은 화면 넘침 방지). MDX 도 이 설정을 이어받는다.
     rehypePlugins: [rehypeTableWrap],
