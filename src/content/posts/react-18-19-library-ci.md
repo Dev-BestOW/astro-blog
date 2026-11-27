@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-27
 title: 'React 18·19 동시 지원 라이브러리 — CI 로 호환성 테스트하기'
 description: 'peerDependencies 만 넓히면 18 에서 깨져도 모릅니다. SSR 경고·useRef 타입·ref 변화와 pnpm overrides.'
 tags: ['react', 'testing', 'typescript']
