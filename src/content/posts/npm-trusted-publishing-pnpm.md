@@ -1,4 +1,5 @@
 ---
+pubDate: 2026-11-28
 title: 'npm 토큰 없이 배포 — Trusted Publishing 함정'
 description: 'GitHub Actions 에서 토큰 없이 npm 에 배포하는 Trusted Publishing(OIDC)으로 바꾸며 실패한 원인과 배포 흐름.'
 tags: ['npm', 'github-actions', 'devops']
